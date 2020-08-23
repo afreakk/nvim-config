@@ -251,6 +251,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " }}}}
 
 " Fzf Stuff -------- {{{{
+command! -bang -nargs=? GFilesRecursive call fzf#vim#gitfiles("--recurse-submodules", {}, <bang>0)
 function! s:build_quickfix_list(lines)
   call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
   copen
@@ -365,7 +366,7 @@ nnoremap <Space>zd :set background=dark<CR>
 nnoremap <Space>zl :set background=light<CR>
 nnoremap <Space>zt :call SetTransparentBg()<CR>
 
-nnoremap <Space>g :GFiles<cr>
+nnoremap <Space>g :GFilesRecursive<cr>
 nnoremap <Space>p :Files<cr>
 nnoremap <Space>b :Buffers<cr>
 
