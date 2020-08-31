@@ -48,6 +48,7 @@ endif
 
 " coc_global_extensions -------- {{{{
 let g:coc_global_extensions = [
+\    "coc-json",
 \    "coc-explorer",
 \    "coc-clangd",
 \    "coc-css",

@@ -1,5 +1,6 @@
 {
   "explorer.icon.enableNerdfont": true,
+  "explorer.previewAction.onHover": false,
   "diagnostic-languageserver.filetypes": {
     "sh": "shellcheck",
     "markdown": [ "write-good", "markdownlint" ]
