@@ -325,8 +325,9 @@ augroup filetype_javascript
     autocmd FileType javascript,javascriptreact :iabbrev <buffer> iff if ()<left>
     autocmd FileType javascript,javascriptreact :iabbrev <buffer> cc const
     autocmd FileType javascript,javascriptreact :iabbrev <buffer> rr return 
-    " autocmd FileType javascript,javascriptreact setlocal foldmethod=syntax
-    " autocmd FileType javascript,javascriptreact setlocal foldnestmax=1
+    autocmd FileType javascript,javascriptreact setlocal foldmethod=syntax
+    autocmd FileType javascript,javascriptreact setlocal foldnestmax=1
+    set nofoldenable
 augroup END
 " }}}}
 
