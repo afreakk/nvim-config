@@ -164,7 +164,10 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'mboughaba/i3config.vim'
 Plug 'chrisbra/Colorizer'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release', 'do': { -> coc#util#install() }}
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release', 'do': { -> coc#util#install() }}
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'laher/fuzzymenu.vim'
@@ -322,8 +325,8 @@ augroup filetype_javascript
     autocmd FileType javascript,javascriptreact :iabbrev <buffer> iff if ()<left>
     autocmd FileType javascript,javascriptreact :iabbrev <buffer> cc const
     autocmd FileType javascript,javascriptreact :iabbrev <buffer> rr return 
-    autocmd FileType javascript,javascriptreact setlocal foldmethod=syntax
-    autocmd FileType javascript,javascriptreact setlocal foldnestmax=1
+    " autocmd FileType javascript,javascriptreact setlocal foldmethod=syntax
+    " autocmd FileType javascript,javascriptreact setlocal foldnestmax=1
 augroup END
 " }}}}
 
