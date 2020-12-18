@@ -1,56 +1,58 @@
 {
-  "explorer.icon.enableNerdfont": true,
-  "explorer.previewAction.onHover": false,
-  "diagnostic-languageserver.filetypes": {
-    "sh": "shellcheck",
-    "markdown": [ "write-good", "markdownlint" ]
-  },
-  "coc.preferences.formatOnSaveFiletypes": [
-    "javascript",
-    "typescript",
-    "typescriptreact",
-    "json",
-    "javascriptreact",
-    "less",
-    "svelte",
-    "rust",
-    "elm"
-  ],
-  "eslint.filetypes": [
-    "javascript",
-    "typescript",
-    "typescriptreact",
-    "javascriptreact",
-    "less",
-    "svelte"
-  ],
-  "tsserver.trace.server": "verbose",
-  "languageserver": {
-    "nix": {
-      "command": "rnix-lsp",
-      "filetypes": ["nix"]
+    "explorer.icon.enableNerdfont": true,
+    "explorer.previewAction.onHover": false,
+    "prettier.tabWidth": 4,
+    "prettier.singleQuote": true,
+    "diagnostic-languageserver.filetypes": {
+        "sh": "shellcheck",
+        "markdown": ["write-good", "markdownlint"]
     },
-    "haskell": {
-      "command": "haskell-language-server-wrapper",
-      "args": ["--lsp"],
-      "rootPatterns": [
-        "*.cabal",
-        "stack.yaml",
-        "cabal.project",
-        "package.yaml"
-      ],
-      "filetypes": ["hs", "lhs", "haskell"],
-      "initializationOptions": {
-        "languageServerHaskell": {}
-      }
-    },
-    "elmLS": {
-      "command": "elm-language-server",
-      "filetypes": ["elm"],
-      "rootPatterns": ["elm.json"],
-      "initializationOptions": {
-        "elmAnalyseTrigger": "change"
-      }
+    "coc.preferences.formatOnSaveFiletypes": [
+        "javascript",
+        "typescript",
+        "typescriptreact",
+        "json",
+        "javascriptreact",
+        "less",
+        "svelte",
+        "rust",
+        "elm"
+    ],
+    "eslint.filetypes": [
+        "javascript",
+        "typescript",
+        "typescriptreact",
+        "javascriptreact",
+        "less",
+        "svelte"
+    ],
+    "tsserver.trace.server": "verbose",
+    "languageserver": {
+        "nix": {
+            "command": "rnix-lsp",
+            "filetypes": ["nix"]
+        },
+        "haskell": {
+            "command": "haskell-language-server-wrapper",
+            "args": ["--lsp"],
+            "rootPatterns": [
+                "*.cabal",
+                "stack.yaml",
+                "cabal.project",
+                "package.yaml"
+            ],
+            "filetypes": ["hs", "lhs", "haskell"],
+            "initializationOptions": {
+                "languageServerHaskell": {}
+            }
+        },
+        "elmLS": {
+            "command": "elm-language-server",
+            "filetypes": ["elm"],
+            "rootPatterns": ["elm.json"],
+            "initializationOptions": {
+                "elmAnalyseTrigger": "change"
+            }
+        }
     }
-  }
 }
