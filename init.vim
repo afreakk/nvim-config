@@ -40,7 +40,7 @@ set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
-set guifont=Hack\ Nerd\ Font\ Mono:h8
+set guifont=Hack\ Nerd\ Font\ Mono:h13
 if !has('nvim')
   set guiheadroom=0
 endif
@@ -62,6 +62,7 @@ let g:coc_global_extensions = [
 \    "coc-rls",
 \    "coc-tsserver",
 \    "coc-vimlsp",
+\    "coc-omnisharp",
 \ ]
 " }}}}
 

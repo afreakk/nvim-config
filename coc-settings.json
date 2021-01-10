@@ -1,4 +1,5 @@
 {
+    "omnisharp.trace.server": "verbose",
     "explorer.icon.enableNerdfont": true,
     "explorer.previewAction.onHover": false,
     "prettier.tabWidth": 4,
