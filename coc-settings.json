@@ -1,5 +1,6 @@
 {
-    "omnisharp.trace.server": "verbose",
+    "omnisharp.debug.server": true,
+    "omnisharp.path": "/nix/store/kg1ir2p58dy838d9fxy5sfflcq75arra-omnisharp-roslyn-1.35.2/bin/omnisharp",
     "explorer.icon.enableNerdfont": true,
     "explorer.previewAction.onHover": false,
     "prettier.tabWidth": 4,
