@@ -332,6 +332,10 @@ augroup filetype_javascript
 augroup END
 " }}}}
 
+augroup filetype_gitcommit
+    autocmd!
+    autocmd FileType gitcommit :iabbrev <buffer> mz modernize
+augroup END
 " Vimscript file settings -------- {{{
 augroup filetype_vim
     autocmd!
