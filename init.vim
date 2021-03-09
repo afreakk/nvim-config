@@ -256,7 +256,11 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " }}}}
 
 " Fzf Stuff -------- {{{{
-command! -bang -nargs=? GFilesRecursive call fzf#vim#gitfiles("--recurse-submodules", {}, <bang>0)
+command! -bang -nargs=? GFilesRecursive call fzf#vim#gitfiles(
+      \"--recurse-submodules",
+      \fzf#vim#with_preview('right:50%'),
+      \<bang>0 )
+
 function! s:build_quickfix_list(lines)
   call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
   copen
