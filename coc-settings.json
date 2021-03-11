@@ -1,4 +1,8 @@
 {
+    "diagnostic.errorSign": "",
+    "diagnostic.warningSign": "",
+    "diagnostic.infoSign": "",
+    "diagnostic.hintSign": "",
     "omnisharp.debug.server": true,
     "omnisharp.path": "/nix/store/kg1ir2p58dy838d9fxy5sfflcq75arra-omnisharp-roslyn-1.35.2/bin/omnisharp",
     "explorer.icon.enableNerdfont": true,
@@ -19,14 +23,6 @@
         "svelte",
         "rust",
         "elm"
-    ],
-    "eslint.filetypes": [
-        "javascript",
-        "typescript",
-        "typescriptreact",
-        "javascriptreact",
-        "less",
-        "svelte"
     ],
     "tsserver.trace.server": "verbose",
     "languageserver": {

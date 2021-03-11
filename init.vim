@@ -207,16 +207,29 @@ function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
 endfunction
 
+function! StatusDiagnostic() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info) | return '' | endif
+  let msgs = []
+  if get(info, 'error', 0)
+    call add(msgs, 'E' . info['error'])
+  endif
+  if get(info, 'warning', 0)
+    call add(msgs, 'W' . info['warning'])
+  endif
+  return join(msgs, ' '). ' ' . get(g:, 'coc_status', '')
+endfunction
+
 let g:lightline = {
-      \ 'colorscheme': 'one',
+      \ 'colorscheme': 'gruvbox',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'currentfunction', 'readonly', 'filename', 'modified' ] ],
-      \   'right': [['lineinfo'], ['percent'], ['cocstatus']]
+      \   'right': [ ['StatusDiagnostic'], ['lineinfo'], ['percent'] ]
       \ },
       \ 'component_function': {
-      \   'cocstatus': 'coc#status',
-      \   'currentfunction': 'CocCurrentFunction'
+      \   'currentfunction': 'CocCurrentFunction',
+      \   'StatusDiagnostic': 'StatusDiagnostic'
       \ },
       \ }
 
@@ -312,10 +325,10 @@ command! -bang -nargs=* Rgm
 " }}}}
 
 " Window splitting/movement -------- {{{{
-nmap <silent> <C-Up> :wincmd k<CR>
-nmap <silent> <C-Down> :wincmd j<CR>
-nmap <silent> <C-Left> :wincmd h<CR>
-nmap <silent> <C-Right> :wincmd l<CR>
+nnoremap <C-Up> <C-W>k
+nnoremap <C-Down> <C-W>j
+nnoremap <C-Left> <C-W>h
+nnoremap <C-Right> <C-W>l
 
 nmap <silent> <S-Up> :wincmd K<CR>
 nmap <silent> <S-Down> :wincmd J<CR>
@@ -412,6 +425,9 @@ vnoremap <Space>qs :<c-u>call <SID>CocSymbolObj(visualmode())<cr>
 
 nnoremap <Space>qg :set operatorfunc=<SID>GitGrepTextObj<cr>g@
 vnoremap <Space>qg :<c-u>call <SID>GitGrepTextObj(visualmode())<cr>
+
+nnoremap <Space>dd :<c-u>call coc#config('diagnostic.enable', 0)<cr>
+nnoremap <Space>de :<c-u>call coc#config('diagnostic.enable', 1)<cr>
 " }}}}
 
 " Leader hotkeys -------- {{{{
