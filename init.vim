@@ -164,7 +164,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'mboughaba/i3config.vim'
-Plug 'chrisbra/Colorizer'
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 " Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release', 'do': { -> coc#util#install() }}
 " Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -428,6 +428,10 @@ vnoremap <Space>qg :<c-u>call <SID>GitGrepTextObj(visualmode())<cr>
 
 nnoremap <Space>dd :<c-u>call coc#config('diagnostic.enable', 0)<cr>
 nnoremap <Space>de :<c-u>call coc#config('diagnostic.enable', 1)<cr>
+
+let g:sessions_dir = '~/vim-sessions'
+exec 'nnoremap <Space>ss :mks! ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
+exec 'nnoremap <Space>sr :so ' . g:sessions_dir. '/*.vim<C-D><BS><BS><BS><BS><BS>'
 " }}}}
 
 " Leader hotkeys -------- {{{{
