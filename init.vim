@@ -367,8 +367,6 @@ nnoremap <Space>cm :Maps<cr>
 nnoremap <space>ve :vsplit $MYVIMRC<cr>
 nnoremap <space>vs :source $MYVIMRC<cr>
 
-nnoremap <space>t  :vsplit ~/Dropbox/todo/todo.txt<cr>
-
 nnoremap <Space>q :set operatorfunc=<SID>AgTxtObj<cr>g@
 vnoremap <Space>q :<c-u>call <SID>AgTxtObj(visualmode())<cr>
 
@@ -383,20 +381,19 @@ vnoremap <Space>qs :<c-u>call <SID>CocSymbolObj(visualmode())<cr>
 nnoremap <Space>qg :set operatorfunc=<SID>GitGrepTextObj<cr>g@
 vnoremap <Space>qg :<c-u>call <SID>GitGrepTextObj(visualmode())<cr>
 
-nnoremap <Space>dd :<c-u>call coc#config('diagnostic.enable', 0)<cr>
-nnoremap <Space>de :<c-u>call coc#config('diagnostic.enable', 1)<cr>
+nnoremap <Space>od :<c-u>call coc#config('diagnostic.enable', 0)<cr>
+nnoremap <Space>oe :<c-u>call coc#config('diagnostic.enable', 1)<cr>
 
-let g:sessions_dir = '~/vim-sessions'
-exec 'nnoremap <Space>ss :mks! ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
-exec 'nnoremap <Space>sr :so ' . g:sessions_dir. '/*.vim<C-D><BS><BS><BS><BS><BS>'
-" }}}}
+nnoremap <Space>de :diffthis<cr>
+nnoremap <Space>dd :diffoff<cr>
+nnoremap <Space>do :diffoff!<cr>
+nnoremap <Space>dw :windo diffthis<cr>
 
-" Leader hotkeys -------- {{{{
-let g:leaderMap['g'] = {
+let g:spaceThing['t'] = {
                 \'name' : 'Git Menu',
                 \'s' : ['Gstatus', 'Git Status'],
                 \'p' : ['Gpull',   'Git Pull'],
-                \'u' : ['Gpush',   'Git Push'],
+                \'h' : ['Gpush',   'Git Push'],
                 \'d' : ['Gdiffsplit', 'Diff split'],
                 \'b' : ['Gblame',  'Git blame'],
                 \'l' : ['0Glog',  '0Git log'],
@@ -404,6 +401,13 @@ let g:leaderMap['g'] = {
                 \'w' : ['Gbrowse',  'Git browse'],
                 \'c' : ['Gbranch',  'Git checkout branch'],
                 \}
+
+let g:sessions_dir = '~/vim-sessions'
+exec 'nnoremap <Space>ss :mks! ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
+exec 'nnoremap <Space>sr :so ' . g:sessions_dir. '/*.vim<C-D><BS><BS><BS><BS><BS>'
+" }}}}
+
+" Leader hotkeys -------- {{{{
 
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
