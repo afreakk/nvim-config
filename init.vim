@@ -245,8 +245,12 @@ let g:fzf_action = {
 
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 
-command! -bang -nargs=+ -complete=dir Rag call fzf#vim#ag_raw(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
+command! -bang -nargs=* Ggrep call fzf#vim#grep('git grep --recurse-submodules --line-number -- '.shellescape(<q-args>), 0, fzf#vim#with_preview(), <bang>0)
+
+command! -bang -nargs=+ -complete=dir Agr call fzf#vim#ag_raw(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
+
+command! -bang -nargs=* Agc call fzf#vim#ag(<q-args>, extend({'dir': expand('%:p:h')}, fzf#vim#with_preview('right:50%:hidden', '?')))
 " Augmenting Ag command using fzf#vim#with_preview function
 "   * fzf#vim#with_preview([[options], [preview window], [toggle keys...]])
 "     * For syntax-highlighting, Ruby and any of the following tools are required:
@@ -259,8 +263,8 @@ command! -bang -nargs=+ -complete=dir Rag call fzf#vim#ag_raw(<q-args>, {'option
 "   :Ag! - Start fzf in fullscreen and display the preview window above
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>,
-  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0 ? fzf#vim#with_preview({},'up:60%')
+  \                         : fzf#vim#with_preview({},'right:50%:hidden', '?'),
   \                 <bang>0)
 
 " Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
@@ -369,17 +373,18 @@ nnoremap <space>vs :source $MYVIMRC<cr>
 
 nnoremap <Space>q :set operatorfunc=<SID>AgTxtObj<cr>g@
 vnoremap <Space>q :<c-u>call <SID>AgTxtObj(visualmode())<cr>
-
 nnoremap <Space>q<space> :Ag 
 
-nnoremap <Space>qc :set operatorfunc=<SID>AgTxtObjInCurrentDirectory<cr>g@
-vnoremap <Space>qc :<c-u>call <SID>AgTxtObjInCurrentDirectory(visualmode())<cr>
+nnoremap <Space>qw :set operatorfunc=<SID>AgTxtObjInCurrentDirectory<cr>g@
+vnoremap <Space>qw :<c-u>call <SID>AgTxtObjInCurrentDirectory(visualmode())<cr>
+nnoremap <Space>qw<space> :Agc 
 
 nnoremap <Space>qs :set operatorfunc=<SID>CocSymbolObj<cr>g@
 vnoremap <Space>qs :<c-u>call <SID>CocSymbolObj(visualmode())<cr>
 
 nnoremap <Space>qg :set operatorfunc=<SID>GitGrepTextObj<cr>g@
 vnoremap <Space>qg :<c-u>call <SID>GitGrepTextObj(visualmode())<cr>
+nnoremap <Space>qg<space> :Ggrep 
 
 nnoremap <Space>od :<c-u>call coc#config('diagnostic.enable', 0)<cr>
 nnoremap <Space>oe :<c-u>call coc#config('diagnostic.enable', 1)<cr>
@@ -537,7 +542,7 @@ function! s:CocSymbolObj(type)
 endfunction
 
 function! s:GitGrepTextObj(type)
-    execute "GGrep ".s:GetTxtObj(a:type)
+    execute "Ggrep ".s:GetTxtObj(a:type)
 endfunction
 
 function! s:AgTxtObj(type)
