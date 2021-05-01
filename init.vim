@@ -163,7 +163,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
-Plug 'mboughaba/i3config.vim'
+" Plug 'mboughaba/i3config.vim'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 " Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release', 'do': { -> coc#util#install() }}
 " Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release' }
