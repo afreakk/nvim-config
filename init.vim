@@ -63,6 +63,7 @@ let g:coc_global_extensions = [
 \    "coc-tsserver",
 \    "coc-vimlsp",
 \    "coc-omnisharp",
+\    "coc-comrade",
 \ ]
 " }}}}
 
