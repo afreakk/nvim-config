@@ -62,9 +62,9 @@ let g:coc_global_extensions = [
 \    "coc-rls",
 \    "coc-tsserver",
 \    "coc-vimlsp",
-\    "coc-omnisharp",
 \    "coc-comrade",
 \ ]
+" coc-omnisharp
 " }}}}
 
 " set variables -------- {{{{
@@ -185,6 +185,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-dadbod'
 Plug 'machakann/vim-highlightedyank'
 Plug 'michaeljsmith/vim-indent-object'
+Plug 'beeender/Comrade'
 call plug#end()
 " }}}}
 
@@ -455,7 +456,7 @@ nmap <leader>x  <Plug>(coc-fix-current)
 " Use <tab> for select selections ranges, needs server support, like: coc-tsserver, coc-python
 nmap <silent> <leader>t <Plug>(coc-range-select)
 xmap <silent> <leader>t <Plug>(coc-range-select)
-xmap <silent> <leader>b <Plug>(coc-range-select-backword)
+" xmap <silent> <leader>b <Plug>(coc-range-select-backword)
 
 nnoremap <leader>q :call <SID>QuickfixToggle()<cr>
 nnoremap <silent> <leader>m  :<C-u>MarkdownPreview<CR>
