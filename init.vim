@@ -657,4 +657,7 @@ function! LightlineReload()
   call lightline#update()
 endfunction
 " }}}}
-
+let hostname = substitute(system('hostname'), '\n', '', '')
+if hostname == "hanstop"
+  set background=light
+endif
