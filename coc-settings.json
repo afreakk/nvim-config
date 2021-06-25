@@ -1,4 +1,9 @@
 {
+    "yaml.schemas": {
+        "kubernetes": "/*.yaml"
+    },
+    "yaml.schemaStore.enable": true,
+    "codeLens.enable": true,
     "diagnostic.errorSign": "",
     "diagnostic.warningSign": "",
     "diagnostic.infoSign": "",
@@ -30,6 +35,10 @@
         "nix": {
             "command": "rnix-lsp",
             "filetypes": ["nix"]
+        },
+        "terraform": {
+          "command": "/nix/store/6hn07zrp44srvgxp9jys4h903lcrbqmm-terraform-ls-0.18.1/bin/terraform-ls",
+          "filetypes": ["terraform", "tf"]
         },
         "haskell": {
             "command": "haskell-language-server-wrapper",

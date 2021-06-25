@@ -48,13 +48,14 @@ endif
 
 " coc_global_extensions -------- {{{{
 let g:coc_global_extensions = [
-\    "coc-json",
 \    "coc-explorer",
 \    "coc-clangd",
 \    "coc-css",
 \    "coc-eslint",
 \    "coc-fsharp",
 \    "coc-json",
+\    "coc-docker",
+\    "coc-yaml",
 \    "coc-phpls",
 \    "coc-prettier",
 \    "coc-diagnostic",
@@ -421,37 +422,41 @@ nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
 omap <leader><tab> <plug>(fzf-maps-o)
 
-nnoremap <silent> <leader>l  :<C-u>CocList<cr>
+nnoremap <silent> <space>l  :<C-u>CocList<cr>
 " Show all diagnostics
-nnoremap <silent> <leader>d  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <space>ld  :<C-u>CocList diagnostics<cr>
 " Manage extensions
-nnoremap <silent> <leader>e  :<C-u>CocList extensions<cr>
+nnoremap <silent> <space>le  :<C-u>CocList extensions<cr>
 " Show commands
-nnoremap <silent> <leader>c  :<C-u>CocList commands<cr>
+nnoremap <silent> <space>lc  :<C-u>CocList commands<cr>
 " Find symbol of current document
-nnoremap <silent> <leader>o  :<C-u>CocList outline<cr>
+nnoremap <silent> <space>lo  :<C-u>CocList outline<cr>
 " Search workspace symbols
-nnoremap <silent> <leader>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <space>ls  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent> <leader>n  :<C-u>CocNext<CR>
+nnoremap <silent> <space>ln  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent> <leader>p  :<C-u>CocPrev<CR>
+nnoremap <silent> <space>lp  :<C-u>CocPrev<CR>
 " Resume latest coc list
-nnoremap <silent> <leader>re  :<C-u>CocListResume<CR>
-nmap <leader>rn <Plug>(coc-rename)
+nnoremap <silent> <space>lr  :<C-u>CocListResume<CR>
+nnoremap <silent> <space>la  :<C-u>CocListCancel<CR>
+nmap <space>re <Plug>(coc-rename)
+nmap <space>rf <Plug>(coc-refactor)
 
-nnoremap <silent> <leader>u  :<C-u>CocCommand workspace.showOutput<CR>
+nnoremap <silent> <space>u  :<C-u>CocCommand workspace.showOutput<CR>
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-line)
-nmap <leader>a  <Plug>(coc-codeaction-line)
-xmap <leader>ar  <Plug>(coc-action-rename)
-nmap <leader>ar  <Plug>(coc-action-rename)
+xmap <space>al  <Plug>(coc-codeaction-line)
+nmap <space>al  <Plug>(coc-codeaction-line)
+nmap <space>af  <Plug>(coc-codeaction)
+nmap <space>ac  <Plug>(coc-codeaction-cursor)
+xmap <space>as  <Plug>(coc-codeaction-selected)
+nmap <space>as  <Plug>(coc-codeaction-selected)
+nmap <space>e  <Plug>(coc-codelens-action)
 
 " Remap for do codeAction of current line
 " nmap <leader>ab  <Plug>(coc-fix-current)
 " nmap <leader>al  <Plug>(coc-codeaction-line)
 " Fix autofix problem of current line
-nmap <leader>x  <Plug>(coc-fix-current)
 
 " Use <tab> for select selections ranges, needs server support, like: coc-tsserver, coc-python
 nmap <silent> <leader>t <Plug>(coc-range-select)
@@ -502,6 +507,15 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gd <Plug>(coc-definition)
+
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
 
 " override go to x hotkeys for go files, use vim-go instead of coc-nvim
 autocmd FileType go     nnoremap <buffer> gy :GoDefType<CR>
