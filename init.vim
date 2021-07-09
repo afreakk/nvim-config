@@ -153,6 +153,7 @@ command! -nargs=+ -complete=command TabMessage call TabMessage(<q-args>)
 
 " Plugins -------- {{{{
 call plug#begin()
+Plug 'svermeulen/vim-subversive'
 Plug 'kevinhwang91/nvim-bqf'
 Plug 'rmagatti/auto-session'
 Plug 'cappyzawa/starlark.vim'
@@ -168,7 +169,7 @@ Plug 'bronson/vim-visual-star-search'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'pechorin/any-jump.vim'
 " Plug 'AlphaMycelium/pathfinder.vim'
-Plug 'svermeulen/vim-easyclip'
+" Plug 'svermeulen/vim-easyclip'
 Plug 'wellle/targets.vim'
 Plug 'andymass/vim-matchup'
 Plug 'tpope/vim-unimpaired'
@@ -261,19 +262,13 @@ augroup filetype_vim
 augroup END
 " }}}
 
-function! QuickfixToggle()
-    let t:quickfix_is_open = get(t:, 'quickfix_is_open', 0)
-    if t:quickfix_is_open
-        cclose
-        let t:quickfix_is_open = 0
-        execute winnr('#') . "wincmd w"
-    else
-        copen
-        let t:quickfix_is_open = 1
-    endif
-endfunction
 
-let hostname = substitute(system('hostname'), '\n', '', '')
-if hostname == "hanstop"
-  set background=light
-endif
+lua <<EOF
+local handle = io.popen("hostname")
+local result = handle:read("*l")
+handle:close()
+if result == "hanstop" then
+  vim.api.nvim_set_option("background", "light")
+end
+print(result)
+EOF

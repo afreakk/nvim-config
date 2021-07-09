@@ -1,5 +1,17 @@
 vim.g.maplocalleader = "<F2>"
 vim.g.mapleader = "\\"
+
+local qfisopen = 0
+function qftoggle()
+    if qfisopen == 0 then
+        vim.cmd("copen")
+        qfisopen = 1
+    else
+        vim.cmd("cclose") 
+        qfisopen = 0
+    end
+end
+
 local wk = require('which-key')
 wk.setup {
     -- Need to fix d c  & y for which-key (not working because of easy-clip)
@@ -111,7 +123,7 @@ local keymap = {
      a = {":<C-u>CocListCancel<CR>", "coclistcancel"},
      u = {":<C-u>CocCommand workspace.showOutput<CR>", "coccommand workspace.showOutput"},
    },
-   i = { ":call QuickfixToggle()<cr>", "quickfixtoggle" },
+   i = { ":lua qftoggle()<CR>", "quickfixtoggle" },
    [";"] = {":History:<cr>", "History"},
 }
 

@@ -29,10 +29,9 @@ nmap <space><tab> <plug>(fzf-maps-n)
 xmap <space><tab> <plug>(fzf-maps-x)
 omap <space><tab> <plug>(fzf-maps-o)
 
-"Because easyclip uses m for move
-nnoremap gm m
-" overrides Middle screen hotkey
-nmap M <Plug>MoveMotionEndOfLinePlug
+nmap s <plug>(SubversiveSubstitute)
+nmap ss <plug>(SubversiveSubstituteLine)
+nmap S <plug>(SubversiveSubstituteToEndOfLine)
 tnoremap <S-Esc> <C-\><C-n>
 nmap <C-S> <Plug>(choosewin)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
