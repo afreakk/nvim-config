@@ -137,4 +137,4 @@ local local_keymap = {
     r = {':!python %', 'run python'},
 }
 
-wk.register(local_keymap, {prefix = 'localleader'})
+wk.register(local_keymap, {prefix = '<localleader>'})
