@@ -12,7 +12,7 @@
     "omnisharp.path": "/nix/store/kg1ir2p58dy838d9fxy5sfflcq75arra-omnisharp-roslyn-1.35.2/bin/omnisharp",
     "explorer.icon.enableNerdfont": true,
     "explorer.previewAction.onHover": false,
-    "explorer.file.autoReveal": true,
+    "explorer.file.reveal.auto": true,
     "prettier.tabWidth": 4,
     "prettier.singleQuote": true,
     "diagnostic-languageserver.filetypes": {
@@ -37,8 +37,8 @@
             "filetypes": ["nix"]
         },
         "terraform": {
-          "command": "/nix/store/6hn07zrp44srvgxp9jys4h903lcrbqmm-terraform-ls-0.18.1/bin/terraform-ls",
-          "filetypes": ["terraform", "tf"]
+            "command": "/nix/store/6hn07zrp44srvgxp9jys4h903lcrbqmm-terraform-ls-0.18.1/bin/terraform-ls",
+            "filetypes": ["terraform", "tf"]
         },
         "haskell": {
             "command": "haskell-language-server-wrapper",

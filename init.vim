@@ -75,6 +75,7 @@ set hidden
 " https://github.com/svermeulen/vim-easyclip#clipboard-setting
 set clipboard+=unnamedplus
 
+set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 set background=dark
 set backupcopy=yes " for REACT etc tranzpilers
 set mouse=a
@@ -107,6 +108,8 @@ set tabstop=8 softtabstop=4 shiftwidth=4 expandtab
 set modeline            " Enable modeline.
 
 set timeout ttimeoutlen=50
+"for which_key to act faster, hopefully im faster than 500 doing combokeys
+set timeoutlen=500
 set t_Co=256                         " Enable 256 colors
 set termguicolors
 
@@ -120,9 +123,14 @@ set cmdheight=2
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
 
-" always show signcolumns
-set signcolumn=yes
-
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
 
 " }}}}
 
@@ -145,6 +153,14 @@ command! -nargs=+ -complete=command TabMessage call TabMessage(<q-args>)
 
 " Plugins -------- {{{{
 call plug#begin()
+Plug 'kevinhwang91/nvim-bqf'
+Plug 'rmagatti/auto-session'
+Plug 'cappyzawa/starlark.vim'
+" Plug 'tversteeg/registers.nvim', { 'branch': 'main' }
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'nvim-treesitter/playground'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'p00f/nvim-ts-rainbow'
 Plug 'LnL7/vim-nix'
 Plug 'airblade/vim-gitgutter'
 Plug 'freitass/todo.txt-vim'
@@ -158,15 +174,17 @@ Plug 'andymass/vim-matchup'
 Plug 'tpope/vim-unimpaired'
 Plug 'chrisbra/Recover.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & npm install'  }
-Plug 'vim-vdebug/vdebug'
+" Plug 'vim-vdebug/vdebug'
+Plug 'mfussenegger/nvim-dap'
 Plug 'rbong/vim-flog'
 " Plug 'meck/vim-brittany'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 " Plug 'mboughaba/i3config.vim'
-Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+" Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+Plug 'norcalli/nvim-colorizer.lua'
 " Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release', 'do': { -> coc#util#install() }}
 " Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -176,129 +194,48 @@ Plug 'junegunn/fzf.vim'
 Plug 'laher/fuzzymenu.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'itchyny/lightline.vim'
-Plug 'sheerun/vim-polyglot'
-Plug 'morhetz/gruvbox'
+" Plug 'sheerun/vim-polyglot'
+" Plug 'morhetz/gruvbox'
+Plug 'rktjmp/lush.nvim'
+Plug 'npxbr/gruvbox.nvim'
 Plug 'tpope/vim-sleuth'
 Plug 't9md/vim-choosewin'
-Plug 'liuchengxu/vim-which-key'
 Plug 'tpope/vim-rhubarb'
+Plug 'folke/which-key.nvim'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-dadbod'
 Plug 'machakann/vim-highlightedyank'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'beeender/Comrade'
+"required by nvim-reload
+Plug 'nvim-lua/plenary.nvim'
+Plug 'famiu/nvim-reload'
 call plug#end()
 " }}}}
 
-" Golang stuff -------- {{{{
-let g:go_highlight_types = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_function_calls = 1
-let g:go_metalinter_autosave = 1
-let g:go_metalinter_enabled = ['vet', 'errcheck', 'staticcheck']
-let g:go_metalinter_autosave_enabled = ['vet', 'errcheck', 'staticcheck']
-let g:go_fmt_command = "goimports"
-let g:go_def_mapping_enabled = 0
+" Plugin settings (Uncategorized) -------- {{{{
+lua require'colorizer'.setup()
+let g:gruvbox_contrast_dark="hard"
+colorscheme gruvbox
+let g:EasyClipUseSubstituteDefaults = 1
+let g:highlightedyank_highlight_duration = 350
+let g:choosewin_label = 'ARSTDHNEIOQWFPGJLUYZXCVBKM'
+let g:any_jump_disable_default_keybindings = 1
 " }}}}
 
-" Coc -------- {{{{
+lua <<EOF
+require('treesitter-settings')
+require('dap-settings')
+require('space-maps')
+EOF
+let g:vimsyn_embed = 'l'
 
-" from https://github.com/neoclide/coc.nvim#example-vim-configuration
+source ~/.config/nvim/coc.vim
+source ~/.config/nvim/lightline.vim
+source ~/.config/nvim/fzf.vim
+source ~/.config/nvim/query.vim
+source ~/.config/nvim/keymaps.vim
 
-" Use K to show documentation in preview window
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-" Using CocList
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
-" Use `:Format` to format current buffer
-command! -nargs=0 Format :call CocAction('format')
-
-" Use `:Fold` to fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" use `:OR` for organize import of current buffer
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" }}}}
-
-" Fzf Stuff -------- {{{{
-command! -bang -nargs=? GFilesRecursive call fzf#vim#gitfiles(
-      \"--recurse-submodules",
-      \fzf#vim#with_preview('right:50%'),
-      \<bang>0 )
-
-function! s:build_quickfix_list(lines)
-  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-  copen
-  cc
-endfunction
-"This is the default extra key bindings
-let g:fzf_action = {
-        \ 'ctrl-q': function('s:build_quickfix_list'),
-	\ 'ctrl-t': 'tab split',
-	\ 'ctrl-x': 'split',
-	\ 'ctrl-v': 'vsplit' }
-
-let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
-
-
-command! -bang -nargs=* Ggrep call fzf#vim#grep('git grep --recurse-submodules --line-number -- '.shellescape(<q-args>), 0, fzf#vim#with_preview(), <bang>0)
-
-command! -bang -nargs=+ -complete=dir Agr call fzf#vim#ag_raw(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
-
-command! -bang -nargs=* Agc call fzf#vim#ag(<q-args>, extend({'dir': expand('%:p:h')}, fzf#vim#with_preview('right:50%:hidden', '?')))
-" Augmenting Ag command using fzf#vim#with_preview function
-"   * fzf#vim#with_preview([[options], [preview window], [toggle keys...]])
-"     * For syntax-highlighting, Ruby and any of the following tools are required:
-"       - Bat: https://github.com/sharkdp/bat
-"       - Highlight: http://www.andre-simon.de/doku/highlight/en/highlight.php
-"       - CodeRay: http://coderay.rubychan.de/
-"       - Rouge: https://github.com/jneen/rouge
-"
-"   :Ag  - Start fzf with hidden preview window that can be enabled with "?" key
-"   :Ag! - Start fzf in fullscreen and display the preview window above
-command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>,
-  \                 <bang>0 ? fzf#vim#with_preview({},'up:60%')
-  \                         : fzf#vim#with_preview({},'right:50%:hidden', '?'),
-  \                 <bang>0)
-
-" Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-
-" Search multiline
-command! -bang -nargs=* Rgm
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case --multiline '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-
-" }}}}
-
-" Window splitting/movement -------- {{{{
-nnoremap <C-Up> <C-W>k
-nnoremap <C-Down> <C-W>j
-nnoremap <C-Left> <C-W>h
-nnoremap <C-Right> <C-W>l
-
-nmap <silent> <S-Up> :wincmd K<CR>
-nmap <silent> <S-Down> :wincmd J<CR>
-nmap <silent> <S-Left> :wincmd H<CR>
-nmap <silent> <S-Right> :wincmd L<CR>
-" }}}}
 
 " Javascript my stuff -------- {{{{
 augroup filetype_javascript
@@ -324,256 +261,7 @@ augroup filetype_vim
 augroup END
 " }}}
 
-" Setup Leader/Space/LocalLeader -------- {{{{
-let g:leaderMap =  {}
-let g:spaceThing = {}
-let g:spaceThing.z ={'name': 'Theme menu'} 
-let g:spaceThing.y ={'name': 'Copy menu'} 
-let g:spaceThing.v ={'name': 'Vimrc menu'} 
-let g:spaceThing.c ={'name': 'Commands'} 
-call which_key#register('\', "g:leaderMap")
-call which_key#register("\<Space>", "g:spaceThing")
-
-let g:maplocalleader = "\<F2>"
-let g:mapleader = '\'
-
-nnoremap <silent> <leader>      :<c-u>WhichKey '\'<CR>
-nnoremap <silent> <localleader> :<c-u>WhichKey  '<F2>'<CR>
-" }}}}
-
-" Space hotkeys -------- {{{{
-nnoremap <silent> <Space> :<c-u>WhichKey  '<Space>'<CR>
-nnoremap <Space>w :w<cr>
-
-nmap <Space><Space> <Plug>Fzm
-vmap <Space><Space> <Plug>FzmVisual
-
-function! SetTransparentBg()
-    hi Normal guibg=NONE ctermbg=NONE
-endfunction
-nnoremap <Space>yf :%y<CR>
-nnoremap <Space>yn :let @+=expand("%")<CR>
-nnoremap <Space>zd :set background=dark<CR>
-nnoremap <Space>zl :set background=light<CR>
-nnoremap <Space>zt :call SetTransparentBg()<CR>
-
-nnoremap <Space>g :GFilesRecursive<cr>
-nnoremap <Space>p :Files<cr>
-nnoremap <Space>b :Buffers<cr>
-
-nnoremap <Space>n :noh<cr> 
-nnoremap <space>; :History:<cr>
-nnoremap <space>f :CocCommand explorer<CR>
-
-nnoremap <Space>cx :IPaste<cr>
-nnoremap <Space>cl :BLines<cr>
-nnoremap <Space>ch :Helptags<cr>
-nnoremap <Space>cc :Commands<cr>
-nnoremap <Space>cm :Maps<cr>
-
-nnoremap <space>ve :vsplit $MYVIMRC<cr>
-nnoremap <space>vs :source $MYVIMRC<cr>
-
-nnoremap <Space>q :set operatorfunc=<SID>AgTxtObj<cr>g@
-vnoremap <Space>q :<c-u>call <SID>AgTxtObj(visualmode())<cr>
-nnoremap <Space>q<space> :Ag 
-
-nnoremap <Space>qw :set operatorfunc=<SID>AgTxtObjInCurrentDirectory<cr>g@
-vnoremap <Space>qw :<c-u>call <SID>AgTxtObjInCurrentDirectory(visualmode())<cr>
-nnoremap <Space>qw<space> :Agc 
-
-nnoremap <Space>qs :set operatorfunc=<SID>CocSymbolObj<cr>g@
-vnoremap <Space>qs :<c-u>call <SID>CocSymbolObj(visualmode())<cr>
-
-nnoremap <Space>qg :set operatorfunc=<SID>GitGrepTextObj<cr>g@
-vnoremap <Space>qg :<c-u>call <SID>GitGrepTextObj(visualmode())<cr>
-nnoremap <Space>qg<space> :Ggrep 
-
-nnoremap <Space>od :<c-u>call coc#config('diagnostic.enable', 0)<cr>
-nnoremap <Space>oe :<c-u>call coc#config('diagnostic.enable', 1)<cr>
-
-nnoremap <Space>de :diffthis<cr>
-nnoremap <Space>dd :diffoff<cr>
-nnoremap <Space>do :diffoff!<cr>
-nnoremap <Space>dw :windo diffthis<cr>
-
-let g:spaceThing['t'] = {
-                \'name' : 'Git Menu',
-                \'s' : ['Gstatus', 'Git Status'],
-                \'p' : [':Git pull',   'Git Pull'],
-                \'h' : [':Git push',   'Git Push'],
-                \'d' : ['Gdiffsplit', 'Diff split'],
-                \'b' : [':Git blame',  'Git blame'],
-                \'l' : [':0Glog',  '0Git log'],
-                \'o' : ['Glog',  'Git log'],
-                \'w' : ['Gbrowse',  'Git browse'],
-                \'c' : ['Gbranch',  'Git checkout branch'],
-                \}
-
-let g:sessions_dir = '~/vim-sessions'
-exec 'nnoremap <Space>ss :mks! ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
-exec 'nnoremap <Space>sr :so ' . g:sessions_dir. '/*.vim<C-D><BS><BS><BS><BS><BS>'
-" }}}}
-
-" Leader hotkeys -------- {{{{
-
-" Mapping selecting mappings
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
-
-nnoremap <silent> <space>l  :<C-u>CocList<cr>
-" Show all diagnostics
-nnoremap <silent> <space>ld  :<C-u>CocList diagnostics<cr>
-" Manage extensions
-nnoremap <silent> <space>le  :<C-u>CocList extensions<cr>
-" Show commands
-nnoremap <silent> <space>lc  :<C-u>CocList commands<cr>
-" Find symbol of current document
-nnoremap <silent> <space>lo  :<C-u>CocList outline<cr>
-" Search workspace symbols
-nnoremap <silent> <space>ls  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>ln  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>lp  :<C-u>CocPrev<CR>
-" Resume latest coc list
-nnoremap <silent> <space>lr  :<C-u>CocListResume<CR>
-nnoremap <silent> <space>la  :<C-u>CocListCancel<CR>
-nmap <space>re <Plug>(coc-rename)
-nmap <space>rf <Plug>(coc-refactor)
-
-nnoremap <silent> <space>u  :<C-u>CocCommand workspace.showOutput<CR>
-" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-xmap <space>al  <Plug>(coc-codeaction-line)
-nmap <space>al  <Plug>(coc-codeaction-line)
-nmap <space>af  <Plug>(coc-codeaction)
-nmap <space>ac  <Plug>(coc-codeaction-cursor)
-xmap <space>as  <Plug>(coc-codeaction-selected)
-nmap <space>as  <Plug>(coc-codeaction-selected)
-nmap <space>e  <Plug>(coc-codelens-action)
-
-" Remap for do codeAction of current line
-" nmap <leader>ab  <Plug>(coc-fix-current)
-" nmap <leader>al  <Plug>(coc-codeaction-line)
-" Fix autofix problem of current line
-
-" Use <tab> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-nmap <silent> <leader>t <Plug>(coc-range-select)
-xmap <silent> <leader>t <Plug>(coc-range-select)
-" xmap <silent> <leader>b <Plug>(coc-range-select-backword)
-
-nnoremap <leader>q :call <SID>QuickfixToggle()<cr>
-nnoremap <silent> <leader>m  :<C-u>MarkdownPreview<CR>
-
-" }}}}
-
-" Keymaps -------- {{{{
-"Because easyclip uses m for move
-nnoremap gm m
-" overrides Middle screen hotkey
-nmap M <Plug>MoveMotionEndOfLinePlug
-tnoremap <S-Esc> <C-\><C-n>
-nmap <C-S> <Plug>(choosewin)
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-" Insert mode completion (FZF)
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" Remap keys for gotos
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gd <Plug>(coc-definition)
-
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
-
-" override go to x hotkeys for go files, use vim-go instead of coc-nvim
-autocmd FileType go     nnoremap <buffer> gy :GoDefType<CR>
-autocmd FileType go     nnoremap <buffer> gr :GoReferrers<CR>
-autocmd FileType go     nnoremap <buffer> gd :GoDef<CR>
-
-" If your '{' or '}' are not in the first column, and you would like to use "[["
-" and "]]" anyway, try these mappings:
-
-map [[ ?{<CR>w99[{:noh<cr>
-map ][ /}<CR>b99]}:noh<cr>
-map ]] j0[[%/{<CR>:noh<cr>
-map [] k$][%?}<CR>:noh<cr>
-" }}}}
-
-" Plugin settings (Uncategorized) -------- {{{{
-let g:gruvbox_contrast_dark="hard"
-colorscheme gruvbox
-
-let g:EasyClipUseSubstituteDefaults = 1
-let g:highlightedyank_highlight_duration = 350
-let g:choosewin_label = 'ARSTDHNEIOQWFPGJLUYZXCVBKM'
-" }}}}
-
-" My functions ----------- {{{
-function! s:GetTxtObj(type)
-    let prev_registered = @@
-    if a:type ==# 'v'
-        normal! `<v`>y
-    elseif a:type ==# 'char'
-        normal! `[v`]y
-    else
-        return
-    endif
-    let txtObj = @@
-    let @@ = prev_registered
-    return txtObj
-endfunction
-
-function! s:CocSymbolObj(type)
-  execute 'CocList -I --normal --input='.s:GetTxtObj(a:type).' symbols'
-endfunction
-
-function! s:GitGrepTextObj(type)
-    execute "Ggrep ".s:GetTxtObj(a:type)
-endfunction
-
-function! s:AgTxtObj(type)
-    execute "Ag ".s:GetTxtObj(a:type)
-endfunction
-
-function! s:AgTxtObjInCurrentDirectory(type)
-    call fzf#vim#ag(s:GetTxtObj(a:type), extend({'dir': expand('%:p:h')}, fzf#vim#with_preview('right:50%:hidden', '?')))
-endfunction
-
-set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
-
-function! s:QuickfixToggle()
+function! QuickfixToggle()
     let t:quickfix_is_open = get(t:, 'quickfix_is_open', 0)
     if t:quickfix_is_open
         cclose
@@ -585,78 +273,6 @@ function! s:QuickfixToggle()
     endif
 endfunction
 
-function! s:Toggler(varName, fnClose, fnOpen)
-    let l:vn = "toggle".a:varName
-    if get(t:, l:vn, 0)
-        execute a:fnOpen
-        let t:[l:vn] = 0
-    else
-        execute a:fnClose
-        let t:[l:vn] = 1
-    endif
-endfunction
-
-function! s:GitCheckoutBranch(branch)
-    " branch can look like this: "/remotes/origin/master [hash] info" or this: "master [hash] info"
-    let l:name = split(split(trim(a:branch), "", 1)[0], "/", 1)[-1]
-    
-    " just show what is happening
-    echo "checking out ".l:name."\n"
-    
-    " you can use !git, instead of Git, if you don't have Fugitive
-    execute "Git checkout ".l:name
-endfunction
-
-" -a option lists all branches (remotes aswell)
-" -vv option shows more information about branch
-" --color and --ansi enables colors
-" --nth=1 makes sure you only search by names and not branch info
-command! -bang Gbranch call fzf#run(fzf#wrap({'source': 'git branch -avv --color', 'sink': function('<SID>GitCheckoutBranch'), 'options': '--ansi --nth=1'}, <bang>0))
-" ---- }}}}
-
-" LightLine -------- {{{{
-
-" Add status line support, for integration with other plugin, checkout `:h coc-status`
-"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-function! CocCurrentFunction()
-    return get(b:, 'coc_current_function', '')
-endfunction
-
-function! StatusDiagnostic() abort
-  let info = get(b:, 'coc_diagnostic_info', {})
-  if empty(info) | return '' | endif
-  let msgs = []
-  if get(info, 'error', 0)
-    call add(msgs, 'E' . info['error'])
-  endif
-  if get(info, 'warning', 0)
-    call add(msgs, 'W' . info['warning'])
-  endif
-  return join(msgs, ' '). ' ' . get(g:, 'coc_status', '')
-endfunction
-
-let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'currentfunction', 'readonly', 'gitbranch', 'filename', 'modified' ] ],
-      \   'right': [['lineinfo'], ['percent'], ['StatusDiagnostic'], ['filetype'],['fileencoding'], ['fileformat']]
-      \ },
-      \ 'component_function': {
-      \   'currentfunction': 'CocCurrentFunction',
-      \   'gitbranch': 'FugitiveHead',
-      \   'StatusDiagnostic': 'StatusDiagnostic'
-      \ },
-      \ }
-
-command! LightlineReload call LightlineReload()
-
-function! LightlineReload()
-  call lightline#init()
-  call lightline#colorscheme()
-  call lightline#update()
-endfunction
-" }}}}
 let hostname = substitute(system('hostname'), '\n', '', '')
 if hostname == "hanstop"
   set background=light
