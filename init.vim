@@ -38,6 +38,7 @@ set hidden
 
 " https://github.com/svermeulen/vim-easyclip#clipboard-setting
 set clipboard+=unnamedplus
+set cursorline
 
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 set background=dark
