@@ -117,29 +117,3 @@ Plug 'beeender/Comrade'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'famiu/nvim-reload'
 call plug#end()
-
-lua <<EOF
-require('colorizer').setup()
-require('afreak.treesitter-settings')
-require('afreak.dap-settings')
-require('afreak.space-maps')
-require('afreak.helper-functions')
-if cmdAndGetFirstLine("hostname") == "hanstop" then
-  vim.api.nvim_set_option("background", "light")
-else
-  vim.api.nvim_set_option("background", "dark")
-end
-
-vim.g.gruvbox_contrast_dark="hard"
-vim.g.highlightedyank_highlight_duration = 350
-vim.g.choosewin_label = 'ARSTDHNEIOQWFPGJLUYZXCVBKM'
-vim.g.any_jump_disable_default_keybindings = 1
-vim.cmd("colorscheme gruvbox")
-vim.g.vimsyn_embed = 'l'
-require('lualine').setup({
-  options = {theme = 'gruvbox'},
-  sections = {
-    lualine_a = {'coc#status', 'mode'}
-  }
-})
-EOF
