@@ -52,7 +52,6 @@ set shortmess+=c
 
 set signcolumn=number
 
-" Plugins -------- {{{{
 call plug#begin()
 Plug 'sbulav/nredir.nvim'
 Plug 'svermeulen/vim-subversive'
@@ -118,7 +117,6 @@ Plug 'beeender/Comrade'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'famiu/nvim-reload'
 call plug#end()
-" }}}}
 
 lua <<EOF
 require('colorizer').setup()
