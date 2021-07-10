@@ -2,13 +2,19 @@ vim.g.maplocalleader = "<F2>"
 vim.g.mapleader = "\\"
 
 local qfisopen = 0
+function qfOpen()
+    vim.cmd("copen")
+    qfisopen = 1
+end
+function qfClose()
+    vim.cmd("cclose") 
+    qfisopen = 0
+end
 function qftoggle()
     if qfisopen == 0 then
-        vim.cmd("copen")
-        qfisopen = 1
+        qfOpen()
     else
-        vim.cmd("cclose") 
-        qfisopen = 0
+        qfClose()
     end
 end
 
@@ -129,12 +135,10 @@ local keymap = {
 
 wk.register(keymap, {prefix = " "})
 local leaderkeymap = {
-   [";"] = {":History:<cr>", "History"},
 }
 wk.register(leaderkeymap, {prefix = '<leader>'})
 
 local local_keymap = {
-    r = {':!python %', 'run python'},
 }
 
 wk.register(local_keymap, {prefix = '<localleader>'})

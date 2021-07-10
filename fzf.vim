@@ -3,22 +3,10 @@ command! -bang -nargs=? GFilesRecursive call fzf#vim#gitfiles(
       \fzf#vim#with_preview('right:50%'),
       \<bang>0 )
 
-function! s:build_quickfix_list(lines)
-  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-  copen
-  cc
-endfunction
-"This is the default extra key bindings
-let g:fzf_action = {
-        \ 'ctrl-q': function('s:build_quickfix_list'),
-	\ 'ctrl-t': 'tab split',
-	\ 'ctrl-x': 'split',
-	\ 'ctrl-v': 'vsplit' }
-
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 
 
-command! -bang -nargs=* Ggrep call fzf#vim#grep('git grep --recurse-submodules --line-number -- '.shellescape(<q-args>), 0, fzf#vim#with_preview(), <bang>0)
+command! -bang -nargs=* Ggrep call fzf#vim#grep('git grep --recurse-submodules --line-number -- '.shellescape(<q-args>), 0, fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 
 command! -bang -nargs=+ -complete=dir Agr call fzf#vim#ag_raw(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
