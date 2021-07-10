@@ -29,6 +29,8 @@ nmap <space><tab> <plug>(fzf-maps-n)
 xmap <space><tab> <plug>(fzf-maps-x)
 omap <space><tab> <plug>(fzf-maps-o)
 
+nmap Y y$
+
 nmap s <plug>(SubversiveSubstitute)
 nmap ss <plug>(SubversiveSubstituteLine)
 nmap S <plug>(SubversiveSubstituteToEndOfLine)
