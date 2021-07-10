@@ -133,7 +133,8 @@ local keymap = {
    [";"] = {":History:<cr>", "History"},
 }
 
-wk.register(keymap, {prefix = " "})
+wk.register(keymap, {prefix = " ", mode = "n"})
+wk.register(keymap, {prefix = " ", mode = "v"})
 local leaderkeymap = {
 }
 wk.register(leaderkeymap, {prefix = '<leader>'})

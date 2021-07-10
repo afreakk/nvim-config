@@ -202,7 +202,7 @@ vim.g.vimsyn_embed = 'l'
 require('lualine').setup({
   options = {theme = 'gruvbox'},
   sections = {
-    lualine_a = {'coc#status'}
+    lualine_a = {'coc#status', 'mode'}
   }
 })
 

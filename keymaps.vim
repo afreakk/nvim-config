@@ -69,7 +69,7 @@ nmap <silent> gd <Plug>(coc-definition)
 " If your '{' or '}' are not in the first column, and you would like to use "[["
 " and "]]" anyway, try these mappings:
 
-map [[ ?{<CR>w99[{:noh<cr>
-map ][ /}<CR>b99]}:noh<cr>
-map ]] j0[[%/{<CR>:noh<cr>
-map [] k$][%?}<CR>:noh<cr>
+" map [[ ?{<CR>w99[{:noh<cr>
+" map ][ /}<CR>b99]}:noh<cr>
+" map ]] j0[[%/{<CR>:noh<cr>
+" map [] k$][%?}<CR>:noh<cr>
