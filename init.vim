@@ -176,13 +176,13 @@ Plug 'famiu/nvim-reload'
 call plug#end()
 " }}}}
 
-source ~/.config/nvim/guioptions.vim
-source ~/.config/nvim/coc.vim
-" source ~/.config/nvim/lightline.vim
-source ~/.config/nvim/fzf.vim
-source ~/.config/nvim/query.vim
-source ~/.config/nvim/keymaps.vim
-source ~/.config/nvim/languages_autocmd.vim
+source guioptions.vim
+source coc.vim
+" source lightline.vim
+source fzf.vim
+source query.vim
+source keymaps.vim
+source languages_autocmd.vim
 
 lua <<EOF
 require('colorizer').setup()
