@@ -1,6 +1,8 @@
 let g:fzf_preview_window = ['right:50%:hidden', '?']
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 
+command! -nargs=* VimFiles
+            \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview({"dir": "~/.config/nvim"}))
 
 "   * fzf#vim#with_preview([[options], [preview window], [toggle keys...]])
 command! -nargs=? GFilesRecursive

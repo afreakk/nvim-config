@@ -44,6 +44,7 @@ local keymap = {
     v = {
         name = '+vimrc',
         e = {":vsplit $MYVIMRC<CR>", "edit vimrc"},
+        g = {":VimFiles<CR>", "find vim file"},
         s = {":Reload<cr>", "nvim-reload"},
     },
     y = {
