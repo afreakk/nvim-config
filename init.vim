@@ -1,47 +1,9 @@
-" Bootstrap Plug ----------- {{{{
-let autoload_plug_path = stdpath('data') . '/site/autoload/plug.vim'
-if !filereadable(autoload_plug_path)
-  silent execute '!curl -fLo ' . autoload_plug_path . '  --create-dirs 
-      \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-unlet autoload_plug_path
-" }}}}
-
 set inccommand=split
-
-" coc_global_extensions -------- {{{{
-let g:coc_global_extensions = [
-\    "coc-explorer",
-\    "coc-clangd",
-\    "coc-css",
-\    "coc-eslint",
-\    "coc-fsharp",
-\    "coc-json",
-\    "coc-docker",
-\    "coc-yaml",
-\    "coc-phpls",
-\    "coc-prettier",
-\    "coc-diagnostic",
-\    "coc-python",
-\    "coc-rls",
-\    "coc-tsserver",
-\    "coc-vimlsp",
-\    "coc-comrade",
-\ ]
-" coc-omnisharp
-" }}}}
-
-" set variables -------- {{{{
-
 set hidden
-
 " https://github.com/svermeulen/vim-easyclip#clipboard-setting
 set clipboard+=unnamedplus
 set cursorline
-
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
-set background=dark
 set backupcopy=yes " for REACT etc tranzpilers
 set mouse=a
 set undofile
@@ -90,27 +52,9 @@ set shortmess+=c
 
 set signcolumn=number
 
-" }}}}
-
-" TabMessage -------- {{{{
-function! TabMessage(cmd)
-  redir => message
-  silent execute a:cmd
-  redir END
-  if empty(message)
-    echoerr "no output"
-  else
-    " use "new" instead of "tabnew" below if you prefer split windows instead of tabs
-    tabnew
-    setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted nomodified
-    silent put=message
-  endif
-endfunction
-command! -nargs=+ -complete=command TabMessage call TabMessage(<q-args>)
-" }}}}
-
 " Plugins -------- {{{{
 call plug#begin()
+Plug 'sbulav/nredir.nvim'
 Plug 'svermeulen/vim-subversive'
 Plug 'kevinhwang91/nvim-bqf'
 Plug 'rmagatti/auto-session'
@@ -176,14 +120,6 @@ Plug 'famiu/nvim-reload'
 call plug#end()
 " }}}}
 
-source guioptions.vim
-source coc.vim
-" source lightline.vim
-source fzf.vim
-source query.vim
-source keymaps.vim
-source languages_autocmd.vim
-
 lua <<EOF
 require('colorizer').setup()
 require('afreak.treesitter-settings')
@@ -192,6 +128,8 @@ require('afreak.space-maps')
 require('afreak.helper-functions')
 if cmdAndGetFirstLine("hostname") == "hanstop" then
   vim.api.nvim_set_option("background", "light")
+else
+  vim.api.nvim_set_option("background", "dark")
 end
 
 vim.g.gruvbox_contrast_dark="hard"
@@ -206,5 +144,4 @@ require('lualine').setup({
     lualine_a = {'coc#status', 'mode'}
   }
 })
-
 EOF
