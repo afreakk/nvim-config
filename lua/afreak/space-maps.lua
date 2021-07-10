@@ -1,23 +1,6 @@
 vim.g.maplocalleader = "<F2>"
 vim.g.mapleader = "\\"
 
-local qfisopen = 0
-function qfOpen()
-    vim.cmd("copen")
-    qfisopen = 1
-end
-function qfClose()
-    vim.cmd("cclose") 
-    qfisopen = 0
-end
-function qftoggle()
-    if qfisopen == 0 then
-        qfOpen()
-    else
-        qfClose()
-    end
-end
-
 local wk = require('which-key')
 wk.setup {
     -- Need to fix d c  & y for which-key (not working because of easy-clip)
