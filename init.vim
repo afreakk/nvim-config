@@ -8,43 +8,7 @@ endif
 unlet autoload_plug_path
 " }}}}
 
-" vim / nvim specifics -------- {{{{
-if has('nvim')
-  set inccommand=split
-endif
-if !has('nvim')
-  set esckeys             " Cursor keys in insert mode.
-  " https://github.com/vim/vim/issues/993#issuecomment-255651605
-  " let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  " let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-
-  " https://unix.stackexchange.com/a/1764
-  map <ESC>[1;5A <C-Up>
-  map <ESC>[1;5B <C-Down>
-  map <ESC>[1;5C <C-Right>
-  map <ESC>[1;5D <C-Left>
-endif
-" }}}}
-
-" Cursor appearance t_SI etc -------- {{{{
-set guicursor+=a:blinkon333
-set guicursor+=a:blinkon0
-" hi Cursor guifg=#121212 guibg=#afd700
-" let &t_SI = "\<Esc>[5 q"
-" let &t_SR = "\<Esc>[4 q"
-" let &t_EI = "\<Esc>[2 q"
-" }}}}
-
-" GuiOptions -------- {{{{
-set guioptions-=m  "remove menu bar
-set guioptions-=T  "remove toolbar
-set guioptions-=r  "remove right-hand scroll bar
-set guioptions-=L  "remove left-hand scroll bar
-set guifont=Hack\ Nerd\ Font\ Mono:h13
-if !has('nvim')
-  set guiheadroom=0
-endif
-" }}}}
+set inccommand=split
 
 " coc_global_extensions -------- {{{{
 let g:coc_global_extensions = [
@@ -123,14 +87,7 @@ set cmdheight=2
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
 
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("nvim-0.5.0") || has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
+set signcolumn=number
 
 " }}}}
 
@@ -194,11 +151,14 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'laher/fuzzymenu.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
+Plug 'hoob3rt/lualine.nvim'
 " Plug 'sheerun/vim-polyglot'
 " Plug 'morhetz/gruvbox'
+
 Plug 'rktjmp/lush.nvim'
 Plug 'npxbr/gruvbox.nvim'
+
 Plug 'tpope/vim-sleuth'
 Plug 't9md/vim-choosewin'
 Plug 'tpope/vim-rhubarb'
@@ -208,67 +168,42 @@ Plug 'tpope/vim-dadbod'
 Plug 'machakann/vim-highlightedyank'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'beeender/Comrade'
+
 "required by nvim-reload
 Plug 'nvim-lua/plenary.nvim'
 Plug 'famiu/nvim-reload'
 call plug#end()
 " }}}}
 
-" Plugin settings (Uncategorized) -------- {{{{
-lua require'colorizer'.setup()
-let g:gruvbox_contrast_dark="hard"
-colorscheme gruvbox
-let g:EasyClipUseSubstituteDefaults = 1
-let g:highlightedyank_highlight_duration = 350
-let g:choosewin_label = 'ARSTDHNEIOQWFPGJLUYZXCVBKM'
-let g:any_jump_disable_default_keybindings = 1
-" }}}}
-
-lua <<EOF
-require('treesitter-settings')
-require('dap-settings')
-require('space-maps')
-EOF
-let g:vimsyn_embed = 'l'
-
+source ~/.config/nvim/guioptions.vim
 source ~/.config/nvim/coc.vim
-source ~/.config/nvim/lightline.vim
+" source ~/.config/nvim/lightline.vim
 source ~/.config/nvim/fzf.vim
 source ~/.config/nvim/query.vim
 source ~/.config/nvim/keymaps.vim
-
-
-" Javascript my stuff -------- {{{{
-augroup filetype_javascript
-    autocmd!
-    autocmd FileType javascript,javascriptreact :iabbrev <buffer> clg console.log()<left>
-    autocmd FileType javascript,javascriptreact :iabbrev <buffer> iff if ()<left>
-    autocmd FileType javascript,javascriptreact :iabbrev <buffer> cc const
-    autocmd FileType javascript,javascriptreact :iabbrev <buffer> rr return 
-    autocmd FileType javascript,javascriptreact setlocal foldmethod=syntax
-    autocmd FileType javascript,javascriptreact setlocal foldnestmax=1
-    set nofoldenable
-augroup END
-" }}}}
-
-augroup filetype_gitcommit
-    autocmd!
-    autocmd FileType gitcommit :iabbrev <buffer> mz modernize
-augroup END
-" Vimscript file settings -------- {{{
-augroup filetype_vim
-    autocmd!
-    autocmd FileType vim setlocal foldmethod=marker
-augroup END
-" }}}
-
+source ~/.config/nvim/languages_autocmd.vim
 
 lua <<EOF
-local handle = io.popen("hostname")
-local result = handle:read("*l")
-handle:close()
-if result == "hanstop" then
+require('colorizer').setup()
+require('treesitter-settings')
+require('dap-settings')
+require('space-maps')
+require('helper-functions')
+if cmdAndGetFirstLine("hostname") == "hanstop" then
   vim.api.nvim_set_option("background", "light")
 end
-print(result)
+
+vim.g.gruvbox_contrast_dark="hard"
+vim.g.highlightedyank_highlight_duration = 350
+vim.g.choosewin_label = 'ARSTDHNEIOQWFPGJLUYZXCVBKM'
+vim.g.any_jump_disable_default_keybindings = 1
+vim.cmd("colorscheme gruvbox")
+vim.g.vimsyn_embed = 'l'
+require('lualine').setup({
+  options = {theme = 'gruvbox'},
+  sections = {
+    lualine_a = {'coc#status'}
+  }
+})
+
 EOF
