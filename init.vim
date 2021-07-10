@@ -185,10 +185,10 @@ source ~/.config/nvim/languages_autocmd.vim
 
 lua <<EOF
 require('colorizer').setup()
-require('treesitter-settings')
-require('dap-settings')
-require('space-maps')
-require('helper-functions')
+require('afreak.treesitter-settings')
+require('afreak.dap-settings')
+require('afreak.space-maps')
+require('afreak.helper-functions')
 if cmdAndGetFirstLine("hostname") == "hanstop" then
   vim.api.nvim_set_option("background", "light")
 end
