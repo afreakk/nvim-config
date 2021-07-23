@@ -52,68 +52,14 @@ set shortmess+=c
 
 set signcolumn=number
 
-call plug#begin()
-Plug 'sbulav/nredir.nvim'
-Plug 'svermeulen/vim-subversive'
-Plug 'kevinhwang91/nvim-bqf'
-Plug 'rmagatti/auto-session'
-Plug 'cappyzawa/starlark.vim'
-" Plug 'tversteeg/registers.nvim', { 'branch': 'main' }
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
-Plug 'nvim-treesitter/playground'
-Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-Plug 'p00f/nvim-ts-rainbow'
-Plug 'LnL7/vim-nix'
-Plug 'airblade/vim-gitgutter'
-Plug 'freitass/todo.txt-vim'
-Plug 'bronson/vim-visual-star-search'
-Plug 'rbgrouleff/bclose.vim'
-Plug 'pechorin/any-jump.vim'
-" Plug 'AlphaMycelium/pathfinder.vim'
-" Plug 'svermeulen/vim-easyclip'
-Plug 'wellle/targets.vim'
-Plug 'andymass/vim-matchup'
-Plug 'tpope/vim-unimpaired'
-Plug 'chrisbra/Recover.vim'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & npm install'  }
-" Plug 'vim-vdebug/vdebug'
-Plug 'mfussenegger/nvim-dap'
-Plug 'rbong/vim-flog'
-" Plug 'meck/vim-brittany'
-" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-commentary'
-" Plug 'mboughaba/i3config.vim'
-" Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
-Plug 'norcalli/nvim-colorizer.lua'
-" Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release', 'do': { -> coc#util#install() }}
-" Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release' }
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'neoclide/coc.nvim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'laher/fuzzymenu.vim'
-Plug 'tpope/vim-fugitive'
-" Plug 'itchyny/lightline.vim'
-Plug 'hoob3rt/lualine.nvim'
-" Plug 'sheerun/vim-polyglot'
-" Plug 'morhetz/gruvbox'
+set shell=/usr/bin/env\ bash
 
-Plug 'rktjmp/lush.nvim'
-Plug 'npxbr/gruvbox.nvim'
+augroup highlight_yank
+    autocmd!
+    au TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }
+augroup END
 
-Plug 'tpope/vim-sleuth'
-Plug 't9md/vim-choosewin'
-Plug 'tpope/vim-rhubarb'
-Plug 'folke/which-key.nvim'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-dadbod'
-Plug 'machakann/vim-highlightedyank'
-Plug 'michaeljsmith/vim-indent-object'
-Plug 'beeender/Comrade'
-
-"required by nvim-reload
-Plug 'nvim-lua/plenary.nvim'
-Plug 'famiu/nvim-reload'
-call plug#end()
+lua << EOF
+require("afreak.packer-bootstrap")
+require("afreak.packer")
+EOF

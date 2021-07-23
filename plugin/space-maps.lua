@@ -29,6 +29,7 @@ local keymap = {
         e = {":vsplit $MYVIMRC<CR>", "edit vimrc"},
         g = {":VimFiles<CR>", "find vim file"},
         s = {":Reload<cr>", "nvim-reload"},
+        q = {":VimFilesAg<space>", "find in vim files"},
     },
     y = {
         name = "+yank",

@@ -1,12 +1,16 @@
 {
     "yaml.schemas": {
-        "kubernetes": "/*.yaml"
+        "https://json.schemastore.org/kustomization.json": [
+            "kustomization.yaml",
+            "kustomization.yml"
+        ]
     },
     "yaml.schemaStore.enable": true,
     "codeLens.enable": true,
     "diagnostic.errorSign": "",
     "diagnostic.warningSign": "",
     "diagnostic.infoSign": "",
+    "diagnostic.virtualText": true,
     "diagnostic.hintSign": "",
     "omnisharp.debug.server": true,
     "omnisharp.path": "/nix/store/kg1ir2p58dy838d9fxy5sfflcq75arra-omnisharp-roslyn-1.35.2/bin/omnisharp",

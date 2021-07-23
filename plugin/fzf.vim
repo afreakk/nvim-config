@@ -4,6 +4,9 @@ let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 command! -nargs=* VimFiles
             \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview({"dir": "~/.config/nvim"}))
 
+command! -nargs=* VimFilesAg
+    \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'dir': '$HOME/.config/nvim'}))
+
 command! -nargs=? GFilesRecursive
     \ call fzf#vim#gitfiles("--recurse-submodules", fzf#vim#with_preview())
 
@@ -17,6 +20,7 @@ command! -nargs=+ -complete=dir Agr
 
 command! -nargs=* Agc
     \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'dir': expand('%:p:h')}))
+
 
 command! -nargs=* Ag
     \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview())
