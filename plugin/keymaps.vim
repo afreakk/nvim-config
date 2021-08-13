@@ -8,6 +8,10 @@
 " xmap ac <Plug>(coc-classobj-a)
 " omap ac <Plug>(coc-classobj-a)
 
+
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
 " Window splitting/movement -------- {{{{
 nnoremap <C-Up> <C-W>k
 nnoremap <C-Down> <C-W>j
@@ -37,6 +41,18 @@ nmap S <plug>(SubversiveSubstituteToEndOfLine)
 tnoremap <S-Esc> <C-\><C-n>
 nmap <C-S> <Plug>(choosewin)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
+" from https://github.com/neoclide/coc.nvim#example-vim-configuration
+
+" Use K to show documentation in preview window
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
 
 " Insert mode completion (FZF)
 imap <c-x><c-k> <plug>(fzf-complete-word)

@@ -10,6 +10,11 @@ return require('packer').startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
+  use {'glepnir/indent-guides.nvim',
+  config = function()
+    require('indent_guides').setup({})
+  end
+  }
   use {'sbulav/nredir.nvim', cmd = "Nredir"}
   use 'svermeulen/vim-subversive'
   use 'kevinhwang91/nvim-bqf'
