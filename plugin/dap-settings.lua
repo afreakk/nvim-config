@@ -1,9 +1,14 @@
 local dap = require('dap')
+local base_path = os.getenv('HOME') .. '/daps'
+require("dapui").setup()
+-- dap.defaults.fallback.external_terminal = {
+--   command = 'terminal.sh'
+-- }
 dap.set_log_level('debug')
 dap.adapters.php = {
   type = 'executable',
   command = 'node',
-  args = { '~/tmp/vscode-php-debug/out/phpDebug.js' }
+  args = { base_path .. '/vscode-php-debug/out/phpDebug.js' }
 }
 
 dap.configurations.php = {
@@ -15,55 +20,30 @@ dap.configurations.php = {
   }
 }
 
-  dap.adapters.go = function(callback, config)
-    local stdout = vim.loop.new_pipe(false)
-    local handle
-    local pid_or_err
-    local port = 38697
-    local opts = {
-      stdio = {nil, stdout},
-      args = {"dap", "-l", "127.0.0.1:" .. port},
-      detached = true
-    }
-    handle, pid_or_err = vim.loop.spawn("dlv", opts, function(code)
-      stdout:close()
-      handle:close()
-      if code ~= 0 then
-        print('dlv exited with code', code)
-      end
-    end)
-    assert(handle, 'Error running dlv: ' .. tostring(pid_or_err))
-    stdout:read_start(function(err, chunk)
-      assert(not err, err)
-      if chunk then
-        vim.schedule(function()
-          require('dap.repl').append(chunk)
-        end)
-      end
-    end)
-    -- Wait for delve to start
-    vim.defer_fn(
-      function()
-        callback({type = "server", host = "127.0.0.1", port = port})
-      end,
-      100)
-  end
+dap.adapters.go = {
+  type = 'executable';
+  command = 'node';
+  args = {base_path .. '/vscode-go/dist/debugAdapter.js'};
+}
   -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
   dap.configurations.go = {
     {
       type = "go",
-      name = "Debug",
+      name = "Launch",
       request = "launch",
-      program = "${file}"
+      program = "${file}",
+      dlvToolPath = vim.fn.exepath('dlv'),
     },
     {
       type = "go",
-      name = "DebugXX",
+      name = "Launch with args",
       request = "launch",
       program = "${workspaceFolder}",
-      args = {"serve", "all", "--dangerous-force-http", "--config", "config.yml"}
+      args = {"serve", "all", "--dangerous-force-http", "--config", "config.yml"},
+      dlvToolPath = vim.fn.exepath('dlv')
     },
     {
+      dlvToolPath = vim.fn.exepath('dlv'),
       type = "go",
       name = "Debug test", -- configuration for debugging test files
       request = "launch",
@@ -72,6 +52,7 @@ dap.configurations.php = {
     },
     -- works with go.mod packages and sub packages 
     {
+      dlvToolPath = vim.fn.exepath('dlv'),
       type = "go",
       name = "Debug test (go.mod)",
       request = "launch",
@@ -79,10 +60,38 @@ dap.configurations.php = {
       program = "./${relativeFileDirname}"
     },
     {
+      dlvToolPath = vim.fn.exepath('dlv'),
       type = "go",
       name = "attach",
       request = "attach",
-      processId = "3160978",
-      -- pid = require('dap.utils').pick_process,
+      pid = require('dap.utils').pick_process,
     } 
+}
+
+dap.adapters.node2 = {
+  type = 'executable',
+  command = 'node',
+  args = {base_path .. '/vscode-node-debug2/out/src/nodeDebug.js'},
+}
+dap.configurations.javascript = {
+  {
+    type = 'node2',
+    request = 'launch',
+    program = '${file}',
+    cwd = vim.fn.getcwd(),
+    sourceMaps = true,
+    protocol = 'inspector',
+    console = 'integratedTerminal',
+  },
+}
+dap.configurations.typescript = {
+  {
+    type = 'node2',
+    request = 'launch',
+    program = '${workspaceFolder}',
+    cwd = vim.fn.getcwd(),
+    sourceMaps = true,
+    protocol = 'inspector',
+    console = 'integratedTerminal',
+  },
 }

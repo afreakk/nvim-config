@@ -12,10 +12,12 @@ wk.setup {
 }
 local keymap = {
     w = {':w<CR>', 'save file'}, -- set a single command and text
-    u = { -- set a nested structure
+    u = {':UndotreeToggle<CR>', 'Undotree toggle'},
+    d = { -- set a nested structure
         name = '+debug(dap)',
         c = {"<Cmd>lua require'dap'.continue()<CR>", 'continue'},
         o = {"<Cmd>lua require'dap'.step_over()<CR>", 'step_over'},
+        k = {"<Cmd>lua require'dap'.step_back()<CR>", 'step back'},
         i = {"<Cmd>lua require'dap'.step_into()<CR>", 'step_into'},
         O = {"<Cmd>lua require'dap'.step_out()<CR>", 'step_out'},
         b = {"<Cmd>lua require'dap'.toggle_breakpoint()<CR>", 'toggle_breakpoint'},
@@ -23,6 +25,8 @@ local keymap = {
         l = {"<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", 'set_breakpoint(log point message)'},
         r = {"<Cmd>lua require'dap'.repl.open()<CR>", 'repl open'},
         a = {"<Cmd>lua require'dap'.run_last()<CR>", 'run last'},
+        l = {"<Cmd>lua require'dap'.list_breakpoints()<CR>", 'list breakpoints'},
+        u = {"<Cmd>lua require'dapui'.toggle()<CR>", 'toggle ui'},
     },
     v = {
         name = '+vimrc',
@@ -30,6 +34,7 @@ local keymap = {
         g = {":VimFiles<CR>", "find vim file"},
         s = {":Reload<cr>", "nvim-reload"},
         q = {":VimFilesAg<space>", "find in vim files"},
+        o = {":so %<cr>", "source this file"},
     },
     y = {
         name = "+yank",
@@ -73,9 +78,9 @@ local keymap = {
         f = {"<Plug>(coc-codeaction)","coc-codeaction"},
         c = {"<Plug>(coc-codeaction-cursor)","coc-codeaction-cursor"},
         s = {"<Plug>(coc-codeaction-selected)","coc-codeaction-selected"},
+        e = {"<Plug>(coc-codelens-action)", "coc-codelens-action"},
     },
-    e = {"<Plug>(coc-codelens-action)", "coc-codelens-action"},
-    d = {
+    i = {
         name = "+diff",
         e = {":diffthis<cr>", "diffthis"},
         d = {":diffoff<cr>", "diffoff"},
@@ -114,7 +119,7 @@ local keymap = {
      a = {":<C-u>CocListCancel<CR>", "coclistcancel"},
      u = {":<C-u>CocCommand workspace.showOutput<CR>", "coccommand workspace.showOutput"},
    },
-   i = { ":lua qftoggle()<CR>", "quickfixtoggle" },
+   k = { ":lua qftoggle()<CR>", "quickfixtoggle" },
    [";"] = {":History:<cr>", "History"},
 }
 

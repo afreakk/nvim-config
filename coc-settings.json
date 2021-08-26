@@ -23,7 +23,16 @@
         "sh": "shellcheck",
         "markdown": ["write-good", "markdownlint"]
     },
+    "diagnostic-languageserver.formatFiletypes": {
+        "starlark": "buildifier"
+    },
+    "diagnostic-languageserver.formatters": {
+        "buildifier": {
+            "command": "buildifier"
+        }
+    },
     "coc.preferences.formatOnSaveFiletypes": [
+        "starlark",
         "javascript",
         "typescript",
         "typescriptreact",

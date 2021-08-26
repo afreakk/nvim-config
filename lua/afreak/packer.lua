@@ -10,11 +10,27 @@ return require('packer').startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
-  use {'glepnir/indent-guides.nvim',
-  config = function()
-    require('indent_guides').setup({})
-  end
-  }
+  use {'mbbill/undotree',
+      config = function()
+        -- vim.g.undotree_DiffCommand = "delta"
+      end
+    }
+  -- use {'glepnir/indent-guides.nvim',
+  -- config = function()
+  --   require('indent_guides').setup({
+  --     indent_levels = 30;
+  --     indent_guide_size = 1;
+  --     indent_start_level = 1;
+  --     indent_enable = false;
+  --     indent_space_guides = true;
+  --     indent_tab_guides = false;
+  --     indent_soft_pattern = '\\s';
+  --     exclude_filetypes = {'help','dashboard','dashpreview','NvimTree','vista','sagahover'};
+  --     even_colors = { fg ='#0000FF',bg='#FF0000' };
+  --     odd_colors = {fg='#FF00FF',bg='#00FF00'};
+  --   })
+  -- end
+  -- }
   use {'sbulav/nredir.nvim', cmd = "Nredir"}
   use 'svermeulen/vim-subversive'
   use 'kevinhwang91/nvim-bqf'
@@ -22,7 +38,7 @@ return require('packer').startup(function()
   use 'cappyzawa/starlark.vim'
   use {
       'nvim-treesitter/nvim-treesitter',
-      run = ':TSUpdate javascript haskell nix bash fish elm lua'
+      run = ':TSUpdate javascript haskell nix bash fish elm lua go'
   }
 use {'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle'}
 use 'nvim-treesitter/nvim-treesitter-textobjects'
@@ -45,6 +61,7 @@ use 'andymass/vim-matchup'
 use 'tpope/vim-unimpaired'
 use 'chrisbra/Recover.vim'
 use 'mfussenegger/nvim-dap'
+use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 use 'tpope/vim-surround'
 use 'tpope/vim-repeat'
 use 'tpope/vim-commentary'
