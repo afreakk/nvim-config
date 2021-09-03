@@ -33,12 +33,13 @@ return require('packer').startup(function()
   -- }
   use {'sbulav/nredir.nvim', cmd = "Nredir"}
   use 'svermeulen/vim-subversive'
+  use 'jparise/vim-graphql'
   use 'kevinhwang91/nvim-bqf'
   use 'rmagatti/auto-session'
   use 'cappyzawa/starlark.vim'
   use {
       'nvim-treesitter/nvim-treesitter',
-      run = ':TSUpdate javascript haskell nix bash fish elm lua go'
+      run = ':TSUpdate graphql javascript haskell nix bash fish elm lua go'
   }
 use {'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle'}
 use 'nvim-treesitter/nvim-treesitter-textobjects'

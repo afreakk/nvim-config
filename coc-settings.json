@@ -45,6 +45,11 @@
     ],
     "tsserver.trace.server": "verbose",
     "languageserver": {
+        "graphql": {
+            "command": "graphql-lsp",
+            "args": ["server", "-m", "stream"],
+            "filetypes": ["graphql"]
+        },
         "nix": {
             "command": "rnix-lsp",
             "filetypes": ["nix"]
