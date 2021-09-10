@@ -1,12 +1,12 @@
 " Javascript my stuff -------- {{{{
 augroup filetype_javascript
     autocmd!
-    autocmd FileType javascript,javascriptreact :iabbrev <buffer> clg console.log()<left>
-    autocmd FileType javascript,javascriptreact :iabbrev <buffer> iff if ()<left>
-    autocmd FileType javascript,javascriptreact :iabbrev <buffer> cc const
-    autocmd FileType javascript,javascriptreact :iabbrev <buffer> rr return 
-    autocmd FileType javascript,javascriptreact setlocal foldmethod=syntax
-    autocmd FileType javascript,javascriptreact setlocal foldnestmax=1
+    autocmd FileType javascript,javascriptreact,typescript :iabbrev <buffer> clg console.log()<left>
+    autocmd FileType javascript,javascriptreact,typescript :iabbrev <buffer> iff if ()<left>
+    autocmd FileType javascript,javascriptreact,typescript :iabbrev <buffer> cc const
+    autocmd FileType javascript,javascriptreact,typescript :iabbrev <buffer> rr return 
+    autocmd FileType javascript,javascriptreact,typescript setlocal foldmethod=syntax
+    autocmd FileType javascript,javascriptreact,typescript setlocal foldnestmax=1
     set nofoldenable
 augroup END
 " }}}}

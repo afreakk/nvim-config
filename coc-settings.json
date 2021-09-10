@@ -1,4 +1,6 @@
 {
+    "yaml.trace.server": "verbose",
+    "yaml.format.enable": true,
     "yaml.schemas": {
         "https://json.schemastore.org/kustomization.json": [
             "kustomization.yaml",
