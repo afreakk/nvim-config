@@ -50,7 +50,7 @@ set cmdheight=2
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
 
-set signcolumn=number
+set signcolumn="auto"
 
 set shell=/usr/bin/env\ bash
 
