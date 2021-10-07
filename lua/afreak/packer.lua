@@ -31,6 +31,7 @@ return require('packer').startup(function()
   --   })
   -- end
   -- }
+  use 'stsewd/fzf-checkout.vim'
   use {'sbulav/nredir.nvim', cmd = "Nredir"}
   use 'svermeulen/vim-subversive'
   use 'jparise/vim-graphql'
