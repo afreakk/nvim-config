@@ -45,6 +45,11 @@ use {'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle'}
 use 'nvim-treesitter/nvim-treesitter-textobjects'
 use 'p00f/nvim-ts-rainbow'
 
+use {
+  'chr4/nginx.vim',
+  ft = {'nginx'},
+}
+
 use 'LnL7/vim-nix'
 use {
   'lewis6991/gitsigns.nvim',
