@@ -58,7 +58,7 @@ local keymap = {
         o = {':GBrowse<CR>',  'browse'},
         w = {':Gwrite<CR>',  'write'},
         r = {':Gread<CR>',  'read'},
-        c = {':Gbranch<CR>',  'checkout branch'},
+        c = {':GBranches<CR>',  'checkout branch'},
     },
     g = {":GFilesRecursive<cr>", "Git files"},
     p = {":Files<cr>", "Files"},
