@@ -29,5 +29,4 @@ let g:coc_global_extensions = [
 \    "coc-comrade",
 \    "coc-go",
 \ ]
-" coc-omnisharp
 

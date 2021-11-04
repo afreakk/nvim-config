@@ -17,6 +17,7 @@ nnoremap <C-Up> <C-W>k
 nnoremap <C-Down> <C-W>j
 nnoremap <C-Left> <C-W>h
 nnoremap <C-Right> <C-W>l
+nmap Y y$
 
 nmap <silent> <S-Up> :wincmd K<CR>
 nmap <silent> <S-Down> :wincmd J<CR>
@@ -33,7 +34,6 @@ nmap <space><tab> <plug>(fzf-maps-n)
 xmap <space><tab> <plug>(fzf-maps-x)
 omap <space><tab> <plug>(fzf-maps-o)
 
-nmap Y y$
 
 nmap s <plug>(SubversiveSubstitute)
 nmap ss <plug>(SubversiveSubstituteLine)
