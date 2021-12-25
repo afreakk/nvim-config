@@ -84,7 +84,7 @@ use 'junegunn/fzf.vim'
 use 'laher/fuzzymenu.vim'
 use 'tpope/vim-fugitive'
 use {
-  'shadmansaleh/lualine.nvim',
+  'nvim-lualine/lualine.nvim',
   requires = {'kyazdani42/nvim-web-devicons', opt = true},
   config = function()
     require('lualine').setup({

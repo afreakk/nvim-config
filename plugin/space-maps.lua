@@ -85,6 +85,8 @@ local keymap = {
         c = {"<Plug>(coc-codeaction-cursor)","coc-codeaction-cursor"},
         s = {"<Plug>(coc-codeaction-selected)","coc-codeaction-selected"},
         e = {"<Plug>(coc-codelens-action)", "coc-codelens-action"},
+        n = {"<Plug>(coc-diagnostic-prev)", "coc-diagnostic-next"},
+        p = {"<Plug>(coc-diagnostic-prev)", "coc-diagnostic-prev"},
     },
     i = {
         name = "+diff",
