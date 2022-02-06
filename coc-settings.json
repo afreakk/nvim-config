@@ -15,11 +15,17 @@
     "diagnostic.virtualText": true,
     "diagnostic.hintSign": "",
     "omnisharp.trace.server": "verbose",
+    "omnisharp.path": "omnisharp",
     "explorer.icon.enableNerdfont": true,
     "explorer.previewAction.onHover": false,
     "explorer.file.reveal.auto": true,
     "prettier.tabWidth": 4,
     "prettier.singleQuote": true,
+    "cSpell.allowCompoundWords": true,
+    "cSpell.dictionaryDefinitions": [
+        { "name": "norsk", "path": "/home/afreak/norsk.txt" }
+    ],
+    "cSpell.dictionaries": ["norsk"],
     "diagnostic-languageserver.filetypes": {
         "sh": "shellcheck",
         "markdown": ["write-good", "markdownlint"]
@@ -81,5 +87,53 @@
                 "elmAnalyseTrigger": "change"
             }
         }
-    }
+    },
+    "cSpell.userWords": [
+      "Dgraph",
+      "Ebillett",
+      "Groot",
+      "OIDC",
+      "Optidrive",
+      "Steptronic",
+      "TLDR",
+      "Uids",
+      "Xdebug",
+      "afreak",
+      "argoproj",
+      "basicauth",
+      "bson",
+      "buildifier",
+      "clangd",
+      "cloudinary",
+      "dxcn",
+      "dxweb",
+      "dxwebserver",
+      "efestival",
+      "eksctl",
+      "envvars",
+      "fastify",
+      "firstname",
+      "gosm",
+      "higlight",
+      "ixpartner",
+      "ixusers",
+      "konfigurasjon",
+      "kratos",
+      "kustomization",
+      "lastname",
+      "ledgerno",
+      "mamut",
+      "mbapi",
+      "mkdir",
+      "mutators",
+      "omnisharp",
+      "organisasjonsnummer",
+      "oryd",
+      "partneradmin",
+      "phpls",
+      "postnr",
+      "rnix",
+      "strongdm",
+      "upsert"
+    ]
 }

@@ -9,6 +9,14 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
+  use({ "iamcco/markdown-preview.nvim", ft = "markdown", run = "cd app && yarn install" })
+
+  use {'ionide/Ionide-vim',
+      config = function()
+        vim.g["fsharp#backend"] = "disable"
+      end
+      --, run = 'make fsautocomplete'}
+      }
 
   use {'mbbill/undotree',
       config = function()
@@ -90,7 +98,9 @@ use {
     require('lualine').setup({
       options = {theme = 'gruvbox'},
       sections = {
-        lualine_a = {'coc#status', 'mode'}
+        lualine_a = {'mode'},
+        lualine_b = {'diff', {'diagnostics', sources = {'coc'}}},
+        lualine_x = {'filetype'},
       }
     })
   end
@@ -107,5 +117,5 @@ use {'t9md/vim-choosewin',
 use 'tpope/vim-rhubarb'
 use 'folke/which-key.nvim'
 use 'michaeljsmith/vim-indent-object'
-use 'beeender/Comrade'
+-- use 'beeender/Comrade'
 end)

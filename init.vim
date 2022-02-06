@@ -50,7 +50,7 @@ set cmdheight=2
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
 
-set signcolumn="auto"
+" set signcolumn="auto"
 
 set shell=/usr/bin/env\ bash
 
@@ -58,6 +58,8 @@ augroup highlight_yank
     autocmd!
     au TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }
 augroup END
+
+autocmd VimResized * wincmd =
 
 lua << EOF
 require("afreak.packer-bootstrap")

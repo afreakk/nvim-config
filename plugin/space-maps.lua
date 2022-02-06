@@ -1,4 +1,4 @@
-vim.g.maplocalleader = "<F2>"
+vim.g.maplocalleader = "+"
 vim.g.mapleader = "\\"
 
 local wk = require('which-key')
@@ -79,14 +79,19 @@ local keymap = {
         m = {":Maps<cr>", "Maps"},
     },
     a = {
-        name = "+coc-codeaction",
-        l = {"<Plug>(coc-codeaction-line)","coc-codeaction-line"},
-        f = {"<Plug>(coc-codeaction)","coc-codeaction"},
-        c = {"<Plug>(coc-codeaction-cursor)","coc-codeaction-cursor"},
-        s = {"<Plug>(coc-codeaction-selected)","coc-codeaction-selected"},
-        e = {"<Plug>(coc-codelens-action)", "coc-codelens-action"},
-        n = {"<Plug>(coc-diagnostic-prev)", "coc-diagnostic-next"},
-        p = {"<Plug>(coc-diagnostic-prev)", "coc-diagnostic-prev"},
+        name = "+coc-actions",
+        l = {"<Plug>(coc-codeaction-line)","codeaction-line"},
+        f = {"<Plug>(coc-codeaction)","codeaction"},
+        c = {"<Plug>(coc-codeaction-cursor)","codeaction-cursor"},
+        s = {"<Plug>(coc-codeaction-selected)","codeaction-selected"},
+        e = {"<Plug>(coc-codelens-action)", "codelens-action"},
+        n = {"<Plug>(coc-diagnostic-prev)", "diagnostic-next"},
+        p = {"<Plug>(coc-diagnostic-prev)", "diagnostic-prev"},
+
+        i = { "<Plug>(coc-implementation)",  "goto-implementation" },
+        t = { "<Plug>(coc-type-definition)", "goto-type-definition" },
+        r = { "<Plug>(coc-references)",      "goto-references" },
+        d = { "<Plug>(coc-definition)",      "goto-definition" },
     },
     i = {
         name = "+diff",
@@ -96,9 +101,10 @@ local keymap = {
         w = {":windo diffthis<cr>", "windo diffthis"},
    },
    o = {
-        name = "+coc-diagnostic",
-        d = {":<c-u>call coc#config('diagnostic.enable', 0)<cr>","enable"},
-        e = {":<c-u>call coc#config('diagnostic.enable', 1)<cr>","disable"},
+        name = "+coc-other",
+        d = {":<c-u>call coc#config('diagnostic.enable', 0)<cr>","diagnostic enable"},
+        e = {":<c-u>call coc#config('diagnostic.enable', 1)<cr>","diagnostic disable"},
+        c = {":<c-u>call coc#float#close_all() <CR>","close all floating windows"},
    },
    r = {
         name = "+rename/refactor(coc)",
