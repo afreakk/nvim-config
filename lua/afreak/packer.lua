@@ -9,6 +9,7 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
+  use 'ggandor/lightspeed.nvim'
   use({ "iamcco/markdown-preview.nvim", ft = "markdown", run = "cd app && yarn install" })
 
   use {'ionide/Ionide-vim',
@@ -77,7 +78,23 @@ use 'tpope/vim-unimpaired'
 use 'chrisbra/Recover.vim'
 use 'mfussenegger/nvim-dap'
 use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
-use 'tpope/vim-surround'
+use {
+   "tpope/vim-surround",
+   keys = {"c", "d", "y"},
+   config = function ()
+     -- https://github.com/ggandor/lightspeed.nvim/discussions/83
+     vim.cmd("nmap ds       <Plug>Dsurround")
+     vim.cmd("nmap cs       <Plug>Csurround")
+     vim.cmd("nmap cS       <Plug>CSurround")
+     vim.cmd("nmap ys       <Plug>Ysurround")
+     vim.cmd("nmap yS       <Plug>YSurround")
+     vim.cmd("nmap yss      <Plug>Yssurround")
+     vim.cmd("nmap ySs      <Plug>YSsurround")
+     vim.cmd("nmap ySS      <Plug>YSsurround")
+     vim.cmd("xmap gs       <Plug>VSurround")
+     vim.cmd("xmap gS       <Plug>VgSurround")
+   end
+}
 use 'tpope/vim-repeat'
 use 'tpope/vim-commentary'
 use {

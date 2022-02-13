@@ -40,6 +40,11 @@ local keymap = {
         name = "+yank",
         f = {":%y<CR>", "content of buffer"},
         n = {":let @+=expand('%')<CR>", "filename"},
+        t = {
+            name = "+tpaste",
+            f = {":!cat % | curl -F 'tpaste=<-' https://tpaste.us<CR>", "file to tpaste"},
+            v = {":'<,'>:w !curl -F 'tpaste=<-' https://tpaste.us<CR>", "visually selected to tpaste"},
+        },
     },
     z = {
         name = "+theme",

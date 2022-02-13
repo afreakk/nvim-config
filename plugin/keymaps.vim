@@ -35,9 +35,9 @@ xmap <space><tab> <plug>(fzf-maps-x)
 omap <space><tab> <plug>(fzf-maps-o)
 
 
-nmap s <plug>(SubversiveSubstitute)
-nmap ss <plug>(SubversiveSubstituteLine)
-nmap S <plug>(SubversiveSubstituteToEndOfLine)
+nmap <space>s <plug>(SubversiveSubstitute)
+nmap <space>ss <plug>(SubversiveSubstituteLine)
+nmap <space>S <plug>(SubversiveSubstituteToEndOfLine)
 tnoremap <S-Esc> <C-\><C-n>
 nmap <C-S> <Plug>(choosewin)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
