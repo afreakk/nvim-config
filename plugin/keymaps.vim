@@ -11,18 +11,26 @@
 
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
-
 " Window splitting/movement -------- {{{{
+" Start Win-Move mode:
+nnoremap <C-W><C-M> <Cmd>WinShift<CR>
+nnoremap <C-W>m <Cmd>WinShift<CR>
+
+" Swap two windows:
+nnoremap <C-W>X <Cmd>WinShift swap<CR>
+
+" If you don't want to use Win-Move mode you can create mappings for calling the
+" move commands directly:
+nnoremap <S-Left> <Cmd>WinShift left<CR>
+nnoremap <S-Down> <Cmd>WinShift down<CR>
+nnoremap <S-Up> <Cmd>WinShift up<CR>
+nnoremap <S-Right> <Cmd>WinShift right<CR>
+
 nnoremap <C-Up> <C-W>k
 nnoremap <C-Down> <C-W>j
 nnoremap <C-Left> <C-W>h
 nnoremap <C-Right> <C-W>l
 nmap Y y$
-
-nmap <silent> <S-Up> :wincmd K<CR>
-nmap <silent> <S-Down> :wincmd J<CR>
-nmap <silent> <S-Left> :wincmd H<CR>
-nmap <silent> <S-Right> :wincmd L<CR>
 " }}}}
 
 nmap <silent> <C-space> <Plug>(Fzm)
