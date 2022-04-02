@@ -11,7 +11,9 @@ return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
   use 'ggandor/lightspeed.nvim'
   use({ "iamcco/markdown-preview.nvim", ft = "markdown", run = "cd app && yarn install" })
+  use {"afreakk/coc-cspell-dicts", run = 'yarn install && yarn build'}
 
+  use 'nfnty/vim-nftables'
   use {'ionide/Ionide-vim',
       config = function()
         vim.g["fsharp#backend"] = "disable"

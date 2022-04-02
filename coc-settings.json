@@ -19,13 +19,17 @@
     "explorer.icon.enableNerdfont": true,
     "explorer.previewAction.onHover": false,
     "explorer.file.reveal.auto": true,
+    "explorer.trash.command": "trash-put %s",
+
     "prettier.tabWidth": 4,
     "prettier.singleQuote": true,
+    "cSpell.language": "en-US,nb",
     "cSpell.allowCompoundWords": true,
+    "cSpellExt.enableDictionaries": ["norwegian"],
     "cSpell.dictionaryDefinitions": [
-        { "name": "norsk", "path": "/home/afreak/norsk.txt" }
+        { "name": "myExtraWords", "path": "/home/afreak/myExtraWords.txt" }
     ],
-    "cSpell.dictionaries": ["norsk"],
+    "cSpell.dictionaries": ["myExtraWords"],
     "diagnostic-languageserver.filetypes": {
         "sh": "shellcheck",
         "markdown": ["write-good", "markdownlint"]
@@ -43,6 +47,7 @@
         }
     },
     "coc.preferences.formatOnSaveFiletypes": [
+        "go",
         "starlark",
         "javascript",
         "typescript",
@@ -93,59 +98,5 @@
             }
         }
     },
-    "cSpell.userWords": [
-      "Dgraph",
-      "Ebillett",
-      "Groot",
-      "OIDC",
-      "Optidrive",
-      "Steptronic",
-      "TLDR",
-      "Uids",
-      "Xdebug",
-      "afreak",
-      "argoproj",
-      "authed",
-      "basicauth",
-      "bson",
-      "buildifier",
-      "clangd",
-      "cloudinary",
-      "crds",
-      "dxcn",
-      "dxdx",
-      "dxweb",
-      "dxwebserver",
-      "efestival",
-      "eksctl",
-      "envvars",
-      "fastify",
-      "firstname",
-      "gosm",
-      "higlight",
-      "ixpartner",
-      "ixusers",
-      "konfigurasjon",
-      "kratos",
-      "kustomization",
-      "kustomize",
-      "lastname",
-      "ledgerno",
-      "mamut",
-      "mbapi",
-      "mkdir",
-      "mutators",
-      "ollivanders",
-      "omnisharp",
-      "organisasjonsnummer",
-      "oryd",
-      "partneradmin",
-      "phpls",
-      "pivetdrive",
-      "postnr",
-      "rnix",
-      "strongdm",
-      "upsert",
-      "vercel"
-    ]
+    "cSpell.userWords": []
 }
