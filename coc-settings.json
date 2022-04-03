@@ -27,7 +27,10 @@
     "cSpell.allowCompoundWords": true,
     "cSpellExt.enableDictionaries": ["norwegian"],
     "cSpell.dictionaryDefinitions": [
-        { "name": "myExtraWords", "path": "/home/afreak/myExtraWords.txt" }
+        {
+            "name": "myExtraWords",
+            "path": "/home/afreak/random/myExtraWords.txt"
+        }
     ],
     "cSpell.dictionaries": ["myExtraWords"],
     "diagnostic-languageserver.filetypes": {

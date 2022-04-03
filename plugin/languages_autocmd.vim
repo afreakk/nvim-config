@@ -15,6 +15,7 @@ augroup END
 augroup filetype_gitcommit
     autocmd!
     autocmd FileType gitcommit :iabbrev <buffer> mz modernize
+    autocmd FileType gitcommit setlocal spell
 augroup END
 " Vimscript file settings -------- {{{
 augroup filetype_vim
@@ -22,3 +23,7 @@ augroup filetype_vim
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
 " }}}
+
+au BufRead nftables.conf set ft=nftables
+
+autocmd FileType markdown setlocal spell

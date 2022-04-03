@@ -10,7 +10,7 @@ return require('packer').startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
   use 'ggandor/lightspeed.nvim'
-  use({ "iamcco/markdown-preview.nvim", ft = "markdown", run = "cd app && yarn install" })
+  use {"iamcco/markdown-preview.nvim", ft = "markdown", run = "cd app && yarn install" }
   use {"afreakk/coc-cspell-dicts", run = 'yarn install && yarn build'}
 
   use 'nfnty/vim-nftables'

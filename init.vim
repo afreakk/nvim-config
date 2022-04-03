@@ -65,4 +65,4 @@ lua << EOF
 require("afreak.packer-bootstrap")
 require("afreak.packer")
 EOF
-au BufRead nftables.conf set ft=nftables
+set spelllang=nb,en
