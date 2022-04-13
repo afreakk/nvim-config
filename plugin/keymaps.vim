@@ -50,15 +50,10 @@ tnoremap <S-Esc> <C-\><C-n>
 nmap <C-S> <Plug>(choosewin)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 " from https://github.com/neoclide/coc.nvim#example-vim-configuration
-
 " Use K to show documentation in preview window
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
+  if !(CocAction('hasProvider', 'hover') && CocAction('doHover'))
+    call feedkeys('K', 'in')
   endif
 endfunction
 
