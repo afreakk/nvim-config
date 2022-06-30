@@ -65,6 +65,23 @@
     ],
     "tsserver.trace.server": "verbose",
     "languageserver": {
+        "lua": {
+            "rootPatterns": [".git/"],
+            "command": "lua-language-server",
+            "filetypes": ["lua"],
+            "settings": {
+                "Lua": {
+                    "workspace": {
+                        "library": [
+                            "/nix/store/g7bf2fpkn6h4fcz52bwka22zrz09m46v-neovim-0.7.0/share/nvim/runtime/lua"
+                        ]
+                    },
+                    "diagnostics": {
+                        "globals": ["vim"]
+                    }
+                }
+            }
+        },
         "graphql": {
             "command": "graphql-lsp",
             "args": ["server", "-m", "stream"],
@@ -97,9 +114,19 @@
             "filetypes": ["elm"],
             "rootPatterns": ["elm.json"],
             "initializationOptions": {
-                "elmAnalyseTrigger": "change"
+                "elmAnalyseTrigger": "change",
+                "elmFormatPath": "elm-format",
+                "elmTestPath": "elm-test",
+                "elmReviewPath": "elm-review"
             }
         }
     },
-    "cSpell.userWords": []
+    "cSpell.userWords": [
+        "Authn",
+        "fmap",
+        "nixpkgs",
+        "stretchr",
+        "totp",
+        "xmobar"
+    ]
 }

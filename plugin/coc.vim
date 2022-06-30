@@ -28,10 +28,10 @@ let g:coc_global_extensions = [
 \    "coc-vimlsp",
 \    "coc-go",
 \    "coc-omnisharp",
-\    "coc-pairs",
 \    "coc-highlight",
 \    "coc-spell-checker",
 \    "coc-sh",
 \ ]
 " \    "coc-comrade",
+" \    "coc-pairs",
 autocmd CursorHold * silent call CocActionAsync('highlight')

@@ -78,7 +78,7 @@ return require('packer').startup(function()
   use 'svermeulen/vim-subversive'
   use 'jparise/vim-graphql'
   use 'kevinhwang91/nvim-bqf'
-  use 'rmagatti/auto-session'
+  -- use 'rmagatti/auto-session'
   use 'cappyzawa/starlark.vim'
   use {
       'nvim-treesitter/nvim-treesitter',
@@ -129,7 +129,13 @@ use {
    end
 }
 use 'tpope/vim-repeat'
-use 'tpope/vim-commentary'
+-- use 'tpope/vim-commentary'
+use {
+    'numToStr/Comment.nvim',
+    config = function()
+        require('Comment').setup()
+    end
+}
 use {
   'norcalli/nvim-colorizer.lua',
   config = function()
