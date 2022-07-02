@@ -7,8 +7,14 @@
             "kustomization.yml"
         ]
     },
+    "snippets.textmateSnippetsRoots": [
+        "/home/afreak/.config/nvim/vscodesnippets"
+    ],
+    "coc.source.around.priority": 80,
+    "coc.source.buffer.priority": 70,
+    "coc.source.file.priority": 60,
     "yaml.schemaStore.enable": true,
-    "codeLens.enable": true,
+    "codeLens.enable": false,
     "diagnostic.errorSign": "",
     "diagnostic.warningSign": "",
     "diagnostic.infoSign": "",
@@ -114,7 +120,6 @@
             "filetypes": ["elm"],
             "rootPatterns": ["elm.json"],
             "initializationOptions": {
-                "elmAnalyseTrigger": "change",
                 "elmFormatPath": "elm-format",
                 "elmTestPath": "elm-test",
                 "elmReviewPath": "elm-review"
@@ -125,6 +130,7 @@
         "Authn",
         "fmap",
         "nixpkgs",
+        "nvim",
         "stretchr",
         "totp",
         "xmobar"
