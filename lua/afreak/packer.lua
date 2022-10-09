@@ -68,6 +68,26 @@ return require('packer').startup(function()
     })
   end
   }
+  use { 'ibhagwan/smartyank.nvim',
+  config = function()
+    require('smartyank').setup {
+      highlight = {
+        enabled = true,         -- highlight yanked text
+        higroup = "IncSearch",  -- highlight group of yanked text
+        timeout = 200,         -- timeout for clearing the highlight
+      },
+      clipboard = {
+        enabled = true
+      },
+      tmux = {
+        enabled = false,
+      },
+      osc52 = {
+        enabled = false,
+      }
+    }
+  end
+  }
   use {'mbbill/undotree',
       config = function()
         -- vim.g.undotree_DiffCommand = "delta"

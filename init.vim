@@ -1,7 +1,5 @@
 set inccommand=split
 set hidden
-" https://github.com/svermeulen/vim-easyclip#clipboard-setting
-set clipboard+=unnamedplus
 set cursorline
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 set backupcopy=yes " for REACT etc tranzpilers
@@ -53,11 +51,6 @@ set shortmess+=c
 " set signcolumn="auto"
 
 set shell=/usr/bin/env\ bash
-
-augroup highlight_yank
-    autocmd!
-    au TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }
-augroup END
 
 autocmd VimResized * wincmd =
 

@@ -128,11 +128,20 @@
     },
     "cSpell.userWords": [
         "Authn",
+        "PGRST",
         "fmap",
+        "initdb",
+        "jwks",
+        "nixos",
         "nixpkgs",
         "nvim",
+        "pgql",
+        "postgrest",
         "stretchr",
         "totp",
-        "xmobar"
+        "vmie",
+        "vmimport",
+        "xmobar",
+        "xvda"
     ]
 }
