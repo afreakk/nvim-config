@@ -67,7 +67,8 @@
         "svelte",
         "rust",
         "elm",
-        "nix"
+        "nix",
+        "graphql"
     ],
     "tsserver.trace.server": "verbose",
     "languageserver": {
@@ -127,21 +128,23 @@
         }
     },
     "cSpell.userWords": [
-        "Authn",
-        "PGRST",
-        "fmap",
-        "initdb",
-        "jwks",
-        "nixos",
-        "nixpkgs",
-        "nvim",
-        "pgql",
-        "postgrest",
-        "stretchr",
-        "totp",
-        "vmie",
-        "vmimport",
-        "xmobar",
-        "xvda"
+      "Authn",
+      "PGRST",
+      "chunkify",
+      "fmap",
+      "idno",
+      "initdb",
+      "jwks",
+      "nixos",
+      "nixpkgs",
+      "nvim",
+      "pgql",
+      "postgrest",
+      "stretchr",
+      "totp",
+      "vmie",
+      "vmimport",
+      "xmobar",
+      "xvda"
     ]
 }

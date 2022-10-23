@@ -1,14 +1,16 @@
 let g:fzf_preview_window = ['right:50%:hidden', '?']
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
+let s:home = expand("~")
 
-command! -nargs=* VimFiles
-            \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview({"dir": "~/.config/nvim"}))
+" command! -bang -nargs=? VimFiles
+    " \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview({'dir': '$HOME/.config/nvim/'}),  <bang>0)
+command VimFiles call fzf#vim#gitfiles('', fzf#vim#with_preview({"dir": s:home."/.config/nvim" }))
 
 command! -nargs=* VimFilesAg
-    \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'dir': '$HOME/.config/nvim'}))
+    \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'dir': s:home.'/.config/nvim'}))
 
-command! -nargs=? GFilesRecursive
-    \ call fzf#vim#gitfiles("--recurse-submodules", fzf#vim#with_preview())
+command! -nargs=? -complete=dir GFilesRecursive
+    \ call fzf#vim#gitfiles("--recurse-submodules", fzf#vim#with_preview({'dir': <q-args>}))
 
 command! -nargs=* Ggrep
     \ call fzf#vim#grep('git grep --recurse-submodules --line-number -- '.shellescape(<q-args>),

@@ -9,7 +9,11 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
-  use 'ggandor/lightspeed.nvim'
+  use {'ggandor/leap.nvim',
+    config = function ()
+      require('leap').add_default_mappings()
+    end
+  }
   use {"iamcco/markdown-preview.nvim", ft = "markdown", run = "cd app && yarn install" }
   use {"afreakk/coc-cspell-dicts", run = 'yarn install && yarn build'}
 
