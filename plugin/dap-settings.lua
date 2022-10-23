@@ -23,55 +23,55 @@ dap.configurations.php = {
 dap.adapters.go = {
   type = 'executable';
   command = 'node';
-  args = {base_path .. '/vscode-go/dist/debugAdapter.js'};
+  args = { base_path .. '/vscode-go/dist/debugAdapter.js' };
 }
-  -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
-  dap.configurations.go = {
-    {
-      type = "go",
-      name = "Launch",
-      request = "launch",
-      program = "${file}",
-      dlvToolPath = vim.fn.exepath('dlv'),
-    },
-    {
-      type = "go",
-      name = "Launch with args",
-      request = "launch",
-      program = "${workspaceFolder}",
-      args = {"serve", "all", "--dangerous-force-http", "--config", "config.yml"},
-      dlvToolPath = vim.fn.exepath('dlv')
-    },
-    {
-      dlvToolPath = vim.fn.exepath('dlv'),
-      type = "go",
-      name = "Debug test", -- configuration for debugging test files
-      request = "launch",
-      mode = "test",
-      program = "${file}"
-    },
-    -- works with go.mod packages and sub packages 
-    {
-      dlvToolPath = vim.fn.exepath('dlv'),
-      type = "go",
-      name = "Debug test (go.mod)",
-      request = "launch",
-      mode = "test",
-      program = "./${relativeFileDirname}"
-    },
-    {
-      dlvToolPath = vim.fn.exepath('dlv'),
-      type = "go",
-      name = "attach",
-      request = "attach",
-      pid = require('dap.utils').pick_process,
-    } 
+-- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
+dap.configurations.go = {
+  {
+    type = "go",
+    name = "Launch",
+    request = "launch",
+    program = "${file}",
+    dlvToolPath = vim.fn.exepath('dlv'),
+  },
+  {
+    type = "go",
+    name = "Launch with args",
+    request = "launch",
+    program = "${workspaceFolder}",
+    args = { "serve", "all", "--dangerous-force-http", "--config", "config.yml" },
+    dlvToolPath = vim.fn.exepath('dlv')
+  },
+  {
+    dlvToolPath = vim.fn.exepath('dlv'),
+    type = "go",
+    name = "Debug test", -- configuration for debugging test files
+    request = "launch",
+    mode = "test",
+    program = "${file}"
+  },
+  -- works with go.mod packages and sub packages
+  {
+    dlvToolPath = vim.fn.exepath('dlv'),
+    type = "go",
+    name = "Debug test (go.mod)",
+    request = "launch",
+    mode = "test",
+    program = "./${relativeFileDirname}"
+  },
+  {
+    dlvToolPath = vim.fn.exepath('dlv'),
+    type = "go",
+    name = "attach",
+    request = "attach",
+    pid = require('dap.utils').pick_process,
+  }
 }
 
 dap.adapters.node2 = {
   type = 'executable',
   command = 'node',
-  args = {base_path .. '/vscode-node-debug2/out/src/nodeDebug.js'},
+  args = { base_path .. '/vscode-node-debug2/out/src/nodeDebug.js' },
 }
 dap.configurations.javascript = {
   {

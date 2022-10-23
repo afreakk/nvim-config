@@ -1,12 +1,12 @@
 function cmdAndGetFirstLine(cmd)
-  local handle = io.popen(cmd)
-  local result = handle:read("*l")
-  handle:close()
-  return result
+    local handle = io.popen(cmd)
+    local result = handle:read("*l")
+    handle:close()
+    return result
 end
 
 function _G.dump(...)
-    local objects = vim.tbl_map(vim.inspect, {...})
+    local objects = vim.tbl_map(vim.inspect, { ... })
     print(unpack(objects))
 end
 
@@ -17,7 +17,7 @@ function qfOpen()
 end
 
 function qfClose()
-    vim.cmd("cclose") 
+    vim.cmd("cclose")
     qfisopen = 0
 end
 
@@ -28,4 +28,3 @@ function qftoggle()
         qfClose()
     end
 end
-

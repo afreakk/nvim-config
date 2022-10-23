@@ -32,6 +32,7 @@ let g:coc_global_extensions = [
 \    "coc-spell-checker",
 \    "coc-sh",
 \    "coc-snippets",
+\    "coc-stylua"
 \ ]
 " \    "coc-comrade",
 " \    "coc-pairs",

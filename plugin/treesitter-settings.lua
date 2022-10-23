@@ -1,10 +1,10 @@
-require'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.configs'.setup {
     indent = {
-      enable = true
+        enable = true
     },
     rainbow = {
-      enable = true,
-      extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
+        enable = true,
+        extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
     },
     textobjects = {
         select = {
