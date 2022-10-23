@@ -1,13 +1,18 @@
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
+end
+
+local packer_bootstrap = ensure_packer()
 vim.g.vimsyn_embed = 'l'
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
 
--- Only required if you have packer configured as `opt`
-vim.cmd [[packadd packer.nvim]]
--- Only if your version of Neovim doesn't have https://github.com/neovim/neovim/pull/12632 merged
--- vim._update_package_paths()
-
-return require('packer').startup(function()
-  -- Packer can manage itself
+return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use {'ggandor/leap.nvim',
     config = function ()
@@ -70,6 +75,17 @@ return require('packer').startup(function()
         })
       end,
     })
+    -- Start Win-Move mode:
+    vim.cmd("nnoremap <C-W><C-M> <Cmd>WinShift<CR>")
+    vim.cmd("nnoremap <C-W>m <Cmd>WinShift<CR>")
+
+    -- Swap two windows:
+    vim.cmd("nnoremap <C-W>X <Cmd>WinShift swap<CR>")
+
+    vim.cmd("nnoremap <S-Left> <Cmd>WinShift left<CR>")
+    vim.cmd("nnoremap <S-Down> <Cmd>WinShift down<CR>")
+    vim.cmd("nnoremap <S-Up> <Cmd>WinShift up<CR>")
+    vim.cmd("nnoremap <S-Right> <Cmd>WinShift right<CR>")
   end
   }
   use { 'ibhagwan/smartyank.nvim',
@@ -115,7 +131,13 @@ return require('packer').startup(function()
   -- }
   use 'stsewd/fzf-checkout.vim'
   use {'sbulav/nredir.nvim', cmd = "Nredir"}
-  use 'svermeulen/vim-subversive'
+  use {'svermeulen/vim-subversive',
+  config = function()
+    vim.keymap.set("n", "<space>s", "<plug>(SubversiveSubstitute)", { noremap = true })
+    vim.keymap.set("n", "<space>ss", "<plug>(SubversiveSubstituteLine)", { noremap = true })
+    vim.keymap.set("n", "<space>S", "<plug>(SubversiveSubstituteToEndOfLine)", { noremap = true })
+  end
+  }
   use 'jparise/vim-graphql'
   use 'kevinhwang91/nvim-bqf'
   -- use 'rmagatti/auto-session'
@@ -185,7 +207,6 @@ use {
 use {'neoclide/coc.nvim', branch = 'release'}
 use 'junegunn/fzf'
 use 'junegunn/fzf.vim'
-use 'laher/fuzzymenu.vim'
 use 'tpope/vim-fugitive'
 use {
   'nvim-lualine/lualine.nvim',
@@ -208,10 +229,14 @@ use 'tpope/vim-sleuth'
 use {'t9md/vim-choosewin',
     config = function()
       vim.g.choosewin_label = 'ARSTDHNEIOQWFPGJLUYZXCVBKM'
+      vim.cmd("nmap <C-S> <Plug>(choosewin)")
     end
 }
 use 'tpope/vim-rhubarb'
 use 'folke/which-key.nvim'
 use 'michaeljsmith/vim-indent-object'
 -- use 'beeender/Comrade'
+  if packer_bootstrap then
+    require('packer').sync()
+  end
 end)

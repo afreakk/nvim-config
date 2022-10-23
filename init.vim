@@ -52,10 +52,27 @@ set shortmess+=c
 
 set shell=/usr/bin/env\ bash
 
+" move selected text up and down
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" Move cursor between windows
+nnoremap <C-Up> <C-W>k
+nnoremap <C-Down> <C-W>j
+nnoremap <C-Left> <C-W>h
+nnoremap <C-Right> <C-W>l
+
+" make Y more consistent 
+nmap Y y$
+
+" exit insertmode in terminal
+tnoremap <S-Esc> <C-\><C-n>
+
+
 autocmd VimResized * wincmd =
 
 lua << EOF
-require("afreak.packer-bootstrap")
 require("afreak.packer")
 EOF
 set spelllang=nb,en
+
