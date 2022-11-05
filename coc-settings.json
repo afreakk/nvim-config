@@ -20,8 +20,6 @@
     "diagnostic.infoSign": "",
     "diagnostic.virtualText": true,
     "diagnostic.hintSign": "",
-    "omnisharp.trace.server": "verbose",
-    "omnisharp.path": "omnisharp",
     "explorer.icon.enableNerdfont": true,
     "explorer.previewAction.onHover": false,
     "explorer.file.reveal.auto": true,
@@ -55,24 +53,14 @@
             "command": "nixpkgs-fmt"
         }
     },
-    "coc.preferences.formatOnSaveFiletypes": [
-        "go",
-        "starlark",
-        "javascript",
-        "typescript",
-        "typescriptreact",
-        "json",
-        "javascriptreact",
-        "less",
-        "svelte",
-        "rust",
-        "elm",
-        "nix",
-        "lua",
-        "graphql"
-    ],
+    "coc.preferences.formatOnSave": true,
     "tsserver.trace.server": "verbose",
     "languageserver": {
+        "csharp-ls": {
+            "command": "csharp-ls",
+            "filetypes": ["cs"],
+            "rootPatterns": ["*.csproj", ".vim/", ".git/", ".hg/"]
+        },
         "lua": {
             "rootPatterns": [".git/"],
             "command": "lua-language-server",
@@ -81,7 +69,7 @@
                 "Lua": {
                     "workspace": {
                         "library": [
-                            "/nix/store/g7bf2fpkn6h4fcz52bwka22zrz09m46v-neovim-0.7.0/share/nvim/runtime/lua"
+                            "/nix/store/hiwgppjbvb5wyy6lx40qlb78r55a2042-neovim-0.8.0/share/nvim/runtime/lua"
                         ]
                     },
                     "diagnostics": {
@@ -128,24 +116,5 @@
             }
         }
     },
-    "cSpell.userWords": [
-        "Authn",
-        "PGRST",
-        "chunkify",
-        "fmap",
-        "idno",
-        "initdb",
-        "jwks",
-        "nixos",
-        "nixpkgs",
-        "nvim",
-        "pgql",
-        "postgrest",
-        "stretchr",
-        "totp",
-        "vmie",
-        "vmimport",
-        "xmobar",
-        "xvda"
-    ]
+    "cSpell.userWords": []
 }

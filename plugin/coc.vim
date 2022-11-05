@@ -27,12 +27,10 @@ let g:coc_global_extensions = [
 \    "coc-tsserver",
 \    "coc-vimlsp",
 \    "coc-go",
-\    "coc-omnisharp",
 \    "coc-highlight",
 \    "coc-spell-checker",
 \    "coc-sh",
 \    "coc-snippets",
-\    "coc-stylua"
 \ ]
 " \    "coc-comrade",
 " \    "coc-pairs",

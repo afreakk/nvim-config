@@ -27,3 +27,14 @@ augroup END
 au BufRead nftables.conf set ft=nftables
 
 autocmd FileType markdown setlocal spell
+
+augroup BgHighlight
+    autocmd!
+    autocmd WinEnter * set number relativenumber
+    autocmd WinLeave * set norelativenumber
+augroup END
+
+augroup tilingWmMakeWindowReadable
+    autocmd!
+    autocmd VimResized * wincmd =
+augroup END

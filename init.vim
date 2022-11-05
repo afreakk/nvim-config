@@ -18,13 +18,12 @@ set wildignorecase
 
 set incsearch
 set hlsearch
-set showcmd             " Show (partial) command in status line.
-set showmatch           " Show matching brackets.
-set ruler               " Show the line and column numbers of the cursor.
-set number              " Show the line numbers on the left side.
-set relativenumber
-set formatoptions+=o    " Continue comment marker in new lines.
-set textwidth=0         " Hard-wrap long lines as you type them.
+set showcmd               " Show (partial) command in status line.
+set showmatch             " Show matching brackets.
+set ruler                 " Show the line and column numbers of the cursor.
+set number relativenumber " Show the line numbers on the left side.
+set formatoptions+=o      " Continue comment marker in new lines.
+set textwidth=0           " Hard-wrap long lines as you type them.
 set noshowmode
 
 " https://www.reddit.com/r/vim/wiki/tabstop
@@ -51,6 +50,7 @@ set shortmess+=c
 " set signcolumn="auto"
 
 set shell=/usr/bin/env\ bash
+set spelllang=nb,en
 
 " move selected text up and down
 vnoremap J :m '>+1<CR>gv=gv
@@ -68,11 +68,6 @@ nmap Y y$
 " exit insertmode in terminal
 tnoremap <S-Esc> <C-\><C-n>
 
-
-autocmd VimResized * wincmd =
-
-lua << EOF
-require("afreak.packer")
-EOF
-set spelllang=nb,en
+" require packer
+lua require("afreak.packer")
 

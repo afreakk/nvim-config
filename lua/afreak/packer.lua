@@ -215,9 +215,9 @@ return require('packer').startup(function(use)
       require('lualine').setup({
         options = { theme = 'gruvbox' },
         sections = {
-          lualine_a = { 'mode' },
-          lualine_b = { 'diff', { 'diagnostics', sources = { 'coc' } } },
-          lualine_x = { 'filetype' },
+          lualine_a = { { 'mode' }, },
+          lualine_b = { { 'diff' }, { 'diagnostics', sources = { 'coc' } } },
+          lualine_x = { { 'filetype' }, },
         }
       })
     end
