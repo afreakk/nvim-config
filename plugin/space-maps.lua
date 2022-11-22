@@ -141,6 +141,7 @@ local keymap = {
     },
     k = { ":lua qftoggle()<CR>", "quickfixtoggle" },
     [";"] = { ":History:<cr>", "History" },
+    ["<space>"] = { ":Legendary<cr>", "Legendary" },
 }
 
 wk.register(keymap, { prefix = " ", mode = "n" })

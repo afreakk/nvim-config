@@ -14,6 +14,14 @@ vim.g.vimsyn_embed = 'l'
 
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
+  use { 'mrjones2014/legendary.nvim', config = function()
+    require('legendary').setup({
+      which_key = {
+        auto_register = true
+      }
+    })
+  end }
+  use { 'stevearc/dressing.nvim' }
   use { 'ggandor/leap.nvim',
     config = function()
       require('leap').add_default_mappings()
