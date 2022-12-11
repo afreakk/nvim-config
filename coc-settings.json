@@ -117,6 +117,8 @@
         }
     },
     "cSpell.userWords": [
-      "oryadmin"
+      "OTEL",
+      "oryadmin",
+      "otlp"
     ]
 }

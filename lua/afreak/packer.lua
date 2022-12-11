@@ -83,17 +83,13 @@ return require('packer').startup(function(use)
         })
       end,
     })
-    -- Start Win-Move mode:
-    vim.cmd("nnoremap <C-W><C-M> <Cmd>WinShift<CR>")
-    vim.cmd("nnoremap <C-W>m <Cmd>WinShift<CR>")
-
-    -- Swap two windows:
-    vim.cmd("nnoremap <C-W>X <Cmd>WinShift swap<CR>")
-
-    vim.cmd("nnoremap <S-Left> <Cmd>WinShift left<CR>")
-    vim.cmd("nnoremap <S-Down> <Cmd>WinShift down<CR>")
-    vim.cmd("nnoremap <S-Up> <Cmd>WinShift up<CR>")
-    vim.cmd("nnoremap <S-Right> <Cmd>WinShift right<CR>")
+    vim.keymap.set("n", "<C-W><C-M>", "<Cmd>WinShift<CR>")
+    vim.keymap.set("n", "<C-W>m", "<Cmd>WinShift<CR>")
+    vim.keymap.set("n", "<C-W>X", "<Cmd>WinShift swap<CR>")
+    vim.keymap.set("n", "<S-Left>", "<Cmd>WinShift left<CR>")
+    vim.keymap.set("n", "<S-Down>", "<Cmd>WinShift down<CR>")
+    vim.keymap.set("n", "<S-Up>", "<Cmd>WinShift up<CR>")
+    vim.keymap.set("n", "<S-Right>", "<Cmd>WinShift right<CR>")
   end
   }
   use { 'ibhagwan/smartyank.nvim',
@@ -137,7 +133,6 @@ return require('packer').startup(function(use)
   --   })
   -- end
   -- }
-  use 'stsewd/fzf-checkout.vim'
   use { 'sbulav/nredir.nvim', cmd = "Nredir" }
   use { 'svermeulen/vim-subversive',
     config = function()
@@ -186,16 +181,16 @@ return require('packer').startup(function(use)
     keys = { "c", "d", "y" },
     config = function()
       -- https://github.com/ggandor/lightspeed.nvim/discussions/83
-      vim.cmd("nmap ds       <Plug>Dsurround")
-      vim.cmd("nmap cs       <Plug>Csurround")
-      vim.cmd("nmap cS       <Plug>CSurround")
-      vim.cmd("nmap ys       <Plug>Ysurround")
-      vim.cmd("nmap yS       <Plug>YSurround")
-      vim.cmd("nmap yss      <Plug>Yssurround")
-      vim.cmd("nmap ySs      <Plug>YSsurround")
-      vim.cmd("nmap ySS      <Plug>YSsurround")
-      vim.cmd("xmap gs       <Plug>VSurround")
-      vim.cmd("xmap gS       <Plug>VgSurround")
+      vim.keymap.set("n", "ds", "<Plug>Dsurround")
+      vim.keymap.set("n", "cs", "<Plug>Csurround")
+      vim.keymap.set("n", "cS", "<Plug>CSurround")
+      vim.keymap.set("n", "ys", "<Plug>Ysurround")
+      vim.keymap.set("n", "yS", "<Plug>YSurround")
+      vim.keymap.set("n", "yss", "<Plug>Yssurround")
+      vim.keymap.set("n", "ySs", "<Plug>YSsurround")
+      vim.keymap.set("n", "ySS", "<Plug>YSsurround")
+      vim.keymap.set("x", "gs", "<Plug>VSurround")
+      vim.keymap.set("x", "gS", "<Plug>VgSurround")
     end
   }
   use 'tpope/vim-repeat'
@@ -214,7 +209,23 @@ return require('packer').startup(function(use)
   }
   use { 'neoclide/coc.nvim', branch = 'release' }
   use 'junegunn/fzf'
-  use 'junegunn/fzf.vim'
+  -- use 'junegunn/fzf.vim'
+  use { 'ibhagwan/fzf-lua',
+    -- optional for icon support
+    requires = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      require('fzf-lua').setup {
+        git = {
+          files = {
+            cmd = "git ls-files --exclude-standard --recurse-submodules"
+          }
+        },
+        grep = {
+          cmd = "git grep --recurse-submodules --line-number --color=auto --perl-regexp"
+        }
+      }
+    end
+  }
   use 'tpope/vim-fugitive'
   use {
     'nvim-lualine/lualine.nvim',
@@ -237,7 +248,7 @@ return require('packer').startup(function(use)
   use { 't9md/vim-choosewin',
     config = function()
       vim.g.choosewin_label = 'ARSTDHNEIOQWFPGJLUYZXCVBKM'
-      vim.cmd("nmap <C-S> <Plug>(choosewin)")
+      vim.keymap.set("n", "<C-S>", "<Plug>(choosewin)")
     end
   }
   use 'tpope/vim-rhubarb'

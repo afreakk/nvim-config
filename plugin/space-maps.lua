@@ -32,9 +32,9 @@ local keymap = {
     v = {
         name = '+vimrc',
         e = { ":vsplit $MYVIMRC<CR>", "edit vimrc" },
-        g = { ":VimFiles<CR>", "find vim file" },
+        g = { "<cmd>lua require('fzf-lua').files({cwd = '~/.config/nvim'})<CR>", "find vim file" },
         s = { ":Reload<cr>", "nvim-reload" },
-        q = { ":VimFilesAg<space>", "find in vim files" },
+        q = { "<cmd>lua require('fzf-lua').grep({cwd = '~/.config/nvim'})<CR>", "find in vim files" },
         o = { ":so %<cr>", "source this file" },
     },
     y = {
@@ -64,26 +64,22 @@ local keymap = {
         o = { ':GBrowse<CR>', 'browse' },
         w = { ':Gwrite<CR>', 'write' },
         r = { ':Gread<CR>', 'read' },
-        c = { ':GBranches<CR>', 'checkout branch' },
+        a = { "<cmd>lua require('fzf-lua').git_branches()<CR>", 'checkout branch' },
+        t = { "<cmd>lua require('fzf-lua').git_stash()<CR>", 'stash' },
+        c = { "<cmd>lua require('fzf-lua').git_commits()<CR>", 'commit log (project)' },
+        u = { "<cmd>lua require('fzf-lua').git_bcommits()<CR>", 'commit log (buffer)' },
     },
-    g = { ":GFilesRecursive<cr>", "Git files" },
-    p = { ":Files<cr>", "Files" },
+    e = { "<cmd>lua require('fzf-lua').resume()<CR>", 'fzf resume last' },
+    g = { "<cmd>lua require('fzf-lua').git_files()<CR>", "Git files" },
+    p = { "<cmd>lua require('fzf-lua').files()<CR>", "Files" },
     b = {
         name = '+buffer',
-        l = { ":Buffers<cr>", "list" },
+        l = { "<cmd>lua require('fzf-lua').buffers()<CR>", "list" },
         o = { ":%bd <bar> e# <bar> bd#<CR> <bar>'\"", "only" },
     },
 
     n = { ":noh<cr> ", "nohilight" },
     f = { ":CocCommand explorer<CR>", "Explorer" },
-    c = {
-        name = "+fzf-stuff",
-        x = { ":IPaste<cr>", "IPaste" },
-        l = { ":BLines<cr>", "BLines" },
-        h = { ":Helptags<cr>", "Helptags" },
-        c = { ":Commands<cr>", "Commands" },
-        m = { ":Maps<cr>", "Maps" },
-    },
     a = {
         name = "+coc-actions",
         l = { "<Plug>(coc-codeaction-line)", "codeaction-line" },
@@ -142,6 +138,16 @@ local keymap = {
     k = { ":lua qftoggle()<CR>", "quickfixtoggle" },
     [";"] = { ":History:<cr>", "History" },
     ["<space>"] = { ":Legendary<cr>", "Legendary" },
+    q = {
+        name = "+fzf",
+        g = { "<cmd>lua require('fzf-lua').grep()<CR>", "run search for a pattern" },
+        l = { "<cmd>lua require('fzf-lua').grep_last()<CR>", "run search again with the last pattern" },
+        W = { "<cmd>lua require('fzf-lua').grep_cWORD()<CR>", "search WORD under cursor" },
+        w = { "<cmd>lua require('fzf-lua').grep_cword()<CR>", "search word under cursor" },
+        v = { "<cmd>lua require('fzf-lua').grep_visual()<CR>", "search visual selection" },
+        p = { "<cmd>lua require('fzf-lua').grep_project()<CR>", "search all project lines" },
+        b = { "<cmd>lua require('fzf-lua').grep_curbuf()<CR>", "grep current buffer" },
+    },
 }
 
 wk.register(keymap, { prefix = " ", mode = "n" })
