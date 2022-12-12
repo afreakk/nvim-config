@@ -30,13 +30,13 @@ return require('packer').startup(function(use)
   use { "iamcco/markdown-preview.nvim", ft = "markdown", run = "cd app && yarn install" }
   use { "afreakk/coc-cspell-dicts", run = 'yarn install && yarn build' }
 
-  use 'nfnty/vim-nftables'
-  use { 'ionide/Ionide-vim',
-    config = function()
-      vim.g["fsharp#backend"] = "disable"
-    end
-    --, run = 'make fsautocomplete'}
-  }
+  use { 'nfnty/vim-nftables', ft = "nftables" }
+  -- use { 'ionide/Ionide-vim',
+  --   config = function()
+  --     vim.g["fsharp#backend"] = "disable"
+  --   end
+  --   --, run = 'make fsautocomplete'}
+  -- }
 
   use { 'sindrets/winshift.nvim', config = function()
     require("winshift").setup({
@@ -141,10 +141,11 @@ return require('packer').startup(function(use)
       vim.keymap.set("n", "<space>S", "<plug>(SubversiveSubstituteToEndOfLine)", { noremap = true })
     end
   }
-  use 'jparise/vim-graphql'
-  use 'kevinhwang91/nvim-bqf'
+  use { 'jparise/vim-graphql', ft = "graphql" }
+
+  use { 'kevinhwang91/nvim-bqf', ft = "qf" }
   -- use 'rmagatti/auto-session'
-  use 'cappyzawa/starlark.vim'
+  use { 'cappyzawa/starlark.vim', ft = "starlark" }
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate graphql javascript haskell nix bash fish elm lua go'
@@ -153,12 +154,8 @@ return require('packer').startup(function(use)
   use 'nvim-treesitter/nvim-treesitter-textobjects'
   use 'p00f/nvim-ts-rainbow'
 
-  use {
-    'chr4/nginx.vim',
-    ft = { 'nginx' },
-  }
-
-  use 'LnL7/vim-nix'
+  use { 'chr4/nginx.vim', ft = { 'nginx' } }
+  use { 'LnL7/vim-nix', ft = "nix" }
   use {
     'lewis6991/gitsigns.nvim',
     requires = {
@@ -168,10 +165,12 @@ return require('packer').startup(function(use)
       require('gitsigns').setup()
     end
   }
-  use 'freitass/todo.txt-vim'
+  use { 'freitass/todo.txt-vim', ft = "todo" }
   use 'bronson/vim-visual-star-search'
+
   use 'wellle/targets.vim'
   use 'andymass/vim-matchup'
+
   use 'tpope/vim-unimpaired'
   use 'chrisbra/Recover.vim'
   use 'mfussenegger/nvim-dap'

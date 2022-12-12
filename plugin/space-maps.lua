@@ -136,7 +136,7 @@ local keymap = {
         u = { ":<C-u>CocCommand workspace.showOutput<CR>", "coccommand workspace.showOutput" },
     },
     k = { ":lua qftoggle()<CR>", "quickfixtoggle" },
-    [";"] = { ":History:<cr>", "History" },
+    [";"] = { "<cmd>lua require('fzf-lua').command_history()<CR>", "command history" },
     ["<space>"] = { ":Legendary<cr>", "Legendary" },
     q = {
         name = "+fzf",
