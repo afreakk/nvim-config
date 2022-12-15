@@ -214,6 +214,15 @@ return require('packer').startup(function(use)
     requires = { 'nvim-tree/nvim-web-devicons' },
     config = function()
       require('fzf-lua').setup {
+        previewers = {
+          builtin = {
+            extensions = {
+              ["png"] = { "ueberzug" },
+              ["jpg"] = { "ueberzug" },
+            },
+            ueberzug_scaler = "fit_contain",
+          }
+        },
         git = {
           files = {
             cmd = "git ls-files --exclude-standard --recurse-submodules"

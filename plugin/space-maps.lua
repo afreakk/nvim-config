@@ -28,6 +28,11 @@ local keymap = {
         a = { "<Cmd>lua require'dap'.run_last()<CR>", 'run last' },
         l = { "<Cmd>lua require'dap'.list_breakpoints()<CR>", 'list breakpoints' },
         u = { "<Cmd>lua require'dapui'.toggle()<CR>", 'toggle ui' },
+        f = { "<cmd>lua require('fzf-lua').dap_commands()<CR>", "fzf: list,run nvim-dap builtin commands" },
+        n = { "<cmd>lua require('fzf-lua').dap_configurations()<CR>", "fzf: list,run debug configurations" },
+        e = { "<cmd>lua require('fzf-lua').dap_breakpoints()<CR>", "fzf: list,delete breakpoints" },
+        v = { "<cmd>lua require('fzf-lua').dap_variables()<CR>", "fzf: active session variables" },
+        m = { "<cmd>lua require('fzf-lua').dap_frames()<CR>", "fzf: active session jump to frame" },
     },
     v = {
         name = '+vimrc',
@@ -147,6 +152,10 @@ local keymap = {
         v = { "<cmd>lua require('fzf-lua').grep_visual()<CR>", "search visual selection" },
         p = { "<cmd>lua require('fzf-lua').grep_project()<CR>", "search all project lines" },
         b = { "<cmd>lua require('fzf-lua').grep_curbuf()<CR>", "grep current buffer" },
+        h = { "<cmd>lua require('fzf-lua').search_history()<CR>", "search history" },
+        j = { "<cmd>lua require('fzf-lua').jumps()<CR>", ":jumps" },
+        r = { "<cmd>lua require('fzf-lua').resume()<CR>", "resume last command/query" },
+        c = { "<cmd>lua require('fzf-lua').changes()<CR>", ":changes" },
     },
 }
 
