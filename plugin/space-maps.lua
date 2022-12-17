@@ -152,8 +152,8 @@ local keymap = {
         b = { "<cmd>lua require('fzf-lua').grep_curbuf()<CR>", "grep current buffer" },
         h = { "<cmd>lua require('fzf-lua').search_history()<CR>", "search history" },
         j = { "<cmd>lua require('fzf-lua').jumps()<CR>", ":jumps" },
-        r = { "<cmd>lua require('fzf-lua').resume()<CR>", "resume last command/query" },
         c = { "<cmd>lua require('fzf-lua').changes()<CR>", ":changes" },
+        s = { "<cmd>lua require('fzf-lua').spell_suggest()<CR>", "Spelling suggestions" },
     },
 }
 
