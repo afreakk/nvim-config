@@ -67,13 +67,24 @@
             "filetypes": ["lua"],
             "settings": {
                 "Lua": {
+                    "runtime": {
+                        "version": "LuaJIT"
+                    },
                     "workspace": {
-                        "library": [
-                            "/nix/store/hiwgppjbvb5wyy6lx40qlb78r55a2042-neovim-0.8.0/share/nvim/runtime/lua"
-                        ]
+                        "library": [],
+                        "checkThirdParty": false
                     },
                     "diagnostics": {
-                        "globals": ["vim"]
+                        "enable": true,
+                        "globals": [
+                            "hs",
+                            "vim",
+                            "it",
+                            "describe",
+                            "before_each",
+                            "after_each"
+                        ],
+                        "disable": ["lowercase-global"]
                     }
                 }
             }
@@ -88,7 +99,7 @@
             "filetypes": ["nix"]
         },
         "terraform": {
-            "command": "/nix/store/6hn07zrp44srvgxp9jys4h903lcrbqmm-terraform-ls-0.18.1/bin/terraform-ls",
+            "command": "terraform-ls",
             "filetypes": ["terraform", "tf"]
         },
         "haskell": {
@@ -116,10 +127,5 @@
             }
         }
     },
-    "cSpell.userWords": [
-      "OTEL",
-      "glog",
-      "oryadmin",
-      "otlp"
-    ]
+    "cSpell.userWords": ["OTEL", "glog", "oryadmin", "otlp"]
 }

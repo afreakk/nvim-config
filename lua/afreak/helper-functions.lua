@@ -1,8 +1,11 @@
 function cmdAndGetFirstLine(cmd)
     local handle = io.popen(cmd)
-    local result = handle:read("*l")
-    handle:close()
-    return result
+    if handle ~= nil then
+        local result = handle:read("*l")
+        handle:close()
+        return result
+    end
+    return "error gettind handle in cmdAndGetFirstLine"
 end
 
 function _G.dump(...)
@@ -11,20 +14,12 @@ function _G.dump(...)
 end
 
 local qfisopen = 0
-function qfOpen()
-    vim.cmd("copen")
-    qfisopen = 1
-end
-
-function qfClose()
-    vim.cmd("cclose")
-    qfisopen = 0
-end
-
-function qftoggle()
+function Qftoggle()
     if qfisopen == 0 then
-        qfOpen()
+        vim.cmd("copen")
+        qfisopen = 1
     else
-        qfClose()
+        vim.cmd("cclose")
+        qfisopen = 0
     end
 end

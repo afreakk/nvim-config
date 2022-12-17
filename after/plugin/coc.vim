@@ -96,3 +96,6 @@ endfunction
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
+
+"dont want to hardcode this, so set it like this!
+call coc#config("languageserver.lua.settings.Lua.workspace.library", nvim_list_runtime_paths())

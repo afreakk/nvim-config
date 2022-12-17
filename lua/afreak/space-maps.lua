@@ -133,7 +133,7 @@ local keymap = {
         o = { ":diffoff!<cr>", "diffoff!" },
         w = { ":windo diffthis<cr>", "windo diffthis" },
     },
-    k = { ":lua qftoggle()<CR>", "quickfixtoggle" },
+    x = { ":lua Qftoggle()<CR>", "quickfixtoggle" },
     [";"] = { "<cmd>lua require('fzf-lua').command_history()<CR>", "command history" },
     ["<space>"] = { ":Legendary<cr>", "Legendary" },
     q = {

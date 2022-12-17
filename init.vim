@@ -71,6 +71,9 @@ nnoremap <C-Down> <C-W>j
 nnoremap <C-Left> <C-W>h
 nnoremap <C-Right> <C-W>l
 
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
 " make Y more consistent 
 nmap Y y$
 

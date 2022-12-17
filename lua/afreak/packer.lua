@@ -282,7 +282,10 @@ return require('packer').startup(function(use)
         end
     }
     use 'tpope/vim-rhubarb'
-    use 'folke/which-key.nvim'
+    use { 'folke/which-key.nvim', config = function()
+        require('afreak.space-maps')
+
+    end }
     use 'michaeljsmith/vim-indent-object'
     -- use 'beeender/Comrade'
     if packer_bootstrap then
