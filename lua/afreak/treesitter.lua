@@ -1,4 +1,15 @@
 require 'nvim-treesitter.configs'.setup {
+    ensure_installed = {
+        "c", "graphql", "javascript", "haskell", "nix", "bash", "fish", "elm", "lua", "go", "gomod", "c_sharp", "html",
+        "jq", "json", "jsonnet", "markdown", "markdown_inline", "php", "python", "regex", "toml", "typescript", "vim",
+        "yaml", "cmake", "comment", "css", "cpp", "diff", "dockerfile"
+    },
+    sync_install = false,
+    auto_install = true,
+    highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+    },
     indent = {
         enable = true
     },
@@ -18,9 +29,6 @@ require 'nvim-treesitter.configs'.setup {
                 ["ic"] = "@class.inner",
             },
         },
-    },
-    highlight = {
-        enable = true,
     },
     incremental_selection = {
         enable = true,

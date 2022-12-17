@@ -37,9 +37,18 @@ set timeoutlen=500
 set t_Co=256                         " Enable 256 colors
 set termguicolors
 
+"coc stuff from https://github.com/neoclide/coc.nvim#example-vim-configuration
 "https://github.com/neoclide/coc.nvim/wiki/F.A.Q#linting-is-slow
 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300
+" May need for Vim (not Neovim) since coc.nvim calculates byte offset by count
+" utf-8 byte sequence
+set encoding=utf-8
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+
 
 " Better display for messages
 set cmdheight=2

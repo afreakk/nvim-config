@@ -88,17 +88,26 @@ local keymap = {
     a = {
         name = "+coc-actions",
         l = { "<Plug>(coc-codeaction-line)", "codeaction-line" },
-        f = { "<Plug>(coc-codeaction)", "codeaction" },
+        a = { "<Plug>(coc-codeaction)", "codeaction" },
         c = { "<Plug>(coc-codeaction-cursor)", "codeaction-cursor" },
-        s = { "<Plug>(coc-codeaction-selected)", "codeaction-selected" },
-        e = { "<Plug>(coc-codelens-action)", "codelens-action" },
-        n = { "<Plug>(coc-diagnostic-prev)", "diagnostic-next" },
+        v = { "<Plug>(coc-codeaction-selected)", "codeaction-selected" },
+        s = { "<Plug>(coc-codelens-action)", "codelens-action" },
+        n = { "<Plug>(coc-diagnostic-next)", "diagnostic-next" },
         p = { "<Plug>(coc-diagnostic-prev)", "diagnostic-prev" },
 
         i = { "<Plug>(coc-implementation)", "goto-implementation" },
         t = { "<Plug>(coc-type-definition)", "goto-type-definition" },
         r = { "<Plug>(coc-references)", "goto-references" },
         d = { "<Plug>(coc-definition)", "goto-definition" },
+
+        e = { "<Plug>(coc-rename)", "rename" },
+        f = { "<Plug>(coc-refactor)", "refactor" },
+        g = {
+            name = "+diagnostics enable/disable",
+            d = { ":<c-u>call coc#config('diagnostic.enable', 0)<cr>", "diagnostic enable" },
+            e = { ":<c-u>call coc#config('diagnostic.enable', 1)<cr>", "diagnostic disable" },
+        },
+        w = { ":<c-u>call coc#float#close_all() <CR>", "close all floating windows" },
     },
     i = {
         name = "+diff",
@@ -106,17 +115,6 @@ local keymap = {
         d = { ":diffoff<cr>", "diffoff" },
         o = { ":diffoff!<cr>", "diffoff!" },
         w = { ":windo diffthis<cr>", "windo diffthis" },
-    },
-    o = {
-        name = "+coc-other",
-        d = { ":<c-u>call coc#config('diagnostic.enable', 0)<cr>", "diagnostic enable" },
-        e = { ":<c-u>call coc#config('diagnostic.enable', 1)<cr>", "diagnostic disable" },
-        c = { ":<c-u>call coc#float#close_all() <CR>", "close all floating windows" },
-    },
-    r = {
-        name = "+rename/refactor(coc)",
-        e = { "<Plug>(coc-rename)", "rename" },
-        f = { "<Plug>(coc-refactor)", "refactor" },
     },
     l = {
         name = "+coclists",
