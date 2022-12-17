@@ -1,4 +1,5 @@
-function cmdAndGetFirstLine(cmd)
+local M = {}
+function M.cmdAndGetFirstLine(cmd)
     local handle = io.popen(cmd)
     if handle ~= nil then
         local result = handle:read("*l")
@@ -9,13 +10,4 @@ function cmdAndGetFirstLine(cmd)
     return ""
 end
 
-local qfisopen = 0
-function Qftoggle()
-    if qfisopen == 0 then
-        vim.cmd("copen")
-        qfisopen = 1
-    else
-        vim.cmd("cclose")
-        qfisopen = 0
-    end
-end
+return M

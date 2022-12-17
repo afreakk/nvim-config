@@ -109,7 +109,9 @@ local keymap = {
         l = { ":set background=light<CR>", "light" },
         t = { ":hi Normal guibg=NONE ctermbg=NONE<CR>", "transparent" },
     },
-    x = { ":lua Qftoggle()<CR>", "quickfixtoggle" },
+    x = { function()
+        require("afreak.qftoggle").toggle()
+    end, "quickfixtoggle" },
     c = {
         name = "+coc-actions",
         l = { "<Plug>(coc-codeaction-line)", "codeaction-line" },

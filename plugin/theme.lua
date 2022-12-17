@@ -1,6 +1,6 @@
-require('afreak.helper-functions')
+local h = require('afreak.helper-functions')
 
-if cmdAndGetFirstLine("hostname") == "hanstop" then
+if h.cmdAndGetFirstLine("hostname") == "hanstop" then
   vim.o.background = "dark"
 else
   vim.o.background = "dark"

@@ -38,3 +38,4 @@ augroup tilingWmMakeWindowReadable
     autocmd!
     autocmd VimResized * wincmd =
 augroup END
+
