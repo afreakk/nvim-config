@@ -2,18 +2,76 @@ vim.g.maplocalleader = "+"
 vim.g.mapleader = "\\"
 
 local wk = require('which-key')
-wk.setup {
-    -- Need to fix d c  & y for which-key (not working because of easy-clip)
-    -- operators = { ['"_d'] = "Delete" },
-    -- operators = { ['"_c'] = "Change" },
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-}
+wk.setup {}
 local keymap = {
-    w = { ':w<CR>', 'save file' }, -- set a single command and text
+    q = {
+        name = "+fzf",
+        g = { "<cmd>lua require('fzf-lua').grep()<CR>", "run search for a pattern" },
+        l = { "<cmd>lua require('fzf-lua').grep_last()<CR>", "run search again with the last pattern" },
+        W = { "<cmd>lua require('fzf-lua').grep_cWORD()<CR>", "search WORD under cursor" },
+        w = { "<cmd>lua require('fzf-lua').grep_cword()<CR>", "search word under cursor" },
+        v = { "<cmd>lua require('fzf-lua').grep_visual()<CR>", "search visual selection" },
+        p = { "<cmd>lua require('fzf-lua').grep_project()<CR>", "search all project lines" },
+        b = { "<cmd>lua require('fzf-lua').grep_curbuf()<CR>", "grep current buffer" },
+        h = { "<cmd>lua require('fzf-lua').search_history()<CR>", "search history" },
+        j = { "<cmd>lua require('fzf-lua').jumps()<CR>", ":jumps" },
+        c = { "<cmd>lua require('fzf-lua').changes()<CR>", ":changes" },
+        s = { "<cmd>lua require('fzf-lua').spell_suggest()<CR>", "Spelling suggestions" },
+    },
+    w = { ':w<CR>', 'save file' },
+    f = { ":CocCommand explorer<CR>", "Explorer" },
+    p = { "<cmd>lua require('fzf-lua').files()<CR>", "Files" },
+    g = { "<cmd>lua require('fzf-lua').git_files()<CR>", "Git files" },
+    j = {},
+    l = {
+        name = "+coclists",
+        l = { ":<C-u>CocFzfList<cr>", "List all list sources" },
+        -- Show all diagnostics
+        d = { ":<C-u>CocFzfList diagnostics<cr>", "diagnostics" },
+        -- Manage extensions
+        e = { ":<C-u>CocFzfList extensions<cr>", "extensions" },
+        -- Show commands
+        c = { ":<C-u>CocFzfList commands<cr>", "commands" },
+        -- Find symbol of current document
+        o = { ":<C-u>CocFzfList outline<cr>", "outline" },
+        -- Search workspace symbols
+        s = { ":<C-u>CocFzfList -I symbols<cr>", "symbols" },
+        -- Resume latest coc list
+        r = { ":<C-u>CocFzfListResume<CR>", "coclistresume" },
+        u = { ":<C-u>CocCommand workspace.showOutput<CR>", "coccommand workspace.showOutput" },
+    },
     u = { ':UndotreeToggle<CR>', 'Undotree toggle' },
-    d = { -- set a nested structure
+    y = {
+        name = "+yank",
+        f = { ":%y<CR>", "content of buffer" },
+        n = { ":let @+=expand('%')<CR>", "filename" },
+        t = {
+            name = "+tpaste",
+            f = { ":!cat % | curl -F 'tpaste=<-' https://tpaste.us<CR>", "file to tpaste" },
+            v = { ":'<,'>:w !curl -F 'tpaste=<-' https://tpaste.us<CR>", "visually selected to tpaste" },
+        },
+    },
+    [";"] = { "<cmd>lua require('fzf-lua').command_history()<CR>", "command history" },
+    a = {},
+    r = {},
+    s = {},
+    t = {
+        name = '+git',
+        s = { ':Git<CR>', 'Status' },
+        p = { ':Git pull<CR>', 'Pull' },
+        h = { ':Git push<CR>', 'Push' },
+        d = { ':Gdiffsplit<CR>', 'split' },
+        b = { ':Git blame<CR>', 'blame' },
+        l = { ':Gclog<CR>', 'log' },
+        o = { ':GBrowse<CR>', 'browse' },
+        w = { ':Gwrite<CR>', 'write' },
+        r = { ':Gread<CR>', 'read' },
+        a = { "<cmd>lua require('fzf-lua').git_branches()<CR>", 'checkout branch' },
+        t = { "<cmd>lua require('fzf-lua').git_stash()<CR>", 'stash' },
+        c = { "<cmd>lua require('fzf-lua').git_commits()<CR>", 'commit log (project)' },
+        u = { "<cmd>lua require('fzf-lua').git_bcommits()<CR>", 'commit log (buffer)' },
+    },
+    d = {
         name = '+debug(dap)',
         c = { "<Cmd>lua require'dap'.continue()<CR>", 'continue' },
         o = { "<Cmd>lua require'dap'.step_over()<CR>", 'step_over' },
@@ -34,57 +92,24 @@ local keymap = {
         v = { "<cmd>lua require('fzf-lua').dap_variables()<CR>", "fzf: active session variables" },
         m = { "<cmd>lua require('fzf-lua').dap_frames()<CR>", "fzf: active session jump to frame" },
     },
-    v = {
-        name = '+vimrc',
-        e = { ":vsplit $MYVIMRC<CR>", "edit vimrc" },
-        g = { "<cmd>lua require('fzf-lua').files({cwd = '~/.config/nvim'})<CR>", "find vim file" },
-        s = { ":Reload<cr>", "nvim-reload" },
-        q = { "<cmd>lua require('fzf-lua').grep({cwd = '~/.config/nvim'})<CR>", "find in vim files" },
-        o = { ":so %<cr>", "source this file" },
+    h = {},
+    n = { ":noh<cr> ", "nohilight" },
+    e = { "<cmd>lua require('fzf-lua').resume()<CR>", 'fzf resume last' },
+    i = {
+        name = "+diff",
+        e = { ":diffthis<cr>", "diffthis" },
+        d = { ":diffoff<cr>", "diffoff" },
+        o = { ":diffoff!<cr>", "diffoff!" },
+        w = { ":windo diffthis<cr>", "windo diffthis" },
     },
-    y = {
-        name = "+yank",
-        f = { ":%y<CR>", "content of buffer" },
-        n = { ":let @+=expand('%')<CR>", "filename" },
-        t = {
-            name = "+tpaste",
-            f = { ":!cat % | curl -F 'tpaste=<-' https://tpaste.us<CR>", "file to tpaste" },
-            v = { ":'<,'>:w !curl -F 'tpaste=<-' https://tpaste.us<CR>", "visually selected to tpaste" },
-        },
-    },
+    o = {},
     z = {
         name = "+theme",
         d = { ":set background=dark<CR>", "dark" },
         l = { ":set background=light<CR>", "light" },
         t = { ":hi Normal guibg=NONE ctermbg=NONE<CR>", "transparent" },
     },
-    t = {
-        name = '+git',
-        s = { ':Git<CR>', 'Status' },
-        p = { ':Git pull<CR>', 'Pull' },
-        h = { ':Git push<CR>', 'Push' },
-        d = { ':Gdiffsplit<CR>', 'split' },
-        b = { ':Git blame<CR>', 'blame' },
-        l = { ':Gclog<CR>', 'log' },
-        o = { ':GBrowse<CR>', 'browse' },
-        w = { ':Gwrite<CR>', 'write' },
-        r = { ':Gread<CR>', 'read' },
-        a = { "<cmd>lua require('fzf-lua').git_branches()<CR>", 'checkout branch' },
-        t = { "<cmd>lua require('fzf-lua').git_stash()<CR>", 'stash' },
-        c = { "<cmd>lua require('fzf-lua').git_commits()<CR>", 'commit log (project)' },
-        u = { "<cmd>lua require('fzf-lua').git_bcommits()<CR>", 'commit log (buffer)' },
-    },
-    e = { "<cmd>lua require('fzf-lua').resume()<CR>", 'fzf resume last' },
-    g = { "<cmd>lua require('fzf-lua').git_files()<CR>", "Git files" },
-    p = { "<cmd>lua require('fzf-lua').files()<CR>", "Files" },
-    b = {
-        name = '+buffer',
-        l = { "<cmd>lua require('fzf-lua').buffers()<CR>", "list" },
-        o = { ":%bd <bar> e# <bar> bd#<CR> <bar>'\"", "only" },
-    },
-
-    n = { ":noh<cr> ", "nohilight" },
-    f = { ":CocCommand explorer<CR>", "Explorer" },
+    x = { ":lua Qftoggle()<CR>", "quickfixtoggle" },
     c = {
         name = "+coc-actions",
         l = { "<Plug>(coc-codeaction-line)", "codeaction-line" },
@@ -109,47 +134,25 @@ local keymap = {
         },
         w = { ":<c-u>call coc#float#close_all() <CR>", "close all floating windows" },
     },
-    l = {
-        name = "+coclists",
-        l = { ":<C-u>CocFzfList<cr>", "List all list sources" },
-        -- Show all diagnostics
-        d = { ":<C-u>CocFzfList diagnostics<cr>", "diagnostics" },
-        -- Manage extensions
-        e = { ":<C-u>CocFzfList extensions<cr>", "extensions" },
-        -- Show commands
-        c = { ":<C-u>CocFzfList commands<cr>", "commands" },
-        -- Find symbol of current document
-        o = { ":<C-u>CocFzfList outline<cr>", "outline" },
-        -- Search workspace symbols
-        s = { ":<C-u>CocFzfList -I symbols<cr>", "symbols" },
-        -- Resume latest coc list
-        r = { ":<C-u>CocFzfListResume<CR>", "coclistresume" },
-        u = { ":<C-u>CocCommand workspace.showOutput<CR>", "coccommand workspace.showOutput" },
+    v = {
+        name = '+vimrc',
+        e = { ":vsplit $MYVIMRC<CR>", "edit vimrc" },
+        g = { "<cmd>lua require('fzf-lua').files({cwd = '~/.config/nvim'})<CR>", "find vim file" },
+        s = { ":Reload<cr>", "nvim-reload" },
+        q = { "<cmd>lua require('fzf-lua').grep({cwd = '~/.config/nvim'})<CR>", "find in vim files" },
+        o = { ":so %<cr>", "source this file" },
     },
-    i = {
-        name = "+diff",
-        e = { ":diffthis<cr>", "diffthis" },
-        d = { ":diffoff<cr>", "diffoff" },
-        o = { ":diffoff!<cr>", "diffoff!" },
-        w = { ":windo diffthis<cr>", "windo diffthis" },
+    b = {
+        name = '+buffer',
+        l = { "<cmd>lua require('fzf-lua').buffers()<CR>", "list" },
+        o = { ":%bd <bar> e# <bar> bd#<CR> <bar>'\"", "only" },
     },
-    x = { ":lua Qftoggle()<CR>", "quickfixtoggle" },
-    [";"] = { "<cmd>lua require('fzf-lua').command_history()<CR>", "command history" },
+    k = {},
+    m = {},
+    [","] = {},
+    ["."] = {},
+    ["/"] = {},
     ["<space>"] = { ":Legendary<cr>", "Legendary" },
-    q = {
-        name = "+fzf",
-        g = { "<cmd>lua require('fzf-lua').grep()<CR>", "run search for a pattern" },
-        l = { "<cmd>lua require('fzf-lua').grep_last()<CR>", "run search again with the last pattern" },
-        W = { "<cmd>lua require('fzf-lua').grep_cWORD()<CR>", "search WORD under cursor" },
-        w = { "<cmd>lua require('fzf-lua').grep_cword()<CR>", "search word under cursor" },
-        v = { "<cmd>lua require('fzf-lua').grep_visual()<CR>", "search visual selection" },
-        p = { "<cmd>lua require('fzf-lua').grep_project()<CR>", "search all project lines" },
-        b = { "<cmd>lua require('fzf-lua').grep_curbuf()<CR>", "grep current buffer" },
-        h = { "<cmd>lua require('fzf-lua').search_history()<CR>", "search history" },
-        j = { "<cmd>lua require('fzf-lua').jumps()<CR>", ":jumps" },
-        c = { "<cmd>lua require('fzf-lua').changes()<CR>", ":changes" },
-        s = { "<cmd>lua require('fzf-lua').spell_suggest()<CR>", "Spelling suggestions" },
-    },
 }
 
 wk.register(keymap, { prefix = " ", mode = "n" })

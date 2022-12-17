@@ -5,12 +5,8 @@ function cmdAndGetFirstLine(cmd)
         handle:close()
         return result
     end
-    return "error gettind handle in cmdAndGetFirstLine"
-end
-
-function _G.dump(...)
-    local objects = vim.tbl_map(vim.inspect, { ... })
-    print(unpack(objects))
+    print("Error getting handle in cmdAndGetFirstLine")
+    return ""
 end
 
 local qfisopen = 0
