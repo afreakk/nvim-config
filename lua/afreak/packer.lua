@@ -208,6 +208,7 @@ return require('packer').startup(function(use)
     }
     use { 'neoclide/coc.nvim', branch = 'release' }
     use 'junegunn/fzf'
+    use { 'antoinemadec/coc-fzf', requires = { 'junegunn/fzf.vim' } }
     -- use 'junegunn/fzf.vim'
     use { 'ibhagwan/fzf-lua',
         -- optional for icon support

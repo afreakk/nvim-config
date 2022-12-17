@@ -85,7 +85,7 @@ local keymap = {
 
     n = { ":noh<cr> ", "nohilight" },
     f = { ":CocCommand explorer<CR>", "Explorer" },
-    a = {
+    c = {
         name = "+coc-actions",
         l = { "<Plug>(coc-codeaction-line)", "codeaction-line" },
         a = { "<Plug>(coc-codeaction)", "codeaction" },
@@ -109,34 +109,29 @@ local keymap = {
         },
         w = { ":<c-u>call coc#float#close_all() <CR>", "close all floating windows" },
     },
+    l = {
+        name = "+coclists",
+        l = { ":<C-u>CocFzfList<cr>", "List all list sources" },
+        -- Show all diagnostics
+        d = { ":<C-u>CocFzfList diagnostics<cr>", "diagnostics" },
+        -- Manage extensions
+        e = { ":<C-u>CocFzfList extensions<cr>", "extensions" },
+        -- Show commands
+        c = { ":<C-u>CocFzfList commands<cr>", "commands" },
+        -- Find symbol of current document
+        o = { ":<C-u>CocFzfList outline<cr>", "outline" },
+        -- Search workspace symbols
+        s = { ":<C-u>CocFzfList -I symbols<cr>", "symbols" },
+        -- Resume latest coc list
+        r = { ":<C-u>CocFzfListResume<CR>", "coclistresume" },
+        u = { ":<C-u>CocCommand workspace.showOutput<CR>", "coccommand workspace.showOutput" },
+    },
     i = {
         name = "+diff",
         e = { ":diffthis<cr>", "diffthis" },
         d = { ":diffoff<cr>", "diffoff" },
         o = { ":diffoff!<cr>", "diffoff!" },
         w = { ":windo diffthis<cr>", "windo diffthis" },
-    },
-    l = {
-        name = "+coclists",
-        l = { ":<C-u>CocList<cr>", "CocList" },
-        -- Show all diagnostics
-        d = { ":<C-u>CocList diagnostics<cr>", "diagnostics" },
-        -- Manage extensions
-        e = { ":<C-u>CocList extensions<cr>", "extensions" },
-        -- Show commands
-        c = { ":<C-u>CocList commands<cr>", "commands" },
-        -- Find symbol of current document
-        o = { ":<C-u>CocList outline<cr>", "outline" },
-        -- Search workspace symbols
-        s = { ":<C-u>CocList -I symbols<cr>", "symbols" },
-        -- Do default action for next item.
-        n = { ":<C-u>CocNext<CR>", "cocnext" },
-        -- Do default action for previous item.
-        p = { ":<C-u>CocPrev<CR>", "cocprev" },
-        -- Resume latest coc list
-        r = { ":<C-u>CocListResume<CR>", "coclistresume" },
-        a = { ":<C-u>CocListCancel<CR>", "coclistcancel" },
-        u = { ":<C-u>CocCommand workspace.showOutput<CR>", "coccommand workspace.showOutput" },
     },
     k = { ":lua qftoggle()<CR>", "quickfixtoggle" },
     [";"] = { "<cmd>lua require('fzf-lua').command_history()<CR>", "command history" },

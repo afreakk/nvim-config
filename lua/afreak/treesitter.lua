@@ -2,7 +2,7 @@ require 'nvim-treesitter.configs'.setup {
     ensure_installed = {
         "c", "graphql", "javascript", "haskell", "nix", "bash", "fish", "elm", "lua", "go", "gomod", "c_sharp", "html",
         "jq", "json", "jsonnet", "markdown", "markdown_inline", "php", "python", "regex", "toml", "typescript", "vim",
-        "yaml", "cmake", "comment", "css", "cpp", "diff", "dockerfile"
+        "yaml", "cmake", "comment", "css", "cpp", "diff", "dockerfile", "sql"
     },
     sync_install = false,
     auto_install = true,
