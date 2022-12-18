@@ -130,5 +130,12 @@
             }
         }
     },
-    "cSpell.userWords": ["OTEL", "glog", "oryadmin", "otlp"]
+    "cSpell.userWords": [
+      "OTEL",
+      "glog",
+      "oryadmin",
+      "otlp",
+      "rtsopts",
+      "xmonad"
+    ]
 }
