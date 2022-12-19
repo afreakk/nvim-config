@@ -110,7 +110,12 @@ local keymap = {
         t = { ":hi Normal guibg=NONE ctermbg=NONE<CR>", "transparent" },
     },
     x = { function()
-        require("afreak.qftoggle").toggle()
+        for _, win in pairs(vim.fn.getwininfo()) do
+            if win['quickfix'] == 1 then
+                return vim.cmd.cclose()
+            end
+        end
+        vim.cmd.copen()
     end, "quickfixtoggle" },
     c = {
         name = "+coc-actions",
