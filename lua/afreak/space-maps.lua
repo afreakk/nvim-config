@@ -1,9 +1,5 @@
-vim.g.maplocalleader = "+"
-vim.g.mapleader = "\\"
-
 local wk = require('which-key')
-wk.setup {}
-local keymap = {
+return {
     q = {
         name = "+fzf",
         g = { "<cmd>lua require('fzf-lua').grep()<CR>", "run search for a pattern" },
@@ -35,7 +31,7 @@ local keymap = {
         -- Find symbol of current document
         o = { ":<C-u>CocFzfList outline<cr>", "outline" },
         -- Search workspace symbols
-        s = { ":<C-u>CocFzfList -I symbols<cr>", "symbols" },
+        s = { ":<C-u>CocFzfList symbols<cr>", "symbols" },
         -- Resume latest coc list
         r = { ":<C-u>CocFzfListResume<CR>", "coclistresume" },
         u = { ":<C-u>CocCommand workspace.showOutput<CR>", "coccommand workspace.showOutput" },
@@ -161,14 +157,3 @@ local keymap = {
     ["/"] = {},
     ["<space>"] = { ":Legendary<cr>", "Legendary" },
 }
-
-wk.register(keymap, { prefix = " ", mode = "n" })
-wk.register(keymap, { prefix = " ", mode = "v" })
-local leaderkeymap = {
-}
-wk.register(leaderkeymap, { prefix = '<leader>' })
-
-local local_keymap = {
-}
-
-wk.register(local_keymap, { prefix = '<localleader>' })

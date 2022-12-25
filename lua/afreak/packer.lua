@@ -13,6 +13,7 @@ local packer_bootstrap = ensure_packer()
 vim.g.vimsyn_embed = 'l'
 
 return require('packer').startup(function(use)
+    use 'dstein64/vim-startuptime'
     use 'wbthomason/packer.nvim'
     use { 'mrjones2014/legendary.nvim', config = function()
         require('legendary').setup({
@@ -237,8 +238,19 @@ return require('packer').startup(function(use)
     }
     use 'tpope/vim-rhubarb'
     use { 'folke/which-key.nvim', config = function()
-        require('afreak.space-maps')
-
+        local wk = require('which-key')
+        wk.setup {}
+        local spaceMaps = require('afreak.space-maps')
+        wk.register(spaceMaps, { prefix = " ", mode = "n" })
+        wk.register(spaceMaps, { prefix = " ", mode = "v" })
+        -- local leaderkeymap = {
+        -- }
+        -- wk.register(leaderkeymap, { prefix = '<leader>' })
+        --
+        -- local local_keymap = {
+        -- }
+        --
+        -- wk.register(local_keymap, { prefix = '<localleader>' })
     end }
     use 'michaeljsmith/vim-indent-object'
     -- use 'beeender/Comrade'
