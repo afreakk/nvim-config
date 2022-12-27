@@ -83,5 +83,5 @@ let mapleader = "\\"
 let maplocalleader = "+"
 
 " require packer
-lua require("afreak.packer")
+lua require("afreak.lazy")
 

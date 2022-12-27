@@ -1,49 +1,34 @@
-local ensure_packer = function()
-    local fn = vim.fn
-    local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-    if fn.empty(fn.glob(install_path)) > 0 then
-        fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
-        vim.cmd [[packadd packer.nvim]]
-        return true
-    end
-    return false
-end
-
-local packer_bootstrap = ensure_packer()
-vim.g.vimsyn_embed = 'l'
-
-return require('packer').startup(function(use)
-    use 'dstein64/vim-startuptime'
-    use 'wbthomason/packer.nvim'
-    use { 'mrjones2014/legendary.nvim', config = function()
+return {
+    'dstein64/vim-startuptime',
+    { 'mrjones2014/legendary.nvim', config = function()
         require('legendary').setup({
             which_key = {
                 auto_register = true
             }
         })
-    end }
-    use { 'stevearc/dressing.nvim' }
-    use { 'ggandor/leap.nvim',
+    end, lazy = true },
+    { "stevearc/dressing.nvim", event = "VeryLazy" },
+    { 'ggandor/leap.nvim',
         config = function()
             require('leap').add_default_mappings()
         end
-    }
-    use { "iamcco/markdown-preview.nvim", ft = "markdown", run = "cd app && yarn install" }
-    use { "afreakk/coc-cspell-dicts", run = 'yarn install && yarn build' }
+    },
+    { "iamcco/markdown-preview.nvim", ft = "markdown", build = "cd app && yarn install" },
+    { "afreakk/coc-cspell-dicts", build = 'yarn install && yarn build' },
 
-    use { 'nfnty/vim-nftables', ft = "nftables" }
-    -- use { 'ionide/Ionide-vim',
+    { 'nfnty/vim-nftables', ft = "nftables" },
+    -- { 'ionide/Ionide-vim',
     --   config = function()
     --     vim.g["fsharp#backend"] = "disable"
     --   end
-    --   --, run = 'make fsautocomplete'}
+    --   --, build = 'make fsautocomplete'}
     -- }
 
-    use { 'sindrets/winshift.nvim', config = function()
+    { 'sindrets/winshift.nvim', config = function()
         require("afreak.winshift")
     end
-    }
-    use { 'ibhagwan/smartyank.nvim',
+    },
+    { 'ibhagwan/smartyank.nvim',
         config = function()
             require('smartyank').setup {
                 highlight = {
@@ -62,12 +47,8 @@ return require('packer').startup(function(use)
                 }
             }
         end
-    }
-    use { 'mbbill/undotree',
-        config = function()
-            -- vim.g.undotree_DiffCommand = "delta"
-        end
-    }
+    },
+    { 'mbbill/undotree', cmd = "UndotreeToggle" },
     -- use {'glepnir/indent-guides.nvim',
     -- config = function()
     --   require('indent_guides').setup({
@@ -84,47 +65,35 @@ return require('packer').startup(function(use)
     --   })
     -- end
     -- }
-    use { 'sbulav/nredir.nvim', cmd = "Nredir" }
-    use { 'svermeulen/vim-subversive',
+    { 'sbulav/nredir.nvim', cmd = "Nredir" },
+    { 'svermeulen/vim-subversive',
         config = function()
             vim.keymap.set("n", "<space>s", "<plug>(SubversiveSubstitute)", { noremap = true })
             vim.keymap.set("n", "<space>ss", "<plug>(SubversiveSubstituteLine)", { noremap = true })
             vim.keymap.set("n", "<space>S", "<plug>(SubversiveSubstituteToEndOfLine)", { noremap = true })
         end
-    }
-    use { 'jparise/vim-graphql', ft = "graphql" }
+    },
+    { 'jparise/vim-graphql', ft = "graphql" },
 
-    use { 'kevinhwang91/nvim-bqf', ft = "qf" }
+    { 'kevinhwang91/nvim-bqf', ft = "qf" },
     -- use 'rmagatti/auto-session'
-    use { 'cappyzawa/starlark.vim', ft = "starlark" }
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-    -- disable until it does not cause error in elm files
-    -- use { 'RRethy/nvim-treesitter-textsubjects' }
-    use { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' }
-    use 'nvim-treesitter/nvim-treesitter-textobjects'
-    use 'p00f/nvim-ts-rainbow'
+    { 'cappyzawa/starlark.vim', ft = "starlark" },
 
-    use { 'chr4/nginx.vim', ft = { 'nginx' } }
-    use { 'LnL7/vim-nix', ft = "nix" }
-    use {
-        'lewis6991/gitsigns.nvim',
+    { 'chr4/nginx.vim', ft = { 'nginx' } },
+    { 'LnL7/vim-nix', ft = "nix" },
+    { 'lewis6991/gitsigns.nvim',
         config = function()
             require('gitsigns').setup()
-        end
-    }
-    use { 'freitass/todo.txt-vim', ft = "todo" }
-    use 'bronson/vim-visual-star-search'
-
-    use 'wellle/targets.vim'
-    use 'andymass/vim-matchup'
-
-    use 'tpope/vim-unimpaired'
-    use 'chrisbra/Recover.vim'
-    use 'mfussenegger/nvim-dap'
-    use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
-    use {
+        end,
+        event = "BufReadPre",
+    },
+    { 'freitass/todo.txt-vim', ft = "todo" },
+    'bronson/vim-visual-star-search',
+    'wellle/targets.vim',
+    -- 'tpope/vim-unimpaired',
+    'chrisbra/Recover.vim',
+    {
         "tpope/vim-surround",
-        keys = { "c", "d", "y" },
         config = function()
             -- https://github.com/ggandor/lightspeed.nvim/discussions/83
             vim.keymap.set("n", "ds", "<Plug>Dsurround")
@@ -138,28 +107,30 @@ return require('packer').startup(function(use)
             vim.keymap.set("x", "gs", "<Plug>VSurround")
             vim.keymap.set("x", "gS", "<Plug>VgSurround")
         end
-    }
-    use 'tpope/vim-repeat'
+    },
+    'tpope/vim-repeat',
     -- use 'tpope/vim-commentary'
-    use {
+    {
         'numToStr/Comment.nvim',
         config = function()
             require('Comment').setup()
         end
-    }
-    use {
+    },
+    {
         'norcalli/nvim-colorizer.lua',
+        event = "BufReadPre",
         config = function()
             require('colorizer').setup()
         end
-    }
-    use { 'neoclide/coc.nvim', branch = 'release' }
-    use 'junegunn/fzf'
-    use { 'antoinemadec/coc-fzf', requires = { 'junegunn/fzf.vim' } }
+    },
+    { 'neoclide/coc.nvim', branch = 'release', lazy = false },
+    'junegunn/fzf',
+    { 'antoinemadec/coc-fzf', dependencies = { 'junegunn/fzf.vim' }, event = "VeryLazy" },
     -- use 'junegunn/fzf.vim'
-    use { 'ibhagwan/fzf-lua',
+    { 'ibhagwan/fzf-lua',
         -- optional for icon support
-        requires = { 'nvim-tree/nvim-web-devicons' },
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        event = "VeryLazy",
         config = function()
             require('fzf-lua').setup {
                 previewers = {
@@ -181,11 +152,12 @@ return require('packer').startup(function(use)
                 }
             }
         end
-    }
-    use 'tpope/vim-fugitive'
-    use {
+    },
+    'tpope/vim-fugitive',
+    {
         'nvim-lualine/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+        event = "VeryLazy",
+        dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
         config = function()
             require('lualine').setup({
                 options = { theme = 'gruvbox' },
@@ -204,9 +176,9 @@ return require('packer').startup(function(use)
                 },
             })
         end
-    }
+    },
 
-    use { "ellisonleao/gruvbox.nvim", config = function()
+    { "ellisonleao/gruvbox.nvim", config = function()
         -- setup must be called before loading the colorscheme
         -- Default options:
         require("gruvbox").setup({
@@ -227,17 +199,17 @@ return require('packer').startup(function(use)
             transparent_mode = false,
         })
         vim.cmd("colorscheme gruvbox")
-    end }
+    end },
 
-    use 'tpope/vim-sleuth'
-    use { 't9md/vim-choosewin',
+    'tpope/vim-sleuth',
+    { 't9md/vim-choosewin',
         config = function()
             vim.g.choosewin_label = 'ARSTDHNEIOQWFPGJLUYZXCVBKM'
             vim.keymap.set("n", "<C-S>", "<Plug>(choosewin)")
         end
-    }
-    use 'tpope/vim-rhubarb'
-    use { 'folke/which-key.nvim', config = function()
+    },
+    'tpope/vim-rhubarb',
+    { 'folke/which-key.nvim', config = function()
         local wk = require('which-key')
         wk.setup {}
         local spaceMaps = require('afreak.space-maps')
@@ -251,10 +223,7 @@ return require('packer').startup(function(use)
         -- }
         --
         -- wk.register(local_keymap, { prefix = '<localleader>' })
-    end }
-    use 'michaeljsmith/vim-indent-object'
+    end },
+    'michaeljsmith/vim-indent-object',
     -- use 'beeender/Comrade'
-    if packer_bootstrap then
-        require('packer').sync()
-    end
-end)
+}

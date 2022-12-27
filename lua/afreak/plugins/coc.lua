@@ -1,3 +1,8 @@
+local M = {
+  'neoclide/coc.nvim', branch = 'release', lazy = false
+}
+function M.config()
+  vim.cmd([[
 " Using CocList
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
@@ -85,10 +90,10 @@ endfunction
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> K :call Show_documentation()<CR>
 " from https://github.com/neoclide/coc.nvim#example-vim-configuration
 " Use K to show documentation in preview window
-function! s:show_documentation()
+function! Show_documentation()
   if !(CocAction('hasProvider', 'hover') && CocAction('doHover'))
     call feedkeys('K', 'in')
   endif
@@ -99,3 +104,7 @@ inoremap <silent><expr> <c-space> coc#refresh()
 
 "dont want to hardcode this, so set it like this!
 call coc#config("languageserver.lua.settings.Lua.workspace.library", nvim_list_runtime_paths())
+    ]])
+end
+
+return M

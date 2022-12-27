@@ -75,7 +75,8 @@ return {
         i = { "<Cmd>lua require'dap'.step_into()<CR>", 'step_into' },
         O = { "<Cmd>lua require'dap'.step_out()<CR>", 'step_out' },
         b = { "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", 'toggle_breakpoint' },
-        B = { "<Cmd>set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", 'set_breakpoint(breakpoint condition)' },
+        B = { "<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
+            'set_breakpoint(breakpoint condition)' },
         s = { "<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>",
             'set_breakpoint(log point message)' },
         r = { "<Cmd>lua require'dap'.repl.open()<CR>", 'repl open' },
@@ -155,5 +156,7 @@ return {
     [","] = {},
     ["."] = {},
     ["/"] = {},
-    ["<space>"] = { ":Legendary<cr>", "Legendary" },
+    ["<space>"] = { function()
+        require('legendary').find({ filters = { require('legendary.filters').current_mode() } })
+    end, "legendary" },
 }
