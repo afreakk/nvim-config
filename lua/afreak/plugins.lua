@@ -67,11 +67,11 @@ return {
     -- }
     { 'sbulav/nredir.nvim', cmd = "Nredir" },
     { 'svermeulen/vim-subversive',
-        config = function()
-            vim.keymap.set("n", "<space>s", "<plug>(SubversiveSubstitute)", { noremap = true })
-            vim.keymap.set("n", "<space>ss", "<plug>(SubversiveSubstituteLine)", { noremap = true })
-            vim.keymap.set("n", "<space>S", "<plug>(SubversiveSubstituteToEndOfLine)", { noremap = true })
-        end
+        keys = {
+            { "<space>s", "<plug>(SubversiveSubstitute)" },
+            { "<space>ss", "<plug>(SubversiveSubstituteLine)" },
+            { "<space>S", "<plug>(SubversiveSubstituteToEndOfLine)" },
+        },
     },
     { 'jparise/vim-graphql', ft = "graphql" },
 
@@ -117,7 +117,7 @@ return {
         end
     },
     {
-        'norcalli/nvim-colorizer.lua',
+        'NvChad/nvim-colorizer.lua',
         event = "BufReadPre",
         config = function()
             require('colorizer').setup()

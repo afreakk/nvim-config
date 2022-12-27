@@ -50,7 +50,7 @@ return {
     [";"] = { "<cmd>lua require('fzf-lua').command_history()<CR>", "command history" },
     a = {},
     r = {},
-    s = {},
+    s = {}, --used for subversive
     t = {
         name = '+git',
         s = { ':Git<CR>', 'Status' },
