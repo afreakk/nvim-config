@@ -1,6 +1,16 @@
+-- function cmdAndGetFirstLine(cmd)
+--     local handle = io.popen(cmd)
+--     if handle ~= nil then
+--         local result = handle:read("*l")
+--         handle:close()
+--         return result
+--     end
+--     print("Error getting handle in cmdAndGetFirstLine")
+--     return ""
+-- end
 -- local h = require('afreak.helper-functions')
 
--- if h.cmdAndGetFirstLine("hostname") == "hanstop" then
+-- if cmdAndGetFirstLine("hostname") == "hanstop" then
 --   vim.o.background = "dark"
 -- else
 --   vim.o.background = "dark"

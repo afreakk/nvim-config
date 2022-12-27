@@ -24,10 +24,6 @@ return {
     --   --, build = 'make fsautocomplete'}
     -- }
 
-    { 'sindrets/winshift.nvim', config = function()
-        require("afreak.winshift")
-    end
-    },
     { 'ibhagwan/smartyank.nvim',
         config = function()
             require('smartyank').setup {
@@ -205,25 +201,10 @@ return {
     { 't9md/vim-choosewin',
         config = function()
             vim.g.choosewin_label = 'ARSTDHNEIOQWFPGJLUYZXCVBKM'
-            vim.keymap.set("n", "<C-S>", "<Plug>(choosewin)")
-        end
+        end,
+        keys = { { "<C-S>", "<Plug>(choosewin)" } }
     },
     'tpope/vim-rhubarb',
-    { 'folke/which-key.nvim', config = function()
-        local wk = require('which-key')
-        wk.setup {}
-        local spaceMaps = require('afreak.space-maps')
-        wk.register(spaceMaps, { prefix = " ", mode = "n" })
-        wk.register(spaceMaps, { prefix = " ", mode = "v" })
-        -- local leaderkeymap = {
-        -- }
-        -- wk.register(leaderkeymap, { prefix = '<leader>' })
-        --
-        -- local local_keymap = {
-        -- }
-        --
-        -- wk.register(local_keymap, { prefix = '<localleader>' })
-    end },
     'michaeljsmith/vim-indent-object',
     -- use 'beeender/Comrade'
 }
