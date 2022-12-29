@@ -120,35 +120,6 @@ return {
         end
     },
     { 'neoclide/coc.nvim', branch = 'release', lazy = false },
-    'junegunn/fzf',
-    { 'antoinemadec/coc-fzf', dependencies = { 'junegunn/fzf.vim' }, event = "VeryLazy" },
-    -- use 'junegunn/fzf.vim'
-    { 'ibhagwan/fzf-lua',
-        -- optional for icon support
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
-        event = "VeryLazy",
-        config = function()
-            require('fzf-lua').setup {
-                previewers = {
-                    builtin = {
-                        extensions = {
-                            ["png"] = { "ueberzug" },
-                            ["jpg"] = { "ueberzug" },
-                        },
-                        ueberzug_scaler = "fit_contain",
-                    }
-                },
-                git = {
-                    files = {
-                        cmd = "git ls-files --exclude-standard --recurse-submodules"
-                    }
-                },
-                grep = {
-                    cmd = "git grep --recurse-submodules --line-number --color=auto --perl-regexp"
-                }
-            }
-        end
-    },
     'tpope/vim-fugitive',
     {
         'nvim-lualine/lualine.nvim',
@@ -201,6 +172,7 @@ return {
     { 't9md/vim-choosewin',
         config = function()
             vim.g.choosewin_label = 'ARSTDHNEIOQWFPGJLUYZXCVBKM'
+            vim.g.choosewin_overlay_enable = 1
         end,
         keys = { { "<C-S>", "<Plug>(choosewin)" } }
     },
