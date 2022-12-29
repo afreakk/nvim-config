@@ -1,25 +1,48 @@
 return { 'folke/which-key.nvim', config = function()
+  function mergeTables(base, extend)
+    -- not pure, will mutate base
+    for key, value in pairs(extend) do
+      base[key] = value
+    end
+    return base
+  end
+
+  function fzfGreps(opts, restOfTable)
+    return mergeTables({
+      g = { "<cmd>lua require('fzf-lua').grep(" .. opts .. ")<CR>", "run search for a pattern" },
+      W = { "<cmd>lua require('fzf-lua').grep_cWORD(" .. opts .. ")<CR>", "search WORD under cursor" },
+      w = { "<cmd>lua require('fzf-lua').grep_cword(" .. opts .. ")<CR>", "search word under cursor" },
+      v = { "<cmd>lua require('fzf-lua').grep_visual(" .. opts .. ")<CR>", "search visual selection" },
+    }, restOfTable)
+  end
+
+  function fzfFileFind(opts, restOfTable)
+    return mergeTables({
+      p = { "<cmd>lua require('fzf-lua').files(" .. opts .. ")<CR>", "Files" },
+      g = { "<cmd>lua require('fzf-lua').git_files(" .. opts .. ")<CR>", "Git files" },
+    }, restOfTable)
+  end
+
   local wk = require('which-key')
   wk.setup {}
-  local spaceMaps = {
-    q = {
+  local spaceMaps = fzfFileFind("", {
+    q = fzfGreps("", {
       name = "+fzf",
-      g = { "<cmd>lua require('fzf-lua').grep()<CR>", "run search for a pattern" },
       l = { "<cmd>lua require('fzf-lua').grep_last()<CR>", "run search again with the last pattern" },
-      W = { "<cmd>lua require('fzf-lua').grep_cWORD()<CR>", "search WORD under cursor" },
-      w = { "<cmd>lua require('fzf-lua').grep_cword()<CR>", "search word under cursor" },
-      v = { "<cmd>lua require('fzf-lua').grep_visual()<CR>", "search visual selection" },
       p = { "<cmd>lua require('fzf-lua').grep_project()<CR>", "search all project lines" },
       b = { "<cmd>lua require('fzf-lua').grep_curbuf()<CR>", "grep current buffer" },
       h = { "<cmd>lua require('fzf-lua').search_history()<CR>", "search history" },
       j = { "<cmd>lua require('fzf-lua').jumps()<CR>", ":jumps" },
       c = { "<cmd>lua require('fzf-lua').changes()<CR>", ":changes" },
       s = { "<cmd>lua require('fzf-lua').spell_suggest()<CR>", "Spelling suggestions" },
-    },
+      d = fzfGreps("{ cwd = vim.fn.expand('%:p:h') }", {
+        name = "+relativeToBuffer"
+      })
+    }),
     w = { ':w<CR>', 'save file' },
     f = { ":CocCommand explorer<CR>", "Explorer" },
-    p = { "<cmd>lua require('fzf-lua').files()<CR>", "Files" },
-    g = { "<cmd>lua require('fzf-lua').git_files()<CR>", "Git files" },
+    -- p = { "<cmd>lua require('fzf-lua').files()<CR>", "Files" }, !BEING MERGED IN BY fzfFileFind
+    -- g = { "<cmd>lua require('fzf-lua').git_files()<CR>", "Git files" },
     j = {},
     l = {
       name = "+coclists",
@@ -140,14 +163,13 @@ return { 'folke/which-key.nvim', config = function()
       },
       w = { ":<c-u>call coc#float#close_all() <CR>", "close all floating windows" },
     },
-    v = {
+    v = fzfFileFind("{cwd = '~/.config/nvim'}", {
       name = '+vimrc',
       e = { ":vsplit $MYVIMRC<CR>", "edit vimrc" },
-      g = { "<cmd>lua require('fzf-lua').files({cwd = '~/.config/nvim'})<CR>", "find vim file" },
       s = { ":Reload<cr>", "nvim-reload" },
-      q = { "<cmd>lua require('fzf-lua').grep({cwd = '~/.config/nvim'})<CR>", "find in vim files" },
+      q = fzfGreps("{cwd = '~/.config/nvim'}", { name = "+relativeToNvimConfig" }),
       o = { ":so %<cr>", "source this file" },
-    },
+    }),
     b = {
       name = '+buffer',
       l = { "<cmd>lua require('fzf-lua').buffers()<CR>", "list" },
@@ -161,7 +183,7 @@ return { 'folke/which-key.nvim', config = function()
     ["<space>"] = { function()
       require('legendary').find({ filters = { require('legendary.filters').current_mode() } })
     end, "legendary" },
-  }
+  })
   wk.register(spaceMaps, { prefix = " ", mode = "n" })
   wk.register(spaceMaps, { prefix = " ", mode = "v" })
   -- local leaderkeymap = {

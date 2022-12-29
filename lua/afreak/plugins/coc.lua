@@ -1,5 +1,5 @@
 local M = {
-  'neoclide/coc.nvim', branch = 'release', lazy = false
+  'neoclide/coc.nvim', branch = 'release'
 }
 function M.config()
   vim.cmd([[
