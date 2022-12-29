@@ -1,20 +1,21 @@
 return {
     { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
-    { 'andymass/vim-matchup', config = function()
-        vim.g.matchup_matchparen_offscreen = { method = "popup" }
-    end,
+    { 'andymass/vim-matchup',
+        config = function()
+            vim.g.matchup_matchparen_offscreen = { method = "popup" }
+        end,
         event = "BufReadPost",
 
     },
     {
         "mfussenegger/nvim-treehopper",
-        keys = { { "m", mode = { "o", "x" } } },
+        keys = {
+            { "m", ":<C-U>lua require('tsht').nodes()<CR>", mode = { "o" } },
+            { "m", ":lua require('tsht').nodes()<CR>", mode = { "x" } },
+        },
         config = function()
-            vim.cmd([[
-        omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>
-        xnoremap <silent> m :lua require('tsht').nodes()<CR>
-      ]]     )
-        end,
+            require("tsht").config.hint_keys = { "a", "r", "s", "t", "d", "h", "n", "e", "i", "o" }
+        end
     },
 
     {

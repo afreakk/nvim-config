@@ -23,8 +23,6 @@ return { 'folke/which-key.nvim', config = function()
     }, restOfTable)
   end
 
-  local wk = require('which-key')
-  wk.setup {}
   local spaceMaps = fzfFileFind("", {
     q = fzfGreps("", {
       name = "+fzf",
@@ -184,6 +182,8 @@ return { 'folke/which-key.nvim', config = function()
       require('legendary').find({ filters = { require('legendary.filters').current_mode() } })
     end, "legendary" },
   })
+  local wk = require('which-key')
+  wk.setup {}
   wk.register(spaceMaps, { prefix = " ", mode = "n" })
   wk.register(spaceMaps, { prefix = " ", mode = "v" })
   -- local leaderkeymap = {
