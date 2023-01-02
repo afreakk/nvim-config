@@ -108,6 +108,7 @@ return {
     -- use 'tpope/vim-commentary'
     {
         'numToStr/Comment.nvim',
+        event = "BufReadPost",
         config = function()
             require('Comment').setup()
         end
