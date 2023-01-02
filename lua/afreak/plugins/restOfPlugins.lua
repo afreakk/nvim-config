@@ -64,9 +64,9 @@ return {
     { 'sbulav/nredir.nvim', cmd = "Nredir" },
     { 'svermeulen/vim-subversive',
         keys = {
-            { "<space>s", "<plug>(SubversiveSubstitute)" },
-            { "<space>ss", "<plug>(SubversiveSubstituteLine)" },
-            { "<space>S", "<plug>(SubversiveSubstituteToEndOfLine)" },
+            { "<space>s", "<plug>(SubversiveSubstitute)", desc = "SubversiveSubstitute" },
+            { "<space>ss", "<plug>(SubversiveSubstituteLine)", desc = "SubversiveSubstituteLine" },
+            { "<space>S", "<plug>(SubversiveSubstituteToEndOfLine)", desc = "SubversiveSubstituteToEndOfLine" },
         },
     },
     { 'jparise/vim-graphql', ft = "graphql" },
@@ -174,7 +174,7 @@ return {
             vim.g.choosewin_label = 'ARSTDHNEIOQWFPGJLUYZXCVBKM'
             vim.g.choosewin_overlay_enable = 1
         end,
-        keys = { { "<C-S>", "<Plug>(choosewin)" } }
+        keys = { { "<C-S>", "<Plug>(choosewin)", desc = "choosewin" } }
     },
     'tpope/vim-rhubarb',
     'michaeljsmith/vim-indent-object',

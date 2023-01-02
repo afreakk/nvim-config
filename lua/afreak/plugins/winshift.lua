@@ -44,12 +44,12 @@ return {
         })
     end,
     keys = {
-        { "<C-W><C-M>", "<Cmd>WinShift<CR>" },
-        { "<C-W>m", "<Cmd>WinShift<CR>" },
-        { "<C-W>X", "<Cmd>WinShift swap<CR>" },
-        { "<S-Left>", "<Cmd>WinShift left<CR>" },
-        { "<S-Down>", "<Cmd>WinShift down<CR>" },
-        { "<S-Up>", "<Cmd>WinShift up<CR>" },
-        { "<S-Right>", "<Cmd>WinShift right<CR>" },
+        { "<C-W><C-M>", "<Cmd>WinShift<CR>", desc = "WinShift" },
+        { "<C-W>m", "<Cmd>WinShift<CR>", desc = "WinShift" },
+        { "<C-W>X", "<Cmd>WinShift swap<CR>", desc = "WinShift swap" },
+        { "<S-Left>", "<Cmd>WinShift left<CR>", desc = "WinShift left" },
+        { "<S-Down>", "<Cmd>WinShift down<CR>", desc = "WinShift down" },
+        { "<S-Up>", "<Cmd>WinShift up<CR>", desc = "WinShift up" },
+        { "<S-Right>", "<Cmd>WinShift right<CR>", desc = "WinShift right" },
     }
 }

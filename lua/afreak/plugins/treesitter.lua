@@ -10,8 +10,8 @@ return {
     {
         "mfussenegger/nvim-treehopper",
         keys = {
-            { "m", ":<C-U>lua require('tsht').nodes()<CR>", mode = { "o" } },
-            { "m", ":lua require('tsht').nodes()<CR>", mode = { "x" } },
+            { "m", ":<C-U>lua require('tsht').nodes()<CR>", mode = { "o" }, desc = "treehopper expand selection" },
+            { "m", ":lua require('tsht').nodes()<CR>", mode = { "x" }, desc = "treehopper expand selection" },
         },
         config = function()
             require("tsht").config.hint_keys = { "a", "r", "s", "t", "d", "h", "n", "e", "i", "o" }

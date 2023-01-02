@@ -13,6 +13,9 @@ return { 'folke/which-key.nvim', config = function()
       W = { "<cmd>lua require('fzf-lua').grep_cWORD(" .. opts .. ")<CR>", "search WORD under cursor" },
       w = { "<cmd>lua require('fzf-lua').grep_cword(" .. opts .. ")<CR>", "search word under cursor" },
       v = { "<cmd>lua require('fzf-lua').grep_visual(" .. opts .. ")<CR>", "search visual selection" },
+      l = { "<cmd>lua require('fzf-lua').grep_last(" .. opts .. ")<CR>", "run search again with the last pattern" },
+      p = { "<cmd>lua require('fzf-lua').grep_project(" .. opts .. ")<CR>", "search all project lines" },
+      b = { "<cmd>lua require('fzf-lua').grep_curbuf(" .. opts .. ")<CR>", "grep current buffer" },
     }, restOfTable)
   end
 
@@ -26,9 +29,6 @@ return { 'folke/which-key.nvim', config = function()
   local spaceMaps = fzfFileFind("", {
     q = fzfGreps("", {
       name = "+fzf",
-      l = { "<cmd>lua require('fzf-lua').grep_last()<CR>", "run search again with the last pattern" },
-      p = { "<cmd>lua require('fzf-lua').grep_project()<CR>", "search all project lines" },
-      b = { "<cmd>lua require('fzf-lua').grep_curbuf()<CR>", "grep current buffer" },
       h = { "<cmd>lua require('fzf-lua').search_history()<CR>", "search history" },
       j = { "<cmd>lua require('fzf-lua').jumps()<CR>", ":jumps" },
       c = { "<cmd>lua require('fzf-lua').changes()<CR>", ":changes" },
@@ -37,37 +37,37 @@ return { 'folke/which-key.nvim', config = function()
         name = "+relativeToBuffer"
       })
     }),
-    w = { ':w<CR>', 'save file' },
-    f = { ":CocCommand explorer<CR>", "Explorer" },
+    w = { '<cmd>w<CR>', 'save file' },
+    f = { "<cmd>CocCommand explorer<CR>", "Explorer" },
     -- p = { "<cmd>lua require('fzf-lua').files()<CR>", "Files" }, !BEING MERGED IN BY fzfFileFind
     -- g = { "<cmd>lua require('fzf-lua').git_files()<CR>", "Git files" },
     j = {},
     l = {
-      name = "+coclists",
-      l = { ":<C-u>CocFzfList<cr>", "List all list sources" },
-      -- Show all diagnostics
-      d = { ":<C-u>CocFzfList diagnostics<cr>", "diagnostics" },
-      -- Manage extensions
-      e = { ":<C-u>CocFzfList extensions<cr>", "extensions" },
-      -- Show commands
-      c = { ":<C-u>CocFzfList commands<cr>", "commands" },
-      -- Find symbol of current document
-      o = { ":<C-u>CocFzfList outline<cr>", "outline" },
-      -- Search workspace symbols
-      s = { ":<C-u>CocFzfList symbols<cr>", "symbols" },
-      -- Resume latest coc list
-      r = { ":<C-u>CocFzfListResume<CR>", "coclistresume" },
-      u = { ":<C-u>CocCommand workspace.showOutput<CR>", "coccommand workspace.showOutput" },
+      name = "+Lazy",
+      o = { "<cmd>Lazy home<CR>", "Lazy home" },
+      u = { "<cmd>Lazy check<CR>", "Check for updates and show the log" },
+      c = { "<cmd>Lazy clean<CR>", "Clean plugins that are no longer needed" },
+      e = { "<cmd>Lazy clear<CR>", "Clear finished tasks" },
+      d = { "<cmd>Lazy debug<CR>", "Show debug info" },
+      h = { "<cmd>Lazy health<CR>", "Run :checkhealth lazy" },
+      p = { "<cmd>Lazy help<CR>", "Lazy help" },
+      i = { "<cmd>Lazy install<CR>", "Install missing plugins" },
+      l = { "<cmd>Lazy log<CR>", "Show recent updates" },
+      r = { "<cmd>Lazy profile<CR>", "Show detailed profiling" },
+      s = { "<cmd>Lazy sync<CR>", "Run install, clean and update" },
+      t = { "<cmd>Lazy update<CR>", "Update plugins. This will also update the lockfile" },
     },
-    u = { ':UndotreeToggle<CR>', 'Undotree toggle' },
+    u = { '<cmd>UndotreeToggle<CR>', 'Undotree toggle' },
     y = {
       name = "+yank",
-      f = { ":%y<CR>", "content of buffer" },
+      f = { "<cmd>%y<CR>", "content of buffer" },
       n = { ":let @+=expand('%')<CR>", "filename" },
       t = {
         name = "+tpaste",
-        f = { ":!cat % | curl -F 'tpaste=<-' https://tpaste.us<CR>", "file to tpaste" },
-        v = { ":'<,'>:w !curl -F 'tpaste=<-' https://tpaste.us<CR>", "visually selected to tpaste" },
+        f = { ":w !curl --silent -F 'tpaste=<-' https://tpaste.us | xclip -out -in -selection clipboard<CR>",
+          "File > tpaste.us" },
+        v = { ":'<,'>w !curl --silent -F 'tpaste=<-' https://tpaste.us | xclip -out -in -selection clipboard<CR>",
+          "Visually selection > tpaste.us" },
       },
     },
     [";"] = { "<cmd>lua require('fzf-lua').command_history()<CR>", "command history" },
@@ -112,7 +112,9 @@ return { 'folke/which-key.nvim', config = function()
       v = { "<cmd>lua require('fzf-lua').dap_variables()<CR>", "fzf: active session variables" },
       m = { "<cmd>lua require('fzf-lua').dap_frames()<CR>", "fzf: active session jump to frame" },
     },
-    h = {},
+    h = {
+      name = "+ChatGPT"
+    }, -- chatgpt
     n = { ":noh<cr> ", "nohilight" },
     e = { "<cmd>lua require('fzf-lua').resume()<CR>", 'fzf resume last' },
     i = {
@@ -160,11 +162,26 @@ return { 'folke/which-key.nvim', config = function()
         e = { ":<c-u>call coc#config('diagnostic.enable', 1)<cr>", "diagnostic disable" },
       },
       w = { ":<c-u>call coc#float#close_all() <CR>", "close all floating windows" },
+      x = {
+        name = "+coclists",
+        l = { "<cmd>CocFzfList<cr>", "List all list sources" },
+        -- Show all diagnostics
+        d = { "<cmd>CocFzfList diagnostics<cr>", "diagnostics" },
+        -- Manage extensions
+        e = { "<cmd>CocFzfList extensions<cr>", "extensions" },
+        -- Show commands
+        c = { "<cmd>CocFzfList commands<cr>", "commands" },
+        -- Find symbol of current document
+        o = { "<cmd>CocFzfList outline<cr>", "outline" },
+        -- Search workspace symbols
+        s = { "<cmd>CocFzfList symbols<cr>", "symbols" },
+        -- Resume latest coc list
+        r = { "<cmd>CocFzfListResume<CR>", "coclistresume" },
+        u = { "<cmd>CocCommand workspace.showOutput<CR>", "coccommand workspace.showOutput" },
+      },
     },
     v = fzfFileFind("{cwd = '~/.config/nvim'}", {
       name = '+vimrc',
-      e = { ":vsplit $MYVIMRC<CR>", "edit vimrc" },
-      s = { ":Reload<cr>", "nvim-reload" },
       q = fzfGreps("{cwd = '~/.config/nvim'}", { name = "+relativeToNvimConfig" }),
       o = { ":so %<cr>", "source this file" },
     }),
@@ -183,7 +200,7 @@ return { 'folke/which-key.nvim', config = function()
     end, "legendary" },
   })
   local wk = require('which-key')
-  wk.setup {}
+  wk.setup { show_keys = false, show_help = false }
   wk.register(spaceMaps, { prefix = " ", mode = "n" })
   wk.register(spaceMaps, { prefix = " ", mode = "v" })
   -- local leaderkeymap = {
