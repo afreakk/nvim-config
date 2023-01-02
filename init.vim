@@ -82,6 +82,5 @@ tnoremap <S-Esc> <C-\><C-n>
 let mapleader = "\\"
 let maplocalleader = "+"
 
-" require packer
 lua require("afreak.lazy")
 
