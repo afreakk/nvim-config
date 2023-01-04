@@ -122,29 +122,6 @@ return {
     },
     { 'neoclide/coc.nvim', branch = 'release', lazy = false },
     'tpope/vim-fugitive',
-    {
-        'nvim-lualine/lualine.nvim',
-        event = "VeryLazy",
-        dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
-        config = function()
-            require('lualine').setup({
-                options = { theme = 'gruvbox' },
-                sections = {
-                    lualine_a = { { 'mode' }, },
-                    lualine_b = { { 'diagnostics', sources = { 'coc' } } },
-                    lualine_x = { { 'filetype' }, },
-                },
-                inactive_sections = {
-                    lualine_a = {},
-                    lualine_b = {},
-                    lualine_c = { 'filename' },
-                    lualine_x = { 'progress' },
-                    lualine_y = { 'location' },
-                    lualine_z = {}
-                },
-            })
-        end
-    },
 
     { "ellisonleao/gruvbox.nvim", config = function()
         -- setup must be called before loading the colorscheme

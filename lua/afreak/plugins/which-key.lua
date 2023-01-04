@@ -33,7 +33,7 @@ return { 'folke/which-key.nvim', config = function()
       j = { "<cmd>lua require('fzf-lua').jumps()<CR>", ":jumps" },
       c = { "<cmd>lua require('fzf-lua').changes()<CR>", ":changes" },
       s = { "<cmd>lua require('fzf-lua').spell_suggest()<CR>", "Spelling suggestions" },
-      d = fzfGreps("{ cwd = vim.fn.expand('%:p:h') }", {
+      d = fzfGreps("{ cwd = vim.fn.expand('%:p:h'), cmd = 'grep -r --line-number --color=auto --perl-regex' }", {
         name = "+relativeToBuffer"
       })
     }),
