@@ -73,8 +73,7 @@ return {
         event = "BufReadPre",
     },
     { 'freitass/todo.txt-vim', ft = "todo" },
-    'bronson/vim-visual-star-search',
-    'wellle/targets.vim',
+    { 'bronson/vim-visual-star-search', event = "BufReadPost" },
     -- 'tpope/vim-unimpaired',
     'chrisbra/Recover.vim',
     {
@@ -116,6 +115,7 @@ return {
     },
     { 'neoclide/coc.nvim', branch = 'release', lazy = false },
     'tpope/vim-fugitive',
+    'tpope/vim-rhubarb',
     { 'ethanholz/nvim-lastplace', config = function()
         require 'nvim-lastplace'.setup {}
     end },
@@ -143,15 +143,13 @@ return {
         vim.cmd("colorscheme gruvbox")
     end },
 
-    'tpope/vim-sleuth',
-    { 't9md/vim-choosewin',
-        config = function()
-            vim.g.choosewin_label = 'ARSTDHNEIOQWFPGJLUYZXCVBKM'
-            vim.g.choosewin_overlay_enable = 1
-        end,
-        keys = { { "<C-S>", "<Plug>(choosewin)", desc = "choosewin" } }
-    },
-    'tpope/vim-rhubarb',
-    'michaeljsmith/vim-indent-object',
+    -- 'tpope/vim-sleuth',
+    -- { 't9md/vim-choosewin',
+    --     config = function()
+    --         vim.g.choosewin_label = 'ARSTDHNEIOQWFPGJLUYZXCVBKM'
+    --         vim.g.choosewin_overlay_enable = 1
+    --     end,
+    --     keys = { { "<C-S>", "<Plug>(choosewin)", desc = "choosewin" } }
+    -- },
     -- use 'beeender/Comrade'
 }

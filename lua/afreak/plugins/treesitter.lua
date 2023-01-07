@@ -1,10 +1,11 @@
 return {
-    { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
-    { 'andymass/vim-matchup',
+    -- not really treesitter, but should be grouped together with matchup ?
+    { 'michaeljsmith/vim-indent-object', event = "BufReadPost" },
+    { 'wellle/targets.vim', event = "BufReadPost" },
+    { 'andymass/vim-matchup', event = "BufReadPost",
         config = function()
             vim.g.matchup_matchparen_offscreen = { method = "popup" }
         end,
-        event = "BufReadPost",
 
     },
     {
@@ -99,4 +100,5 @@ return {
             })
         end,
     },
+    { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
 }
