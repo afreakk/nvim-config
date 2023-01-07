@@ -33,7 +33,7 @@ return { 'folke/which-key.nvim', config = function()
       j = { "<cmd>lua require('fzf-lua').jumps()<CR>", ":jumps" },
       c = { "<cmd>lua require('fzf-lua').changes()<CR>", ":changes" },
       s = { "<cmd>lua require('fzf-lua').spell_suggest()<CR>", "Spelling suggestions" },
-      d = fzfGreps("{ cwd = vim.fn.expand('%:p:h'), cmd = 'grep -r --line-number --color=auto --perl-regex' }", {
+      d = fzfGreps("{ cwd = vim.fn.expand('%:p:h'), cmd = 'grep -r -i --line-number --color=auto --perl-regex' }", {
         name = "+relativeToBuffer"
       })
     }),
@@ -59,7 +59,8 @@ return { 'folke/which-key.nvim', config = function()
     },
     u = { '<cmd>UndotreeToggle<CR>', 'Undotree toggle' },
     y = {
-      name = "+yank",
+      name = "+yank/put",
+      p = { "<cmd>YankyRingHistory<CR>", "YankHistoryPicker" },
       f = { "<cmd>%y<CR>", "content of buffer" },
       n = { ":let @+=expand('%')<CR>", "filename" },
       t = {

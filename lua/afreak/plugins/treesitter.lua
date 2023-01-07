@@ -24,7 +24,7 @@ return {
         event = "BufReadPost",
         dependencies = {
             "nvim-treesitter/nvim-treesitter-textobjects",
-            'p00f/nvim-ts-rainbow'
+            'mrjones2014/nvim-ts-rainbow'
         },
         config = function()
             require("nvim-treesitter.configs").setup({
@@ -49,7 +49,7 @@ return {
                 incremental_selection = {
                     enable = true,
                     keymaps = {
-                        init_selection = "<C-n>",
+                        init_selection = "<C-i>",
                         node_incremental = "<C-n>",
                         scope_incremental = "<C-s>",
                         node_decremental = "<C-r>",

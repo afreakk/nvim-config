@@ -7,7 +7,16 @@ return {
             }
         })
     end, lazy = true },
-    { "stevearc/dressing.nvim", event = "VeryLazy" },
+    { "stevearc/dressing.nvim", event = "VeryLazy", config = function()
+        require('dressing').setup({
+            select = {
+                backend = "fzf_lua",
+            }
+        })
+    end },
+    { 'ggandor/flit.nvim', config = function()
+        require('flit').setup {}
+    end },
     { 'ggandor/leap.nvim',
         config = function()
             require('leap').add_default_mappings()
@@ -24,26 +33,6 @@ return {
     --   --, build = 'make fsautocomplete'}
     -- }
 
-    { 'ibhagwan/smartyank.nvim',
-        config = function()
-            require('smartyank').setup {
-                highlight = {
-                    enabled = true, -- highlight yanked text
-                    higroup = "IncSearch", -- highlight group of yanked text
-                    timeout = 200, -- timeout for clearing the highlight
-                },
-                clipboard = {
-                    enabled = true
-                },
-                tmux = {
-                    enabled = false,
-                },
-                osc52 = {
-                    enabled = false,
-                }
-            }
-        end
-    },
     { 'mbbill/undotree', cmd = "UndotreeToggle" },
     -- use {'glepnir/indent-guides.nvim',
     -- config = function()
@@ -62,13 +51,13 @@ return {
     -- end
     -- }
     { 'sbulav/nredir.nvim', cmd = "Nredir" },
-    { 'svermeulen/vim-subversive',
-        keys = {
-            { "<space>s", "<plug>(SubversiveSubstitute)", desc = "SubversiveSubstitute" },
-            { "<space>ss", "<plug>(SubversiveSubstituteLine)", desc = "SubversiveSubstituteLine" },
-            { "<space>S", "<plug>(SubversiveSubstituteToEndOfLine)", desc = "SubversiveSubstituteToEndOfLine" },
-        },
-    },
+    -- { 'svermeulen/vim-subversive',
+    --     keys = {
+    --         { "<space>s", "<plug>(SubversiveSubstitute)", desc = "SubversiveSubstitute" },
+    --         { "<space>ss", "<plug>(SubversiveSubstituteLine)", desc = "SubversiveSubstituteLine" },
+    --         { "<space>S", "<plug>(SubversiveSubstituteToEndOfLine)", desc = "SubversiveSubstituteToEndOfLine" },
+    --     },
+    -- },
     { 'jparise/vim-graphql', ft = "graphql" },
 
     { 'kevinhwang91/nvim-bqf', ft = "qf" },
@@ -89,19 +78,24 @@ return {
     -- 'tpope/vim-unimpaired',
     'chrisbra/Recover.vim',
     {
-        "tpope/vim-surround",
-        config = function()
-            -- https://github.com/ggandor/lightspeed.nvim/discussions/83
-            vim.keymap.set("n", "ds", "<Plug>Dsurround")
-            vim.keymap.set("n", "cs", "<Plug>Csurround")
-            vim.keymap.set("n", "cS", "<Plug>CSurround")
-            vim.keymap.set("n", "ys", "<Plug>Ysurround")
-            vim.keymap.set("n", "yS", "<Plug>YSurround")
-            vim.keymap.set("n", "yss", "<Plug>Yssurround")
-            vim.keymap.set("n", "ySs", "<Plug>YSsurround")
-            vim.keymap.set("n", "ySS", "<Plug>YSsurround")
-            vim.keymap.set("x", "gs", "<Plug>VSurround")
-            vim.keymap.set("x", "gS", "<Plug>VgSurround")
+        -- maybe mini.surround or vim-sandwich instead
+        'tpope/vim-surround',
+        -- https://github.com/ggandor/lightspeed.nvim/discussions/83
+        keys = {
+            { "cs", "<Plug>Csurround", desc = "change surrounding #1 by #2" },
+            { "ds", "<Plug>Dsurround", desc = "delete surrounding #1" },
+            { "cS", "<Plug>CSurround", desc = "change surrounding #1 by #2 + new line" },
+            { "ys", "<Plug>Ysurround", desc = "wraps #1 in #2 (surround)" },
+            { "yS", "<Plug>YSurround", desc = "wraps #1 in #2 (surround) + new line" },
+            { "yss", "<Plug>Yssurround", desc = "wraps line in #1 (surround)" },
+            { "ySs", "<Plug>YSsurround", desc = "wraps line in #1 (surround) + new line" },
+            { "ySS", "<Plug>YSsurround", desc = "wraps line in #1 (surround) + new line" },
+            -- this conflicts with leap.nvim cross window, but should override it, and cross-window-leap wont usually be done in visual mode anyways?
+            { "gs", "<Plug>VSurround", desc = "wraps visual selection in #1 (surround)", mode = "x" },
+            { "gS", "<Plug>VgSurround", desc = "wraps visual selection in #1 (surround) + new line", mode = "x" },
+        },
+        init = function()
+            vim.g.surround_no_mappings = 1
         end
     },
     'tpope/vim-repeat',
@@ -122,6 +116,9 @@ return {
     },
     { 'neoclide/coc.nvim', branch = 'release', lazy = false },
     'tpope/vim-fugitive',
+    { 'ethanholz/nvim-lastplace', config = function()
+        require 'nvim-lastplace'.setup {}
+    end },
 
     { "ellisonleao/gruvbox.nvim", config = function()
         -- setup must be called before loading the colorscheme

@@ -10,7 +10,7 @@ if not vim.loop.fs_stat(lazypath) then
     })
 end
 vim.opt.runtimepath:prepend(lazypath)
-
+vim.api.nvim_set_keymap("n", "gx", [[:silent execute '!$BROWSER ' . shellescape(expand('<cfile>'), 1)<CR>]], {})
 require("lazy").setup("afreak.plugins", {
     defaults = { lazy = false },
     install = { colorscheme = { "gruvbox" } },

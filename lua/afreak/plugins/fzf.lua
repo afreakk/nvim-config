@@ -24,7 +24,7 @@ return {
           }
         },
         grep = {
-          cmd = "git grep --recurse-submodules --line-number --color=auto --perl-regexp"
+          cmd = "git grep --ignore-case --recurse-submodules --line-number --color=auto --perl-regexp"
         }
       }
     end

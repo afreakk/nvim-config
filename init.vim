@@ -71,6 +71,7 @@ nnoremap <C-Down> <C-W>j
 nnoremap <C-Left> <C-W>h
 nnoremap <C-Right> <C-W>l
 
+"center after scroll is nice
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
 
@@ -79,8 +80,7 @@ nmap Y y$
 
 " exit insertmode in terminal
 tnoremap <S-Esc> <C-\><C-n>
-let mapleader = "\\"
+let mapleader = ";"
 let maplocalleader = "+"
-
 lua require("afreak.lazy")
 
