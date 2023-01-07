@@ -14,56 +14,14 @@ return {
             }
         })
     end },
-    { 'ggandor/flit.nvim', config = function()
-        require('flit').setup {}
-    end },
-    { 'ggandor/leap.nvim',
-        config = function()
-            require('leap').add_default_mappings()
-        end
-    },
     { "iamcco/markdown-preview.nvim", ft = "markdown", build = "cd app && yarn install" },
     { "afreakk/coc-cspell-dicts", build = 'yarn install && yarn build' },
-
     { 'nfnty/vim-nftables', ft = "nftables" },
-    -- { 'ionide/Ionide-vim',
-    --   config = function()
-    --     vim.g["fsharp#backend"] = "disable"
-    --   end
-    --   --, build = 'make fsautocomplete'}
-    -- }
-
     { 'mbbill/undotree', cmd = "UndotreeToggle" },
-    -- use {'glepnir/indent-guides.nvim',
-    -- config = function()
-    --   require('indent_guides').setup({
-    --     indent_levels = 30;
-    --     indent_guide_size = 1;
-    --     indent_start_level = 1;
-    --     indent_enable = false;
-    --     indent_space_guides = true;
-    --     indent_tab_guides = false;
-    --     indent_soft_pattern = '\\s';
-    --     exclude_filetypes = {'help','dashboard','dashpreview','NvimTree','vista','sagahover'};
-    --     even_colors = { fg ='#0000FF',bg='#FF0000' };
-    --     odd_colors = {fg='#FF00FF',bg='#00FF00'};
-    --   })
-    -- end
-    -- }
     { 'sbulav/nredir.nvim', cmd = "Nredir" },
-    -- { 'svermeulen/vim-subversive',
-    --     keys = {
-    --         { "<space>s", "<plug>(SubversiveSubstitute)", desc = "SubversiveSubstitute" },
-    --         { "<space>ss", "<plug>(SubversiveSubstituteLine)", desc = "SubversiveSubstituteLine" },
-    --         { "<space>S", "<plug>(SubversiveSubstituteToEndOfLine)", desc = "SubversiveSubstituteToEndOfLine" },
-    --     },
-    -- },
     { 'jparise/vim-graphql', ft = "graphql" },
-
     { 'kevinhwang91/nvim-bqf', ft = "qf" },
-    -- use 'rmagatti/auto-session'
     { 'cappyzawa/starlark.vim', ft = "starlark" },
-
     { 'chr4/nginx.vim', ft = { 'nginx' } },
     { 'LnL7/vim-nix', ft = "nix" },
     { 'lewis6991/gitsigns.nvim',
@@ -98,7 +56,6 @@ return {
         end
     },
     'tpope/vim-repeat',
-    -- use 'tpope/vim-commentary'
     {
         'numToStr/Comment.nvim',
         event = "BufReadPost",

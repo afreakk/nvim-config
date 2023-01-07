@@ -42,7 +42,7 @@ return {
                 sync_install = false,
                 auto_install = true,
                 highlight = { enable = true },
-                indent = { enable = false },
+                indent = { enable = true },
                 rainbow = {
                     enable = true,
                     extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
