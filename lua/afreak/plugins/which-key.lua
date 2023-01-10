@@ -1,4 +1,5 @@
 return { 'folke/which-key.nvim', config = function()
+    vim.o.timeoutlen = 500
     function mergeTables(base, extend)
         -- not pure, will mutate base
         for key, value in pairs(extend) do
@@ -61,7 +62,6 @@ return { 'folke/which-key.nvim', config = function()
         u = { '<cmd>UndotreeToggle<CR>', 'Undotree toggle' },
         y = {
             name = "+yank/put",
-            p = { "<cmd>YankyRingHistory<CR>", "YankHistoryPicker" },
             f = { "<cmd>%y<CR>", "content of buffer" },
             n = { ":let @+=expand('%')<CR>", "filename" },
             t = {
@@ -117,7 +117,10 @@ return { 'folke/which-key.nvim', config = function()
         h = {
             name = "+ChatGPT"
         }, -- chatgpt
-        n = { ":noh<cr> ", "nohilight" },
+        n = { function()
+            vim.cmd([[nohlsearch]])
+            require('notify').dismiss()
+        end, "nonoise" },
         e = { "<cmd>lua require('fzf-lua').resume()<CR>", 'fzf resume last' },
         i = {
             name = "+diff",
@@ -126,7 +129,16 @@ return { 'folke/which-key.nvim', config = function()
             o = { ":diffoff!<cr>", "diffoff!" },
             w = { ":windo diffthis<cr>", "windo diffthis" },
         },
-        o = {},
+        o = {
+            name = '+tab/window',
+            e = { "<cmd>tabe<CR>", "tab new" },
+            v = { "<cmd>vsplit<CR>", "vertical split" },
+            s = { "<cmd>split<CR>", "horizontal split" },
+            c = { "<cmd>tabclose<CR>", "tab close" },
+            o = { "<cmd>tabonly<CR>", "tab only" },
+            u = { "<cmd>+tabmove<CR>", "tab up" },
+            d = { "<cmd>-tabmove<CR>", "tab down" },
+        },
         z = {
             name = "+theme",
             d = { ":set background=dark<CR>", "dark" },
@@ -204,20 +216,21 @@ return { 'folke/which-key.nvim', config = function()
     local wk = require('which-key')
     wk.setup { show_keys = false, show_help = false }
     wk.register(spaceMaps, { prefix = " ", mode = "n" })
-    wk.register(spaceMaps, { prefix = " ", mode = "v" })
-    wk.register({
-        q = { "<cmd>cnext<cr>", "quickfix next" }
-    }, { prefix = "]", mode = "n" })
-    wk.register({
-        q = { "<cmd>cprevious<cr>", "quickfix previous" }
-    }, { prefix = "[", mode = "n" })
-    -- local leaderkeymap = {
-    -- }
-    -- wk.register(leaderkeymap, { prefix = '<leader>' })
+    wk.register(spaceMaps, { prefix = " ", mode = "x" })
+    -- wk.register({
+    -- }, { prefix = "]", mode = "n" })
+    -- wk.register({
+    -- }, { prefix = "[", mode = "n" })
+    local leaderkeymap = {
+    }
+    wk.register(leaderkeymap, { prefix = '<leader>' })
     --
-    -- local local_keymap = {
-    -- }
-    --
-    -- wk.register(local_keymap, { prefix = '<localleader>' })
+    local local_keymap = {
+        ["<space>"] = { function()
+            require('legendary').find({ filters = { require('legendary.filters').current_mode() } })
+        end, "legendary" },
+    }
+
+    wk.register(local_keymap, { prefix = '<localleader>' })
 end
 }

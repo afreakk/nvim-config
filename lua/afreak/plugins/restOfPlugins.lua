@@ -30,29 +30,48 @@ return {
         end,
         event = "BufReadPre",
     },
-    { 'freitass/todo.txt-vim', ft = "todo" },
+    { 'freitass/todo.txt-vim' },
     { 'bronson/vim-visual-star-search', event = "BufReadPost" },
-    -- 'tpope/vim-unimpaired',
+    'tpope/vim-unimpaired',
     'chrisbra/Recover.vim',
     {
-        -- maybe mini.surround or vim-sandwich instead
-        'tpope/vim-surround',
-        -- https://github.com/ggandor/lightspeed.nvim/discussions/83
+        "gbprod/substitute.nvim",
         keys = {
-            { "cs", "<Plug>Csurround", desc = "change surrounding #1 by #2" },
-            { "ds", "<Plug>Dsurround", desc = "delete surrounding #1" },
-            { "cS", "<Plug>CSurround", desc = "change surrounding #1 by #2 + new line" },
-            { "ys", "<Plug>Ysurround", desc = "wraps #1 in #2 (surround)" },
-            { "yS", "<Plug>YSurround", desc = "wraps #1 in #2 (surround) + new line" },
-            { "yss", "<Plug>Yssurround", desc = "wraps line in #1 (surround)" },
-            { "ySs", "<Plug>YSsurround", desc = "wraps line in #1 (surround) + new line" },
-            { "ySS", "<Plug>YSsurround", desc = "wraps line in #1 (surround) + new line" },
-            -- this conflicts with leap.nvim cross window, but should override it, and cross-window-leap wont usually be done in visual mode anyways?
-            { "gs", "<Plug>VSurround", desc = "wraps visual selection in #1 (surround)", mode = "x" },
-            { "gS", "<Plug>VgSurround", desc = "wraps visual selection in #1 (surround) + new line", mode = "x" },
+            { "<space>s", "<cmd>lua require('substitute').operator()<cr>",
+                desc = "subtitute txt given by operator by register0" },
+            { "<space>ss", "<cmd>lua require('substitute').line()<cr>", desc = "substitute line by register0" },
+            { "<space>S", "<cmd>lua require('substitute').eol()<cr>", desc = "substitute to end of line by register0" },
+            { mode = "x",
+                "<space>s", "<cmd>lua require('substitute').visual()<cr>",
+                desc = "substitute visual selection by register0" },
+            { "<leader>s", "<cmd>lua require('substitute.range').operator()<cr>",
+                desc = "replace text defined by motion1 over range defined by motion2" },
+            { mode = "x", "<leader>s", "<cmd>lua require('substitute.range').visual()<cr>",
+                desc = "replace text defined by visual selection over range given by following motion" },
+            { "<leader>ss", "<cmd>lua require('substitute.range').word()<cr>" },
         },
-        init = function()
-            vim.g.surround_no_mappings = 1
+        config = function()
+            require("substitute").setup()
+        end
+    },
+    {
+        "kylechui/nvim-surround",
+        version = "*", -- Use for stability; omit to use `main` branch for the latest features
+        config = function()
+            require("nvim-surround").setup({
+                keymaps = {
+                    insert = "<C-g>s",
+                    insert_line = "<C-g>S",
+                    normal = "ys",
+                    normal_cur = "yss",
+                    normal_line = "yS",
+                    normal_cur_line = "ySS",
+                    visual = "S",
+                    visual_line = "gS",
+                    delete = "ds",
+                    change = "cs",
+                }
+            })
         end
     },
     'tpope/vim-repeat',
@@ -74,39 +93,6 @@ return {
     'tpope/vim-fugitive',
     'tpope/vim-rhubarb',
     { 'ethanholz/nvim-lastplace', config = function()
-        require 'nvim-lastplace'.setup {}
+        require 'nvim-lastplace'.setup()
     end },
-
-    { "ellisonleao/gruvbox.nvim", config = function()
-        -- setup must be called before loading the colorscheme
-        -- Default options:
-        require("gruvbox").setup({
-            undercurl = true,
-            underline = true,
-            bold = true,
-            italic = true,
-            strikethrough = true,
-            invert_selection = false,
-            invert_signs = false,
-            invert_tabline = false,
-            invert_intend_guides = false,
-            inverse = true, -- invert background for search, diffs, statuslines and errors
-            contrast = "hard", -- can be "hard", "soft" or empty string
-            palette_overrides = {},
-            overrides = {},
-            dim_inactive = false,
-            transparent_mode = false,
-        })
-        vim.cmd("colorscheme gruvbox")
-    end },
-
-    -- 'tpope/vim-sleuth',
-    -- { 't9md/vim-choosewin',
-    --     config = function()
-    --         vim.g.choosewin_label = 'ARSTDHNEIOQWFPGJLUYZXCVBKM'
-    --         vim.g.choosewin_overlay_enable = 1
-    --     end,
-    --     keys = { { "<C-S>", "<Plug>(choosewin)", desc = "choosewin" } }
-    -- },
-    -- use 'beeender/Comrade'
 }

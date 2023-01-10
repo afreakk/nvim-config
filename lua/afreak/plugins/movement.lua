@@ -5,7 +5,11 @@ return {
     end },
     { 'ggandor/leap.nvim',
         config = function()
-            require('leap').add_default_mappings()
+            vim.keymap.set({ 'n', 'x', 'o' }, 'm', '<Plug>(leap-forward-to)', { desc = "leap-forward-to" })
+            vim.keymap.set({ 'n', 'x', 'o' }, 'M', '<Plug>(leap-backward-to)', { desc = "leap-backward-to" })
+            vim.keymap.set({ 'x', 'o' }, 'x', '<Plug>(leap-forward-till)', { desc = "leap-forward-till" })
+            vim.keymap.set({ 'x', 'o' }, 'X', '<Plug>(leap-backward-till)', { desc = "leap-backward-till" })
+            vim.keymap.set({ 'n', 'x', 'o' }, 'gm', '<Plug>(leap-cross-window)', { desc = "leap-cross-window" })
         end
     },
     { 'ggandor/leap-spooky.nvim', config = function()

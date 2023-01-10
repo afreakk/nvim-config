@@ -2,7 +2,7 @@ set inccommand=split
 set hidden
 set cursorline
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
-set backupcopy=yes " for REACT etc tranzpilers
+set backupcopy=yes " for REACT etc transpilers
 set mouse=a
 set undofile
 " Neovim-qt Guifont command, to change the font
@@ -32,8 +32,6 @@ set tabstop=8 softtabstop=4 shiftwidth=4 expandtab
 set modeline            " Enable modeline.
 
 set timeout ttimeoutlen=50
-"for which_key to act faster, hopefully im faster than 500 doing combokeys
-set timeoutlen=500
 set t_Co=256                         " Enable 256 colors
 set termguicolors
 
@@ -58,7 +56,7 @@ set shortmess+=c
 
 " set signcolumn="auto"
 
-set shell=/usr/bin/env\ bash
+set shell=/usr/bin/env\ fish
 set spelllang=nb,en
 
 " move selected text up and down
@@ -78,9 +76,16 @@ nnoremap <C-u> <C-u>zz
 " make Y more consistent 
 nmap Y y$
 
-" exit insertmode in terminal
-tnoremap <S-Esc> <C-\><C-n>
-let mapleader = ";"
-let maplocalleader = "+"
+"terminal mode mappings
+tnoremap <C-Up>     <C-\><C-N><C-w>h
+tnoremap <C-Down>   <C-\><C-N><C-w>j
+tnoremap <C-Left>   <C-\><C-N><C-w>k
+tnoremap <C-Right>  <C-\><C-N><C-w>l
+tnoremap <Space><Esc>      <C-\><C-n>
+
+let mapleader = ';'
+let maplocalleader = '\'
+noremap <Leader>y "+y
+noremap <Leader>Y "*y
 lua require("afreak.lazy")
 
