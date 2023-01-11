@@ -37,22 +37,31 @@ return {
     {
         "gbprod/substitute.nvim",
         keys = {
-            { "<space>s", "<cmd>lua require('substitute').operator()<cr>",
+            { "s", "<cmd>lua require('substitute').operator()<cr>",
                 desc = "subtitute txt given by operator by register0" },
-            { "<space>ss", "<cmd>lua require('substitute').line()<cr>", desc = "substitute line by register0" },
-            { "<space>S", "<cmd>lua require('substitute').eol()<cr>", desc = "substitute to end of line by register0" },
+            { "ss", "<cmd>lua require('substitute').line()<cr>",
+                desc = "substitute line by register0" },
+            { "S", "<cmd>lua require('substitute').eol()<cr>",
+                desc = "substitute to end of line by register0" },
             { mode = "x",
-                "<space>s", "<cmd>lua require('substitute').visual()<cr>",
+                "s", "<cmd>lua require('substitute').visual()<cr>",
                 desc = "substitute visual selection by register0" },
             { "<leader>s", "<cmd>lua require('substitute.range').operator()<cr>",
                 desc = "replace text defined by motion1 over range defined by motion2" },
-            { mode = "x", "<leader>s", "<cmd>lua require('substitute.range').visual()<cr>",
+            { mode = "x",
+                "<leader>s", "<cmd>lua require('substitute.range').visual()<cr>",
                 desc = "replace text defined by visual selection over range given by following motion" },
-            { "<leader>ss", "<cmd>lua require('substitute.range').word()<cr>" },
+            { "<leader>ss", "<cmd>lua require('substitute.range').word()<cr>",
+                desc = "replace word under cursor, in the range given by motion" },
         },
         config = function()
             require("substitute").setup()
         end
+    }, {
+        "AckslD/nvim-neoclip.lua",
+        config = function()
+            require('neoclip').setup()
+        end,
     },
     {
         "kylechui/nvim-surround",

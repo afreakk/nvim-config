@@ -217,11 +217,13 @@ return { 'folke/which-key.nvim', config = function()
     wk.setup { show_keys = false, show_help = false }
     wk.register(spaceMaps, { prefix = " ", mode = "n" })
     wk.register(spaceMaps, { prefix = " ", mode = "x" })
-    -- wk.register({
-    -- }, { prefix = "]", mode = "n" })
-    -- wk.register({
-    -- }, { prefix = "[", mode = "n" })
     local leaderkeymap = {
+        P = { function()
+            require('neoclip.fzf')("+")
+        end, "registerPlusSelect" },
+        p = { function()
+            require('neoclip.fzf')()
+        end, "registerUnnamedSelect" }
     }
     wk.register(leaderkeymap, { prefix = '<leader>' })
     --

@@ -88,4 +88,3 @@ let maplocalleader = '\'
 noremap <Leader>y "+y
 noremap <Leader>Y "*y
 lua require("afreak.lazy")
-
