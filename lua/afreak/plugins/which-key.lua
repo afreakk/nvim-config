@@ -217,6 +217,7 @@ return { 'folke/which-key.nvim', config = function()
     wk.setup { show_keys = false, show_help = false }
     wk.register(spaceMaps, { prefix = " ", mode = "n" })
     wk.register(spaceMaps, { prefix = " ", mode = "x" })
+    --
     local leaderkeymap = {
         P = { function()
             require('neoclip.fzf')("+")
