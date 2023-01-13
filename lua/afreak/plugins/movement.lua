@@ -5,6 +5,15 @@ return {
     end },
     { 'ggandor/leap.nvim',
         config = function()
+            local leap = require('leap')
+            local safe_labels = {}
+            for _, v in pairs(leap.opts.safe_labels) do
+                -- could be wanting to substitute, so thats not a safe label
+                if v ~= "s" and v ~= "S" then
+                    table.insert(safe_labels, v)
+                end
+            end
+            leap.opts.safe_labels = safe_labels
             vim.keymap.set({ 'n', 'x', 'o' }, 'm', '<Plug>(leap-forward-to)', { desc = "leap-forward-to" })
             vim.keymap.set({ 'n', 'x', 'o' }, 'M', '<Plug>(leap-backward-to)', { desc = "leap-backward-to" })
             vim.keymap.set({ 'x', 'o' }, 'x', '<Plug>(leap-forward-till)', { desc = "leap-forward-till" })
