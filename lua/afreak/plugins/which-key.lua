@@ -75,22 +75,44 @@ return { 'folke/which-key.nvim', config = function()
         [";"] = { "<cmd>lua require('fzf-lua').command_history()<CR>", "command history" },
         a = {},
         r = {},
-        s = {}, --used for subversive
+        s = {},
         t = {
             name = '+git',
-            s = { ':Git<CR>', 'Status' },
-            p = { ':Git pull<CR>', 'Pull' },
-            h = { ':Git push<CR>', 'Push' },
+            t = { ':Git<CR>', 'Status' },
+            p = {
+                name = "+push/pull",
+                l = { ':Git pull<CR>', 'Pull' },
+                h = { ':Git push<CR>', 'Push' },
+            },
+            h = {
+                name = "+hunk",
+                s = { ':Gitsigns stage_hunk<CR>', "stage hunk" },
+                r = { ':Gitsigns reset_hunk<CR>', "reset hunk" },
+                u = { function()
+                    require("gitsigns").undo_stage_hunk()
+                end, "undo stage hunk " },
+                p = { function()
+                    require("gitsigns").preview_hunk()
+                end, "preview hunk" },
+            },
             d = { ':Gdiffsplit<CR>', 'split' },
-            b = { ':Git blame<CR>', 'blame' },
-            l = { ':Gclog<CR>', 'log' },
+            b = {
+                name = "+blame",
+                b = { ':Git blame<CR>', 'blame' },
+                l = { function() require('gitsigns').blame_line { full = true } end, "blame line" },
+            },
+            l = {
+                name = "+log",
+                l = { ':Git log<CR>', 'log' },
+                p = { "<cmd>lua require('fzf-lua').git_commits()<CR>", 'commit log (project)' },
+                b = { "<cmd>lua require('fzf-lua').git_bcommits()<CR>", 'commit log (buffer)' },
+            },
             o = { ':GBrowse<CR>', 'browse' },
             w = { ':Gwrite<CR>', 'write' },
             r = { ':Gread<CR>', 'read' },
             a = { "<cmd>lua require('fzf-lua').git_branches()<CR>", 'checkout branch' },
-            t = { "<cmd>lua require('fzf-lua').git_stash()<CR>", 'stash' },
-            c = { "<cmd>lua require('fzf-lua').git_commits()<CR>", 'commit log (project)' },
-            u = { "<cmd>lua require('fzf-lua').git_bcommits()<CR>", 'commit log (buffer)' },
+            s = { "<cmd>lua require('fzf-lua').git_stash()<CR>", 'stash' },
+            e = { function() require('gitsigns').toggle_deleted() end, "toggle deleted" }
         },
         d = {
             name = '+debug(dap)',
@@ -116,7 +138,16 @@ return { 'folke/which-key.nvim', config = function()
         },
         h = {
             name = "+ChatGPT"
-        }, -- chatgpt
+        },
+        N = {
+            name = "+Noice",
+            l = { function() require("noice").cmd("last") end, "last message in a popup" },
+            h = { function() require("noice").cmd("history") end, "message history" },
+            e = { function() require("noice").cmd("errors") end, "error messages in a split. Last errors on top" },
+            s = { function() require("noice").cmd("stats") end, "debugging stats" },
+            t = { function() require("noice").cmd("telescope") end, "opens message history in Telescope" },
+
+        },
         n = { function()
             vim.cmd([[nohlsearch]])
             require('notify').dismiss()
@@ -176,23 +207,6 @@ return { 'folke/which-key.nvim', config = function()
                 e = { ":<c-u>call coc#config('diagnostic.enable', 1)<cr>", "diagnostic disable" },
             },
             w = { ":<c-u>call coc#float#close_all() <CR>", "close all floating windows" },
-            x = {
-                name = "+coclists",
-                l = { "<cmd>CocFzfList<cr>", "List all list sources" },
-                -- Show all diagnostics
-                d = { "<cmd>CocFzfList diagnostics<cr>", "diagnostics" },
-                -- Manage extensions
-                e = { "<cmd>CocFzfList extensions<cr>", "extensions" },
-                -- Show commands
-                c = { "<cmd>CocFzfList commands<cr>", "commands" },
-                -- Find symbol of current document
-                o = { "<cmd>CocFzfList outline<cr>", "outline" },
-                -- Search workspace symbols
-                s = { "<cmd>CocFzfList symbols<cr>", "symbols" },
-                -- Resume latest coc list
-                r = { "<cmd>CocFzfListResume<CR>", "coclistresume" },
-                u = { "<cmd>CocCommand workspace.showOutput<CR>", "coccommand workspace.showOutput" },
-            },
         },
         v = fzfFileFind("{cwd = '~/.config/nvim'}", {
             name = '+vimrc',
@@ -219,6 +233,23 @@ return { 'folke/which-key.nvim', config = function()
     wk.register(spaceMaps, { prefix = " ", mode = "x" })
     --
     local leaderkeymap = {
+        c = {
+            name = "+coclists",
+            l = { "<cmd>CocFzfList<cr>", "List all list sources" },
+            -- Show all diagnostics
+            d = { "<cmd>CocFzfList diagnostics<cr>", "diagnostics" },
+            -- Manage extensions
+            e = { "<cmd>CocFzfList extensions<cr>", "extensions" },
+            -- Show commands
+            c = { "<cmd>CocFzfList commands<cr>", "commands" },
+            -- Find symbol of current document
+            o = { "<cmd>CocFzfList outline<cr>", "outline" },
+            -- Search workspace symbols
+            s = { "<cmd>CocFzfList symbols<cr>", "symbols" },
+            -- Resume latest coc list
+            r = { "<cmd>CocFzfListResume<CR>", "coclistresume" },
+            u = { "<cmd>CocCommand workspace.showOutput<CR>", "coccommand workspace.showOutput" },
+        },
         P = { function()
             require('neoclip.fzf')("+")
         end, "registerPlusSelect" },

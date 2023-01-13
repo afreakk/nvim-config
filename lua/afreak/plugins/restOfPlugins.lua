@@ -26,7 +26,23 @@ return {
     { 'LnL7/vim-nix', ft = "nix" },
     { 'lewis6991/gitsigns.nvim',
         config = function()
-            require('gitsigns').setup()
+            require('gitsigns').setup({
+                on_attach = function(bufnr)
+                    local gs = package.loaded.gitsigns
+                    local function map(mode, l, r, opts)
+                        opts = opts or {}
+                        opts.buffer = bufnr
+                        vim.keymap.set(mode, l, r, opts)
+                    end
+
+                    map('n', ']h', function() vim.schedule(gs.next_hunk) return "<Ignore>" end,
+                        { expr = true, desc = "next hunk" })
+                    map('n', '[h', function() vim.schedule(gs.prev_hunk) return "<Ignore>" end,
+                        { expr = true, desc = "prev hunk" })
+                    map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = "hunk" })
+                    -- rest of keys are set in which-key
+                end
+            })
         end,
         event = "BufReadPre",
     },
