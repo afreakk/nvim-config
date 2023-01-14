@@ -31,14 +31,14 @@ return {
                     enable = true, -- mandatory, false will disable the whole extension
                 },
                 ensure_installed = {
-                    "c", "graphql", "javascript", "haskell", "nix", "bash", "fish", "elm", "lua", "go", "gomod",
+                    "c", "graphql", "javascript", "haskell", --[[ "nix",  ]] "bash", "fish", "elm", "lua", "go", "gomod",
                     "c_sharp", "html",
                     "jq", "json", "jsonnet", "markdown", "markdown_inline", "php", "python", "regex", "toml",
                     "typescript", "vim",
                     "yaml", "cmake", "comment", "css", "cpp", "diff", "dockerfile", "sql", "help"
                 },
                 sync_install = false,
-                auto_install = true,
+                -- auto_install = true,
                 highlight = { enable = true },
                 indent = { enable = true },
                 rainbow = {

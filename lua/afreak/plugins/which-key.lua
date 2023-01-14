@@ -228,7 +228,14 @@ return { 'folke/which-key.nvim', config = function()
         end, "legendary" },
     })
     local wk = require('which-key')
-    wk.setup { show_keys = false, show_help = false }
+    wk.setup {
+        show_keys = false,
+        show_help = false,
+        spelling = {
+            enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+            suggestions = 20, -- how many suggestions should be shown in the list?
+        },
+    }
     wk.register(spaceMaps, { prefix = " ", mode = "n" })
     wk.register(spaceMaps, { prefix = " ", mode = "x" })
     --
@@ -250,10 +257,10 @@ return { 'folke/which-key.nvim', config = function()
             r = { "<cmd>CocFzfListResume<CR>", "coclistresume" },
             u = { "<cmd>CocCommand workspace.showOutput<CR>", "coccommand workspace.showOutput" },
         },
-        P = { function()
+        R = { function()
             require('neoclip.fzf')("+")
         end, "registerPlusSelect" },
-        p = { function()
+        r = { function()
             require('neoclip.fzf')()
         end, "registerUnnamedSelect" }
     }

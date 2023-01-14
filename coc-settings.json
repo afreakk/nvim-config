@@ -18,8 +18,8 @@
     "diagnostic.errorSign": "",
     "diagnostic.warningSign": "",
     "diagnostic.infoSign": "",
-    "diagnostic.virtualText": true,
     "diagnostic.hintSign": "",
+    "diagnostic.virtualText": true,
     "explorer.icon.enableNerdfont": true,
     "explorer.previewAction.onHover": false,
     "explorer.file.reveal.auto": true,
@@ -53,41 +53,26 @@
             "command": "nixpkgs-fmt"
         }
     },
+    "suggest.insertMode": "insert",
     "coc.preferences.formatOnSave": true,
-    "tsserver.trace.server": "verbose",
+    "sumneko-lua.enableNvimLuaDev": true,
+    "sumneko-lua.checkUpdate": false,
+    "sumneko-lua.serverDir": "/home/afreak/.local/share/sumneko-lua-language-server/share/lua-language-server",
+    "Lua.misc.parameters": [
+        "--metapath",
+        "~/.cache/sumneko_lua/meta",
+        "--logpath",
+        "~/.cache/sumneko_lua/log"
+    ],
+    "Lua.workspace.library": [
+        "/home/afreak/.local/share/nvim/lazy/noice.nvim/lua/noice"
+    ],
+
     "languageserver": {
         "csharp-ls": {
             "command": "csharp-ls",
             "filetypes": ["cs"],
             "rootPatterns": ["*.csproj", ".vim/", ".git/", ".hg/"]
-        },
-        "lua": {
-            "rootPatterns": [".git/"],
-            "command": "lua-language-server",
-            "filetypes": ["lua"],
-            "settings": {
-                "Lua": {
-                    "runtime": {
-                        "version": "LuaJIT"
-                    },
-                    "workspace": {
-                        "library": [],
-                        "checkThirdParty": false
-                    },
-                    "diagnostics": {
-                        "enable": true,
-                        "globals": [
-                            "hs",
-                            "vim",
-                            "it",
-                            "describe",
-                            "before_each",
-                            "after_each"
-                        ],
-                        "disable": ["lowercase-global"]
-                    }
-                }
-            }
         },
         "graphql": {
             "command": "graphql-lsp",
@@ -113,7 +98,11 @@
             ],
             "filetypes": ["hs", "lhs", "haskell"],
             "initializationOptions": {
-                "languageServerHaskell": {}
+                "languageServerHaskell": {
+                    "hlintOn": true,
+                    "maxNumberOfProblems": 10,
+                    "completionSnippetsOn": true
+                }
             }
         },
         "elmLS": {
@@ -131,13 +120,26 @@
         }
     },
     "cSpell.userWords": [
+      "Cmds",
+      "Cond",
       "OTEL",
+      "Tmpl",
       "alacritty",
+      "alsa",
       "glog",
+      "hlint",
       "modm",
+      "noice",
       "oryadmin",
       "otlp",
+      "pango",
       "rtsopts",
+      "rxvbar",
+      "sumneko",
+      "trayer",
+      "txvbar",
+      "vscodesnippets",
       "xmonad"
-    ]
+    ],
+    "Lua.telemetry.enable": true
 }

@@ -44,6 +44,7 @@ return {
         event = "VeryLazy",
         dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
         config = function()
+            local noice = require("noice")
             require('lualine').setup({
                 options = {
                     theme = 'gruvbox',
@@ -53,20 +54,20 @@ return {
                     lualine_b = { { 'diagnostics', sources = { 'coc' } } },
                     lualine_x = {
                         -- {
-                        --   require("noice").api.status.message.get_hl,
-                        --   cond = require("noice").api.status.message.has,
+                        --   noice.api.status.message.get_hl,
+                        --   cond = noice.api.status.message.has,
                         -- },
                         {
-                            require("noice").api.status.command.get,
-                            cond = require("noice").api.status.command.has,
+                            noice.api.status.command.get,
+                            cond = noice.api.status.command.has,
                         },
                         {
-                            require("noice").api.status.mode.get,
-                            cond = require("noice").api.status.mode.has,
+                            noice.api.status.mode.get,
+                            cond = noice.api.status.mode.has,
                         },
                         {
-                            require("noice").api.status.search.get,
-                            cond = require("noice").api.status.search.has,
+                            noice.api.status.search.get,
+                            cond = noice.api.status.search.has,
                         },
                     },
                     lualine_z = { { 'filetype' }, },
@@ -84,7 +85,8 @@ return {
     },
     {
         'folke/noice.nvim', config = function()
-            require("noice").setup({
+            local noice = require("noice")
+            noice.setup({
                 presets = {
                     bottom_search = true, -- use a classic bottom cmdline for search
                     command_palette = true, -- position the cmdline and popupmenu together
@@ -93,6 +95,9 @@ return {
                     lsp_doc_border = false, -- add a border to hover docs and signature help
                 },
             })
+            vim.keymap.set("c", "<S-Enter>", function()
+                noice.redirect(vim.fn.getcmdline())
+            end, { desc = "Redirect Cmdline" })
         end,
         dependencies =
         { -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries

@@ -1,12 +1,5 @@
 return {
     'dstein64/vim-startuptime',
-    { 'mrjones2014/legendary.nvim', config = function()
-        require('legendary').setup({
-            which_key = {
-                auto_register = true
-            }
-        })
-    end, lazy = true },
     { "stevearc/dressing.nvim", event = "VeryLazy", config = function()
         require('dressing').setup({
             select = {
@@ -15,10 +8,8 @@ return {
         })
     end },
     { "iamcco/markdown-preview.nvim", ft = "markdown", build = "cd app && yarn install" },
-    { "afreakk/coc-cspell-dicts", build = 'yarn install && yarn build' },
     { 'nfnty/vim-nftables', ft = "nftables" },
     { 'mbbill/undotree', cmd = "UndotreeToggle" },
-    { 'sbulav/nredir.nvim', cmd = "Nredir" },
     { 'jparise/vim-graphql', ft = "graphql" },
     { 'kevinhwang91/nvim-bqf', ft = "qf" },
     { 'cappyzawa/starlark.vim', ft = "starlark" },
@@ -122,7 +113,6 @@ return {
             require('colorizer').setup()
         end
     },
-    { 'neoclide/coc.nvim', branch = 'release', lazy = false },
     'tpope/vim-fugitive',
     'tpope/vim-rhubarb',
     { 'ethanholz/nvim-lastplace', config = function()

@@ -85,6 +85,8 @@ tnoremap <Space><Esc>      <C-\><C-n>
 
 let mapleader = ';'
 let maplocalleader = '\'
+noremap <Leader>p "+p
 noremap <Leader>y "+y
-noremap <Leader>Y "*y
+noremap <Leader>P "+P
+noremap <Leader>Y "+Y
 lua require("afreak.lazy")
