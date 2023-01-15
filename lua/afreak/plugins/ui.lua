@@ -1,6 +1,6 @@
 return {
     { 'nyoom-engineering/oxocarbon.nvim', priority = 1000, lazy = true },
-    { "ellisonleao/gruvbox.nvim", priority = 1000, config = function()
+    { "ellisonleao/gruvbox.nvim", priority = 1000, lazy = false, config = function()
         -- setup must be called before loading the colorscheme
         -- Default options:
         require("gruvbox").setup({
@@ -22,23 +22,29 @@ return {
         })
         vim.cmd([[colorscheme gruvbox]])
     end },
-    { 'nanozuki/tabby.nvim', config = function()
-        require('tabby.tabline').set(function(line)
-            return {
-                line.tabs().foreach(function(tab)
-                    return {
-                        line.sep('', 'TabLine', 'TabLineFill'),
-                        tab.number(),
-                        tab.name(),
-                        line.sep('', 'TabLine', 'TabLineFill'),
-                        hl = tab.is_current() and 'TabLineSel' or 'TabLine',
-                        margin = ' ',
-                    }
-                end),
-                hl = 'TabLineFill',
-            }
-        end)
-    end },
+    {
+        event = "VeryLazy",
+        'nanozuki/tabby.nvim',
+        config = function()
+            require('tabby.tabline').set(function(line)
+                return {
+                    line.tabs().foreach(function(tab)
+                        local tabClr = tab.is_current() and 'GruvboxOrangeSign' or 'WinBarNC'
+                        local bgClr = "Normal"
+                        return {
+                            line.sep('', tabClr, bgClr),
+                            tab.number(),
+                            tab.name(),
+                            line.sep('', tabClr, bgClr),
+                            hl = tabClr,
+                            margin = ' ',
+                        }
+                    end),
+                    hl = 'WinBarNC',
+                }
+            end)
+        end
+    },
     {
         'nvim-lualine/lualine.nvim',
         event = "VeryLazy",

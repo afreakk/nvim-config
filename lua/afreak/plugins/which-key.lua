@@ -1,6 +1,6 @@
 return { 'folke/which-key.nvim', config = function()
     vim.o.timeoutlen = 500
-    function mergeTables(base, extend)
+    local mergeTables = function(base, extend)
         -- not pure, will mutate base
         for key, value in pairs(extend) do
             base[key] = value
@@ -8,7 +8,7 @@ return { 'folke/which-key.nvim', config = function()
         return base
     end
 
-    function fzfGreps(opts, restOfTable)
+    local fzfGreps = function(opts, restOfTable)
         return mergeTables({
             g = { "<cmd>lua require('fzf-lua').grep(" .. opts .. ")<CR>", "run search for a pattern" },
             W = { "<cmd>lua require('fzf-lua').grep_cWORD(" .. opts .. ")<CR>", "search WORD under cursor" },
@@ -20,7 +20,7 @@ return { 'folke/which-key.nvim', config = function()
         }, restOfTable)
     end
 
-    function fzfFileFind(opts, restOfTable)
+    local fzfFileFind = function(opts, restOfTable)
         return mergeTables({
             p = { "<cmd>lua require('fzf-lua').files(" .. opts .. ")<CR>", "Files" },
             g = { "<cmd>lua require('fzf-lua').git_files(" .. opts .. ")<CR>", "Git files" },
@@ -139,7 +139,7 @@ return { 'folke/which-key.nvim', config = function()
         h = {
             name = "+ChatGPT"
         },
-        N = {
+        n = {
             name = "+Noice",
             l = { function() require("noice").cmd("last") end, "last message in a popup" },
             h = { function() require("noice").cmd("history") end, "message history" },
@@ -148,10 +148,6 @@ return { 'folke/which-key.nvim', config = function()
             t = { function() require("noice").cmd("telescope") end, "opens message history in Telescope" },
 
         },
-        n = { function()
-            vim.cmd([[nohlsearch]])
-            require('notify').dismiss()
-        end, "nonoise" },
         e = { "<cmd>lua require('fzf-lua').resume()<CR>", 'fzf resume last' },
         i = {
             name = "+diff",
@@ -222,10 +218,7 @@ return { 'folke/which-key.nvim', config = function()
         m = {},
         [","] = {},
         ["."] = {},
-        ["/"] = {},
-        ["<space>"] = { function()
-            require('legendary').find({ filters = { require('legendary.filters').current_mode() } })
-        end, "legendary" },
+        ["/"] = {}
     })
     local wk = require('which-key')
     wk.setup {
@@ -268,8 +261,8 @@ return { 'folke/which-key.nvim', config = function()
     --
     local local_keymap = {
         ["<space>"] = { function()
-            require('legendary').find({ filters = { require('legendary.filters').current_mode() } })
-        end, "legendary" },
+            print("hello")
+        end, "hello" },
     }
 
     wk.register(local_keymap, { prefix = '<localleader>' })

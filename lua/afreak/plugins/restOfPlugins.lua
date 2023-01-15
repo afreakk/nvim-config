@@ -1,5 +1,11 @@
 return {
+    'chrisbra/Recover.vim',
     'dstein64/vim-startuptime',
+    'tpope/vim-unimpaired',
+    'tpope/vim-repeat',
+    'tpope/vim-fugitive',
+    'tpope/vim-rhubarb',
+
     { "stevearc/dressing.nvim", event = "VeryLazy", config = function()
         require('dressing').setup({
             select = {
@@ -16,8 +22,11 @@ return {
     { 'chr4/nginx.vim', ft = { 'nginx' } },
     { 'LnL7/vim-nix', ft = "nix" },
     { 'lewis6991/gitsigns.nvim',
+        event = "BufReadPre",
         config = function()
             require('gitsigns').setup({
+                numhl = true,
+                signcolumn = false,
                 on_attach = function(bufnr)
                     local gs = package.loaded.gitsigns
                     local function map(mode, l, r, opts)
@@ -35,12 +44,9 @@ return {
                 end
             })
         end,
-        event = "BufReadPre",
     },
-    { 'freitass/todo.txt-vim' },
+    { 'freitass/todo.txt-vim', ft = "todo" },
     { 'bronson/vim-visual-star-search', event = "BufReadPost" },
-    'tpope/vim-unimpaired',
-    'chrisbra/Recover.vim',
     {
         "gbprod/substitute.nvim",
         keys = {
@@ -64,8 +70,10 @@ return {
         config = function()
             require("substitute").setup()
         end
-    }, {
+    },
+    {
         "AckslD/nvim-neoclip.lua",
+        event = "VeryLazy",
         config = function()
             require('neoclip').setup({
                 -- doesnt support fzf, and probably not superuserfull for me
@@ -80,6 +88,7 @@ return {
     },
     {
         "kylechui/nvim-surround",
+        event = "BufReadPost",
         version = "*", -- Use for stability; omit to use `main` branch for the latest features
         config = function()
             require("nvim-surround").setup({
@@ -98,7 +107,6 @@ return {
             })
         end
     },
-    'tpope/vim-repeat',
     {
         'numToStr/Comment.nvim',
         event = "BufReadPost",
@@ -113,9 +121,10 @@ return {
             require('colorizer').setup()
         end
     },
-    'tpope/vim-fugitive',
-    'tpope/vim-rhubarb',
-    { 'ethanholz/nvim-lastplace', config = function()
-        require 'nvim-lastplace'.setup()
-    end },
+    { 'ethanholz/nvim-lastplace',
+        event = "BufReadPre",
+        config = function()
+            require 'nvim-lastplace'.setup()
+        end
+    },
 }
