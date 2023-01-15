@@ -1,3 +1,16 @@
+local function change_cwd_to_closest_git(relativeTo)
+    local closestGitRootFile = vim.fn.fnamemodify(vim.fn.findfile(".git", relativeTo .. ';'), ':h')
+    local closestGitRoot = vim.fn.fnamemodify(vim.fn.finddir(".git", relativeTo .. ';'), ':h')
+    local cwd
+    if string.len(closestGitRoot) > string.len(closestGitRootFile) then
+        cwd = closestGitRoot
+    else
+        cwd = closestGitRootFile
+    end
+    print("changed cwd to: " .. cwd)
+    vim.api.nvim_set_current_dir(cwd)
+end
+
 return { 'folke/which-key.nvim', config = function()
     vim.o.timeoutlen = 500
     local mergeTables = function(base, extend)
@@ -74,7 +87,11 @@ return { 'folke/which-key.nvim', config = function()
         },
         [";"] = { "<cmd>lua require('fzf-lua').command_history()<CR>", "command history" },
         a = {},
-        r = {},
+        r = {
+            name = "change cwd",
+            i = { function() change_cwd_to_closest_git(vim.fn.expand('%:p:h')) end, "closest git root to buffer" },
+            o = { function() change_cwd_to_closest_git(vim.fn.getcwd()) end, "parent git root" }
+        },
         s = {},
         t = {
             name = '+git',

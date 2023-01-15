@@ -119,27 +119,5 @@
             }
         }
     },
-    "cSpell.userWords": [
-      "Cmds",
-      "Cond",
-      "OTEL",
-      "Tmpl",
-      "alacritty",
-      "alsa",
-      "glog",
-      "hlint",
-      "modm",
-      "noice",
-      "oryadmin",
-      "otlp",
-      "pango",
-      "rtsopts",
-      "rxvbar",
-      "sumneko",
-      "trayer",
-      "txvbar",
-      "vscodesnippets",
-      "xmonad"
-    ],
     "Lua.telemetry.enable": true
 }

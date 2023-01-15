@@ -88,13 +88,6 @@ local terminalMappings = {
     ["<Space><Esc>"] = "<C-\\><C-n>"
 }
 
-
-local v_mappings = {
-    -- move selected text up/down
-    ["J"] = ":m '>+1<CR>gv=gv",
-    ["K"] = ":m '<-2<CR>gv=gv"
-}
-
 local n_mappings = {
     -- move cursor between windows
     ["<C-Up>"] = "<C-W>k",
@@ -107,7 +100,6 @@ local n_mappings = {
 }
 
 utils.map('t', terminalMappings)
-utils.map('v', v_mappings)
 utils.map('n', n_mappings)
 
 --expression mapping

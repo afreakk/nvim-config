@@ -7,6 +7,20 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end,
 })
 
+local timeAtNvimStartup = os.time()
+local direnvLoaded = vim.api.nvim_create_augroup("direnvLoaded", {})
+vim.api.nvim_create_autocmd("User", {
+    group = direnvLoaded,
+    pattern = "DirenvLoaded",
+    callback = function()
+        -- probably loaded some lsps, so restart coc
+        -- but this event also starts at startup, so dont do it then..
+        if os.difftime(os.time(), timeAtNvimStartup) > 1 then
+            vim.cmd([[CocRestart]])
+        end
+    end,
+})
+
 local makeSplitsNiceAfterResize = vim.api.nvim_create_augroup("makeSplitsNiceAfterResize", {})
 vim.api.nvim_create_autocmd("VimResized", {
     group = makeSplitsNiceAfterResize,
