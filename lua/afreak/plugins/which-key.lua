@@ -206,18 +206,20 @@ return { 'folke/which-key.nvim', config = function()
             s = { "<Plug>(coc-codelens-action)", "codelens-action" },
             n = { "<Plug>(coc-diagnostic-next)", "diagnostic-next" },
             p = { "<Plug>(coc-diagnostic-prev)", "diagnostic-prev" },
-
-            i = { "<Plug>(coc-implementation)", "goto-implementation" },
-            t = { "<Plug>(coc-type-definition)", "goto-type-definition" },
-            r = { "<Plug>(coc-references)", "goto-references" },
-            d = { "<Plug>(coc-definition)", "goto-definition" },
-
+            r = { ":CocRestart<CR>", "CocRestart" },
+            g = {
+                name = "+goto (also available as g* keys)",
+                i = { "<Plug>(coc-implementation)", "goto-implementation" },
+                t = { "<Plug>(coc-type-definition)", "goto-type-definition" },
+                r = { "<Plug>(coc-references)", "goto-references" },
+                d = { "<Plug>(coc-definition)", "goto-definition" },
+            },
             e = { "<Plug>(coc-rename)", "rename" },
             f = { "<Plug>(coc-refactor)", "refactor" },
-            g = {
+            d = {
                 name = "+diagnostics enable/disable",
-                d = { ":<c-u>call coc#config('diagnostic.enable', 0)<cr>", "diagnostic enable" },
-                e = { ":<c-u>call coc#config('diagnostic.enable', 1)<cr>", "diagnostic disable" },
+                e = { ":<c-u>call coc#config('diagnostic.enable', 0)<cr>", "diagnostic enable" },
+                d = { ":<c-u>call coc#config('diagnostic.enable', 1)<cr>", "diagnostic disable" },
             },
             w = { ":<c-u>call coc#float#close_all() <CR>", "close all floating windows" },
         },

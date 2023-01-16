@@ -21,6 +21,8 @@ vim.opt.wildignorecase = true
 -- not sure, lets try without for a while
 -- vim.opt.showmatch = true
 
+-- both number and relativenumber at the same time
+vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.numberwidth = 1
 
