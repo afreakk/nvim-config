@@ -71,3 +71,14 @@ vim.api.nvim_create_autocmd("FileType", {
         ]])
     end,
 })
+
+-- set titlestring to cwd initially also
+vim.opt.titlestring = vim.fn.getcwd()
+local dirChanged = vim.api.nvim_create_augroup("dirChanged", {})
+vim.api.nvim_create_autocmd("DirChanged", {
+    group = dirChanged,
+    pattern = "*",
+    callback = function()
+        vim.opt.titlestring = vim.fn.getcwd()
+    end,
+})

@@ -198,14 +198,15 @@ return { 'folke/which-key.nvim', config = function()
             vim.cmd.copen()
         end, "quickfixtoggle" },
         c = {
-            name = "+coc-actions",
-            l = { "<Plug>(coc-codeaction-line)", "codeaction-line" },
-            a = { "<Plug>(coc-codeaction)", "codeaction" },
-            c = { "<Plug>(coc-codeaction-cursor)", "codeaction-cursor" },
-            v = { "<Plug>(coc-codeaction-selected)", "codeaction-selected" },
-            s = { "<Plug>(coc-codelens-action)", "codelens-action" },
-            n = { "<Plug>(coc-diagnostic-next)", "diagnostic-next" },
-            p = { "<Plug>(coc-diagnostic-prev)", "diagnostic-prev" },
+            name = "+coc",
+            a = {
+                name = "+actions",
+                a = { "<Plug>(coc-codeaction)", "codeaction" },
+                l = { "<Plug>(coc-codeaction-line)", "codeaction-line" },
+                c = { "<Plug>(coc-codeaction-cursor)", "codeaction-cursor" },
+                v = { "<Plug>(coc-codeaction-selected)", "codeaction-selected" },
+                s = { "<Plug>(coc-codelens-action)", "codelens-action" },
+            },
             r = { ":CocRestart<CR>", "CocRestart" },
             g = {
                 name = "+goto (also available as g* keys)",

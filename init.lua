@@ -26,6 +26,9 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.numberwidth = 1
 
+-- have a title
+vim.opt.title = true
+
 -- Automatically insert the current comment leader after hitting 'o' or
 -- 'O' in Normal mode.  In case comment is unwanted in a specific place
 -- use CTRL-U to quickly delete it. |i_CTRL-U|
