@@ -6,7 +6,9 @@ return {
     'tpope/vim-fugitive',
     'tpope/vim-rhubarb',
 
-    'direnv/direnv.vim',
+    { 'direnv/direnv.vim', init = function()
+        vim.g.direnv_auto = 0
+    end },
     { 'echasnovski/mini.move', event = "VeryLazy", config = function()
         require('mini.move').setup({
             -- Module mappings. Use `''` (empty string) to disable one.
