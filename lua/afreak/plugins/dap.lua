@@ -14,7 +14,7 @@ local M = {
 
 function M.config()
     local dap = require('dap')
-    local base_path = os.getenv('HOME') .. '/daps'
+    local base_path = vim.fn.stdpath("data") .. '/daps'
     require("dapui").setup()
     -- dap.defaults.fallback.external_terminal = {
     --   command = 'terminal.sh'

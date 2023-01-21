@@ -50,29 +50,5 @@ return {
                 command = "silent call CocActionAsync('highlight')",
                 desc = "Highlight symbol under cursor on CursorHold"
             })
-            local g_mappings = {
-                ["gy"] = "<Plug>(coc-type-definition)",
-                ["gr"] = "<Plug>(coc-references)",
-                ["gd"] = "<Plug>(coc-definition)",
-                ["gD"] = "<Plug>(coc-implementation)",
-                ["[g"] = "<Plug>(coc-diagnostic-prev)",
-                ["]g"] = "<Plug>(coc-diagnostic-next)",
-                -- Use K to show documentation in preview window
-                ["K"] = "<CMD>lua _G.show_docs()<CR>"
-            }
-
-            local insert_completions = {
-                ["<TAB>"] = 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()',
-                ["<S-TAB>"] = 'coc#pum#visible() ? coc#pum#prev(1) : "<C-h>"',
-                -- Make <CR> to accept selected completion item or notify coc.nvim to format
-                -- <C-g>u breaks current undo, please make your own choice
-                ["<cr>"] = 'coc#pum#visible() ? coc#pum#confirm() : "<C-g>u<CR><c-r>=coc#on_enter()<CR>"',
-            }
-
-            local utils = require "afreak.utils"
-            utils.map('n', g_mappings, { silent = true })
-            utils.map('i', insert_completions, { silent = true, noremap = true, expr = true, replace_keycodes = false })
-            -- Use <c-space> to trigger completion
-            vim.keymap.set("i", "<c-space>", "coc#refresh()", { silent = true, expr = true })
         end }
 }

@@ -1,5 +1,5 @@
 return {
-    'sindrets/winshift.nvim', config = function()
+    'sindrets/winshift.nvim', lazy = true, config = function()
         require("winshift").setup({
             highlight_moving_win = true, -- Highlight the window being moved
             focused_hl_group = "Visual", -- The highlight group used for the moving window
@@ -43,13 +43,4 @@ return {
             end,
         })
     end,
-    keys = {
-        { "<C-W><C-M>", "<Cmd>WinShift<CR>", desc = "WinShift" },
-        { "<C-W>m", "<Cmd>WinShift<CR>", desc = "WinShift" },
-        { "<C-W>X", "<Cmd>WinShift swap<CR>", desc = "WinShift swap" },
-        { "<S-Left>", "<Cmd>WinShift left<CR>", desc = "WinShift left" },
-        { "<S-Down>", "<Cmd>WinShift down<CR>", desc = "WinShift down" },
-        { "<S-Up>", "<Cmd>WinShift up<CR>", desc = "WinShift up" },
-        { "<S-Right>", "<Cmd>WinShift right<CR>", desc = "WinShift right" },
-    }
 }

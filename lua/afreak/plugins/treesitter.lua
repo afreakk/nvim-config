@@ -10,9 +10,7 @@ return {
     },
     {
         "mfussenegger/nvim-treehopper",
-        keys = {
-            { "gM", ":lua require('tsht').nodes()<CR>", mode = { "x" }, desc = "treehopper expand selection" },
-        },
+        lazy = true,
         config = function()
             require("tsht").config.hint_keys = { "a", "r", "s", "t", "d", "h", "n", "e", "i", "o" }
         end
