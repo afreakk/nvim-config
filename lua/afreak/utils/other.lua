@@ -1,13 +1,4 @@
 local M = {}
-M.map = function(mode, mappings, opts)
-    for lhs, rhs in pairs(mappings) do
-        if (type(rhs)) == "table" then
-            vim.keymap.set(vim.tbl_extend(mode, rhs.mode), lhs, rhs[1], vim.tbl.extend("error", rhs.opts, opts))
-        else
-            vim.keymap.set(mode, lhs, rhs, opts)
-        end
-    end
-end
 M.change_cwd_to_closest_git = function(relativeTo)
     local closestGitRootFile = vim.fn.fnamemodify(vim.fn.findfile(".git", relativeTo .. ';'), ':h')
     local closestGitRoot = vim.fn.fnamemodify(vim.fn.finddir(".git", relativeTo .. ';'), ':h')
@@ -45,5 +36,8 @@ M.qfToggle = function()
         end
     end
     vim.cmd.copen()
+end
+M.p = function(plugCmd)
+    return "<Plug>(" .. plugCmd .. ")"
 end
 return M

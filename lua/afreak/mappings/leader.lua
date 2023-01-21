@@ -2,6 +2,7 @@ local utils = require("afreak.utils.other")
 local fzfUtils = require("afreak.utils.fzf")
 local h = utils.h
 local c = utils.c
+local p = utils.p
 local grepCmd = 'grep -r -i --line-number --color=auto --perl-regex'
 local M = {}
 M.spaceMaps = fzfUtils.fzfFileFind({}, {
@@ -57,8 +58,10 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
     a = {},
     r = {
         name = "change cwd",
-        i = { h('afreak.utils', 'change_cwd_to_closest_git', function() return vim.fn.expand('%:p:h') end), "buffer" },
-        o = { h('afreak.utils', 'change_cwd_to_closest_git', function() return vim.fn.getcwd() end), "parent of cwd" }
+        i = { h('afreak.utils.other', 'change_cwd_to_closest_git', function() return vim.fn.expand('%:p:h') end),
+            "buffer" },
+        o = { h('afreak.utils.other', 'change_cwd_to_closest_git', function() return vim.fn.getcwd() end),
+            "parent of cwd" }
     },
     s = {},
     t = {
@@ -153,16 +156,16 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
         l = { c('set background=light'), "light" },
         t = { c('hi Normal guibg=NONE ctermbg=NONE'), "transparent" },
     },
-    x = { h('afreak.utils', 'qfToggle', {}), "quickfixtoggle" },
+    x = { h('afreak.utils.other', 'qfToggle', {}), "quickfixtoggle" },
     c = {
         name = "+coc",
         a = {
             name = "+actions",
-            a = { "<Plug>(coc-codeaction)", "codeaction" },
-            l = { "<Plug>(coc-codeaction-line)", "codeaction-line" },
-            c = { "<Plug>(coc-codeaction-cursor)", "codeaction-cursor" },
-            v = { "<Plug>(coc-codeaction-selected)", "codeaction-selected" },
-            s = { "<Plug>(coc-codelens-action)", "codelens-action" },
+            a = { p("coc-codeaction"), "codeaction" },
+            l = { p("coc-codeaction-line"), "codeaction-line" },
+            c = { p("coc-codeaction-cursor"), "codeaction-cursor" },
+            v = { p("coc-codeaction-selected"), "codeaction-selected" },
+            s = { p("coc-codelens-action"), "codelens-action" },
         },
         l = {
             name = "+coclists",
@@ -178,13 +181,13 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
         r = { c("CocRestart"), "CocRestart" },
         g = {
             name = "+goto (also available as g* keys)",
-            i = { "<Plug>(coc-implementation)", "goto-implementation" },
-            t = { "<Plug>(coc-type-definition)", "goto-type-definition" },
-            r = { "<Plug>(coc-references)", "goto-references" },
-            d = { "<Plug>(coc-definition)", "goto-definition" },
+            i = { p("coc-implementation"), "goto-implementation" },
+            t = { p("coc-type-definition"), "goto-type-definition" },
+            r = { p("coc-references"), "goto-references" },
+            d = { p("coc-definition"), "goto-definition" },
         },
-        e = { "<Plug>(coc-rename)", "rename" },
-        f = { "<Plug>(coc-refactor)", "refactor" },
+        e = { p("coc-rename"), "rename" },
+        f = { p("coc-refactor"), "refactor" },
         d = {
             name = "+diagnostics enable/disable",
             e = { c('call coc#config("diagnostic.enable", 1)'), "diagnostic enable" },

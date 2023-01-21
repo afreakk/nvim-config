@@ -2,6 +2,7 @@ local M = {}
 local utils = require('afreak.utils.other')
 local h = utils.h
 local c = utils.c
+local p = utils.p
 M.terminalMappings = {
     ["<C-Up>"] = { "<C-\\><C-N><C-w>h", "go window up" },
     ["<C-Down>"] = { "<C-\\><C-N><C-w>j", "go window down" },
@@ -40,10 +41,10 @@ M.n_mappings = {
         m = { h('leap', 'leap', function()
             return { target_windows = require('leap.util').get_enterable_windows() }
         end), "leap-cross-window" },
-        y = { "<Plug>(coc-type-definition)", "show type definition" },
-        r = { "<Plug>(coc-references)", "show references" },
-        d = { "<Plug>(coc-definition)", "show definition" },
-        D = { "<Plug>(coc-implementation)", "show implementation" },
+        y = { p("coc-type-definition"), "show type definition" },
+        r = { p("coc-references"), "show references" },
+        d = { p("coc-definition"), "show definition" },
+        D = { p("coc-implementation"), "show implementation" },
     },
     ["<Esc>"] = { function()
         vim.schedule(function()
@@ -58,12 +59,12 @@ M.n_mappings = {
     ["]"] = {
         h = { function() vim.schedule(require('gitsigns').next_hunk) return "<Ignore>" end, "next hunk",
             { expr = true } },
-        g = { "<Plug>(coc-diagnostic-next)", "coc diagnostic next" },
+        g = { p("coc-diagnostic-next"), "coc diagnostic next" },
     },
     ["["] = {
         h = { function() vim.schedule(require('gitsigns').prev_hunk) return "<Ignore>" end, "prev hunk",
             { expr = true } },
-        g = { "<Plug>(coc-diagnostic-prev)", "coc diagnostic prev" },
+        g = { p("coc-diagnostic-prev"), "coc diagnostic prev" },
     },
     m = { h('leap', 'leap', {}), "leap-forward-to" },
     M = { h('leap', 'leap', { backward = true }), "leap-backward-to" },
