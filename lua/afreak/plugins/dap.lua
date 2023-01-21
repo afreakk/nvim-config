@@ -19,7 +19,7 @@ function M.config()
     -- dap.defaults.fallback.external_terminal = {
     --   command = 'terminal.sh'
     -- }
-    dap.set_log_level('debug')
+    dap.set_log_level('trace')
     dap.adapters.php = {
         type = 'executable',
         command = 'node',

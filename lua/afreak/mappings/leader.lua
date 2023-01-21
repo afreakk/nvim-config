@@ -8,10 +8,10 @@ local M = {}
 M.spaceMaps = fzfUtils.fzfFileFind({}, {
     q = fzfUtils.fzfGreps({}, {
         name = "+fzf",
-        h = { h('fzf-lua', 'search_history', {}), "search history" },
-        j = { h('fzf-lua', 'jumps', {}), ":jumps" },
-        c = { h('fzf-lua', 'changes', {}), ":changes" },
-        s = { h('fzf-lua', 'spell_suggest', {}), "Spelling suggestions" },
+        h = { h('fzf-lua', 'search_history'), "search history" },
+        j = { h('fzf-lua', 'jumps'), ":jumps" },
+        c = { h('fzf-lua', 'changes'), ":changes" },
+        s = { h('fzf-lua', 'spell_suggest'), "Spelling suggestions" },
         d = fzfUtils.fzfGreps(function()
             return { cwd = vim.fn.expand('%:p:h'), cmd = grepCmd }
         end, {
@@ -54,7 +54,7 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
                 "Visually selection > tpaste.us" },
         },
     },
-    [";"] = { h('fzf-lua', 'command_history', {}), "command history" },
+    [";"] = { h('fzf-lua', 'command_history'), "command history" },
     a = {},
     r = {
         name = "change cwd",
@@ -76,8 +76,8 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
             name = "+hunk",
             s = { c('Gitsigns stage_hunk'), "stage hunk" },
             r = { c('Gitsigns reset_hunk'), "reset hunk" },
-            u = { h("gitsigns", 'undo_stage_hunk', {}), "undo stage hunk " },
-            p = { h("gitsigns", 'preview_hunk', {}), "preview hunk" },
+            u = { h("gitsigns", 'undo_stage_hunk'), "undo stage hunk " },
+            p = { h("gitsigns", 'preview_hunk'), "preview hunk" },
         },
         d = { c('Gdiffsplit'), 'split' },
         b = {
@@ -88,37 +88,37 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
         l = {
             name = "+log",
             l = { c('Git log'), 'log' },
-            p = { h('fzf-lua', 'git_commits', {}), 'commit log (project)' },
-            b = { h('fzf-lua', 'git_bcommits', {}), 'commit log (buffer)' },
+            p = { h('fzf-lua', 'git_commits'), 'commit log (project)' },
+            b = { h('fzf-lua', 'git_bcommits'), 'commit log (buffer)' },
         },
         o = { c('GBrowse'), 'browse' },
         w = { c('Gwrite'), 'write' },
         r = { c('Gread'), 'read' },
-        a = { h('fzf-lua', 'git_branches', {}), 'checkout branch' },
-        s = { h('fzf-lua', 'git_stash', {}), 'stash' },
-        e = { h('gitsigns', 'toggle_deleted', {}), "toggle deleted" }
+        a = { h('fzf-lua', 'git_branches'), 'checkout branch' },
+        s = { h('fzf-lua', 'git_stash'), 'stash' },
+        e = { h('gitsigns', 'toggle_deleted'), "toggle deleted" }
     },
     d = {
         name = '+debug(dap)',
-        c = { h('dap', 'continue', {}), 'continue' },
-        o = { h('dap', 'step_over', {}), 'step_over' },
-        k = { h('dap', 'step_back', {}), 'step back' },
-        i = { h('dap', 'step_into', {}), 'step_into' },
-        O = { h('dap', 'step_out', {}), 'step_out' },
-        b = { h('dap', 'toggle_breakpoint', {}), 'toggle_breakpoint' },
+        c = { h('dap', 'continue'), 'continue' },
+        o = { h('dap', 'step_over'), 'step_over' },
+        k = { h('dap', 'step_back'), 'step back' },
+        i = { h('dap', 'step_into'), 'step_into' },
+        O = { h('dap', 'step_out'), 'step_out' },
+        b = { h('dap', 'toggle_breakpoint'), 'toggle_breakpoint' },
         B = { c("lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))"),
             'set_breakpoint(breakpoint condition)' },
         s = { c("lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))"),
             'set_breakpoint(log point message)' },
-        r = { h('dap', 'repl.open', {}), 'repl open' },
-        a = { h('dap', 'run_last', {}), 'run last' },
-        l = { h('dap', 'list_breakpoints', {}), 'list breakpoints' },
-        u = { h('dapui', 'toggle', {}), 'toggle ui' },
-        f = { h('fzf-lua', 'dap_commands', {}), "fzf: list,run nvim-dap builtin commands" },
-        n = { h('fzf-lua', 'dap_configurations', {}), "fzf: list,run debug configurations" },
-        e = { h('fzf-lua', 'dap_breakpoints', {}), "fzf: list,delete breakpoints" },
-        v = { h('fzf-lua', 'dap_variables', {}), "fzf: active session variables" },
-        m = { h('fzf-lua', 'dap_frames', {}), "fzf: active session jump to frame" },
+        r = { h('dap', 'repl.open'), 'repl open' },
+        a = { h('dap', 'run_last'), 'run last' },
+        l = { h('dap', 'list_breakpoints'), 'list breakpoints' },
+        u = { h('dapui', 'toggle'), 'toggle ui' },
+        f = { h('fzf-lua', 'dap_commands'), "fzf: list,run nvim-dap builtin commands" },
+        n = { h('fzf-lua', 'dap_configurations'), "fzf: list,run debug configurations" },
+        e = { h('fzf-lua', 'dap_breakpoints'), "fzf: list,delete breakpoints" },
+        v = { h('fzf-lua', 'dap_variables'), "fzf: active session variables" },
+        m = { h('fzf-lua', 'dap_frames'), "fzf: active session jump to frame" },
     },
     h = {
         name = "+ChatGPT"
@@ -132,7 +132,7 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
         t = { h("noice", 'cmd', "telescope"), "opens message history in Telescope" },
 
     },
-    e = { h('fzf-lua', 'resume', {}), 'fzf resume last' },
+    e = { h('fzf-lua', 'resume'), 'fzf resume last' },
     i = {
         name = "+diff",
         e = { c('diffthis'), "diffthis" },
@@ -156,7 +156,7 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
         l = { c('set background=light'), "light" },
         t = { c('hi Normal guibg=NONE ctermbg=NONE'), "transparent" },
     },
-    x = { h('afreak.utils.other', 'qfToggle', {}), "quickfixtoggle" },
+    x = { h('afreak.utils.other', 'qfToggle'), "quickfixtoggle" },
     c = {
         name = "+coc",
         a = {
@@ -202,7 +202,7 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
     }),
     b = {
         name = '+buffer',
-        l = { h('fzf-lua', 'buffers', {}), "list" },
+        l = { h('fzf-lua', 'buffers'), "list" },
         o = { ":%bd <bar> e# <bar> bd#<CR> <bar>'\"", "only" },
     },
     k = {},
