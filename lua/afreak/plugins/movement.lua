@@ -1,9 +1,10 @@
 -- TODO: check out https://github.com/rlane/pounce.nvim if its nice
 return {
     {
-        event = "VeryLazy",
+        keys = { { "f", mode = { "n", "x" } }, { "F", mode = { "n", "x" } }, { "t", mode = { "n", "x" } },
+            { "T", mode = { "n", "x" } } },
         'ggandor/flit.nvim', config = function()
-            require('flit').setup {}
+            require('flit').setup()
         end
     },
     { 'ggandor/leap.nvim',
@@ -16,7 +17,6 @@ return {
                     leap.opts.safe_labels[k] = nil
                 end
             end
-            print(vim.inspect(leap.opts.safe_labels))
         end
     },
     {

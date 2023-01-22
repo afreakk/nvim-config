@@ -46,8 +46,8 @@ return {
                 incremental_selection = {
                     enable = true,
                     keymaps = {
-                        -- ruins cedit (commandline)
-                        -- init_selection = "<CR>",
+                        -- dont use <CR> for init, ruins cedit (commandline ctrl+f)
+                        init_selection = "<C-CR>",
                         node_incremental = "<CR>",
                         scope_incremental = "<S-CR>",
                         node_decremental = "<BS>",

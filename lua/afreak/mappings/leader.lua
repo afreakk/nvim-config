@@ -63,7 +63,12 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
         o = { h('afreak.utils.other', 'change_cwd_to_closest_git', function() return vim.fn.getcwd() end),
             "parent of cwd" }
     },
-    s = {},
+    s = {
+        w = { c("lua MiniSessions.write(vim.fn.input('Session name: '))"), "save session" },
+        s = { c("lua MiniSessions.select()"), "open session" },
+        d = { c("lua MiniSessions.select('delete')"), "delete session" },
+        o = { c("lua MiniSessions.select('write', {force = true})"), "overwrite session" }
+    },
     t = {
         name = '+git',
         t = { c('Git'), 'Status' },

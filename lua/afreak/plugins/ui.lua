@@ -1,4 +1,10 @@
 return {
+    { 'echasnovski/mini.sessions', version = false, config = function()
+        require('mini.sessions').setup({ file = "", autowrite = true, autoread = false })
+    end },
+    { 'echasnovski/mini.starter', version = false, config = function()
+        require('mini.starter').setup()
+    end },
     { 'nyoom-engineering/oxocarbon.nvim', priority = 1000, lazy = true },
     { "ellisonleao/gruvbox.nvim", priority = 1000, lazy = false, config = function()
         -- setup must be called before loading the colorscheme
@@ -91,8 +97,7 @@ return {
     },
     {
         'folke/noice.nvim', config = function()
-            local noice = require("noice")
-            noice.setup({
+            require("noice").setup({
                 presets = {
                     bottom_search = true, -- use a classic bottom cmdline for search
                     command_palette = true, -- position the cmdline and popupmenu together
@@ -101,9 +106,6 @@ return {
                     lsp_doc_border = false, -- add a border to hover docs and signature help
                 },
             })
-            vim.keymap.set("c", "<S-Enter>", function()
-                noice.redirect(vim.fn.getcmdline())
-            end, { desc = "Redirect Cmdline" })
         end,
         dependencies =
         { -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries

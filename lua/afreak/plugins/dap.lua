@@ -110,6 +110,7 @@ function M.config()
             console = 'integratedTerminal',
         },
     }
+    vim.fn.sign_define('DapBreakpoint', { text = '🛑', texthl = '', linehl = '', numhl = '' })
 end
 
 -- - `DapBreakpoint` for breakpoints (default: `B`)

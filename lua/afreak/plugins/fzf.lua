@@ -6,7 +6,7 @@ return {
         event = "VeryLazy" },
     { 'ibhagwan/fzf-lua',
         dependencies = { 'nvim-tree/nvim-web-devicons' },
-        event = "VeryLazy",
+        lazy = true,
         config = function()
             local fzfLua = require('fzf-lua')
             fzfLua.setup {

@@ -98,4 +98,7 @@ M.i_mappings = {
     ["<cr>"] = { 'coc#pum#visible() ? coc#pum#confirm() : "<C-g>u<CR><c-r>=coc#on_enter()<CR>"', "confirm", silent = true,
         noremap = true, expr = true, replace_keycodes = false },
 }
+M.c_mappings = {
+    ["<S-Enter>"] = { function() require("noice").redirect(vim.fn.getcmdline()) end, "Redirect Cmdline" }
+}
 return M
