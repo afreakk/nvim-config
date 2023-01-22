@@ -1,8 +1,8 @@
 local utils = require("afreak.utils.other")
 local fzfUtils = require("afreak.utils.fzf")
-local h = utils.h
-local c = utils.c
-local p = utils.p
+local h = utils.functionHelper
+local c = utils.cmd
+local p = utils.plug
 local grepCmd = 'grep -r -i --line-number --color=auto --perl-regex'
 local M = {}
 M.spaceMaps = fzfUtils.fzfFileFind({}, {

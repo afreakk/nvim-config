@@ -1,5 +1,5 @@
 local M = {}
-local h = require('afreak.utils.other').h
+local h = require('afreak.utils.other').functionHelper
 
 -- TODO: follow https://github.com/neovim/neovim/issues/14157 for better ways of doing this
 -- from this: https://github.com/neovim/nvim-lspconfig/wiki/User-contributed-tips#range-formatting-with-a-motion

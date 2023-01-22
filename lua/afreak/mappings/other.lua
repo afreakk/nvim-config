@@ -1,8 +1,8 @@
 local M = {}
 local utils = require('afreak.utils.other')
-local h = utils.h
-local c = utils.c
-local p = utils.p
+local h = utils.functionHelper
+local c = utils.cmd
+local p = utils.plug
 M.terminalMappings = {
     ["<C-Up>"] = { "<C-\\><C-N><C-w>h", "go window up" },
     ["<C-Down>"] = { "<C-\\><C-N><C-w>j", "go window down" },

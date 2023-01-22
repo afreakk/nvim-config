@@ -20,13 +20,13 @@ M.resolveArg = function(arg)
 
 end
 
-M.h = function(module, funcName, arg)
+M.functionHelper = function(module, funcName, arg)
     return function()
         require(module)[funcName](M.resolveArg(arg))
     end
 end
 
-M.c = function(cmd)
+M.cmd = function(cmd)
     return "<cmd>" .. cmd .. "<CR>"
 end
 M.qfToggle = function()
@@ -37,7 +37,7 @@ M.qfToggle = function()
     end
     vim.cmd.copen()
 end
-M.p = function(plugCmd)
+M.plug = function(plugCmd)
     return "<Plug>(" .. plugCmd .. ")"
 end
 return M
