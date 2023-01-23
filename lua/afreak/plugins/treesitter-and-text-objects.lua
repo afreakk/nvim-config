@@ -1,7 +1,20 @@
 return {
     -- not really treesitter, but should be grouped together with matchup ?
     { 'michaeljsmith/vim-indent-object', event = "BufReadPost" },
-    { 'wellle/targets.vim', event = "BufReadPost" },
+    { 'echasnovski/mini.ai', version = false, event = "BufReadPost", config = function()
+        require('mini.ai').setup({
+            custom_textobjects = {
+                -- use treesitter-textobjects instead of Function call
+                f = false,
+                -- rebind  function_call to F instead of f
+                F = require('mini.ai').gen_spec.function_call(),
+                -- use treesitter-textobjects instead of Argument
+                a = false,
+                -- rebind  argument to A instead of a
+                A = require('mini.ai').gen_spec.argument(),
+            }
+        })
+    end },
     { 'andymass/vim-matchup', event = "BufReadPost",
         config = function()
             vim.g.matchup_matchparen_offscreen = { method = "popup" }

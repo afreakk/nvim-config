@@ -15,9 +15,11 @@ end
 M.resolveArg = function(arg)
     if type(arg) == 'function' then
         return arg()
+    elseif type(arg) == 'table' then
+        -- hmm sometimes fzf.search seems to be mutated by a previous command, so maybe just always clone it
+        return vim.deepcopy(arg)
     end
     return arg
-
 end
 
 M.functionHelper = function(module, funcName, arg)

@@ -10,13 +10,12 @@ return {
     { 'ggandor/leap.nvim',
         lazy = true,
         config = function()
-            local leap = require('leap')
-            for k, v in pairs(leap.opts.safe_labels) do
-                -- could be wanting to substitute, so thats not a safe label
-                if v == "s" and v == "S" then
-                    leap.opts.safe_labels[k] = nil
+            require('leap').opts.safe_labels = vim.tbl_map(function(v)
+                if vim.tbl_contains({ "s", "S" }, v) then
+                    return nil
                 end
-            end
+                return v
+            end, require('leap').opts.safe_labels)
         end
     },
     {

@@ -119,5 +119,9 @@
             }
         }
     },
-    "Lua.telemetry.enable": true
+    "Lua.telemetry.enable": true,
+    "cSpell.userWords": [
+      "Aeson",
+      "mzero"
+    ]
 }
