@@ -44,14 +44,17 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
     u = { '<cmd>UndotreeToggle<CR>', 'Undotree toggle' },
     y = {
         name = "+yank/put",
-        f = { c("%y"), "content of buffer" },
-        n = { c("let @+=expand('%')"), "filename" },
+        R = { function() require('neoclip.fzf')("+") end, "FZF-Selected > system-clipboard" },
+        r = { function() require('neoclip.fzf')() end, "FZF-Selected > default-register" },
+        s = { function() vim.fn.setreg('"', vim.fn.getreg('+')) end, "System-clipboard > default-register" },
+        f = { c("%y"), "Buffer contents > default-register" },
+        n = { c("let @+=expand('%')"), "Filename > system-clipboard" },
         t = {
             name = "+tpaste",
             f = { c('w !curl --silent -F "tpaste=<-" https://tpaste.us | xclip -out -in -selection clipboard'),
-                "File > tpaste.us" },
+                "Buffer contents > tpaste.us" },
             v = { c("'<,'>w !curl --silent -F 'tpaste=<-' https://tpaste.us | xclip -out -in -selection clipboard"),
-                "Visually selection > tpaste.us" },
+                "Visually selected > tpaste.us" },
         },
     },
     [";"] = { h('fzf-lua', 'command_history'), "command history" },
@@ -228,8 +231,6 @@ M.localLeaderMaps = {
     ["<space>"] = { function() print("hello") end, "hello" },
 }
 M.leaderMaps = {
-    R = { function() require('neoclip.fzf')("+") end, "registerPlusSelect" },
-    r = { function() require('neoclip.fzf')() end, "registerUnnamedSelect" },
     s = { h("substitute.range", "operator"), "replace text defined by motion1 over range defined by motion2" },
     ["ss"] = { h("substitute.range", "word"), "replace word under cursor, in the range given by motion" }
 }
