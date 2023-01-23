@@ -124,6 +124,11 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
         e = { h('fzf-lua', 'dap_breakpoints'), "fzf: list,delete breakpoints" },
         v = { h('fzf-lua', 'dap_variables'), "fzf: active session variables" },
         m = { h('fzf-lua', 'dap_frames'), "fzf: active session jump to frame" },
+        q = { function()
+            require('dap').clear_breakpoints()
+            require('dap').set_exception_breakpoints({})
+        end, "Removes all breakpoints" },
+        x = { h('dap', 'set_exception_breakpoints'), "set exception breakpoint" },
     },
     h = {
         name = "+ChatGPT"
@@ -154,6 +159,9 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
         o = { c("tabonly"), "tab only" },
         u = { c("+tabmove"), "tab up" },
         d = { c("-tabmove"), "tab down" },
+        p = { function() vim.api.nvim_set_current_win(require('window-picker').pick_window() or
+                vim.api.nvim_get_current_win())
+        end, "Pick a window" }
     },
     z = {
         name = "+theme",

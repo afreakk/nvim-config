@@ -14,6 +14,16 @@ return {
             }
         })
     end },
+    {
+        's1n7ax/nvim-window-picker',
+        version = 'v1.*',
+        lazy = true,
+        config = function()
+            require 'window-picker'.setup({
+                selection_chars = 'ARSTDHNEIOQWUY'
+            })
+        end,
+    },
     { "iamcco/markdown-preview.nvim", ft = "markdown", build = "cd app && yarn install" },
     { 'nfnty/vim-nftables', ft = "nftables" },
     { 'mbbill/undotree', cmd = "UndotreeToggle" },
