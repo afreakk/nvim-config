@@ -82,7 +82,7 @@ return {
                             cond = noice.api.status.search.has,
                         },
                     },
-                    lualine_z = { { 'filetype' }, },
+                    lualine_z = { { 'location' }, { 'filetype' }, },
                 },
                 inactive_sections = {
                     lualine_a = {},
