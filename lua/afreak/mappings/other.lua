@@ -4,11 +4,13 @@ local h = utils.functionHelper
 local c = utils.cmd
 local p = utils.plug
 M.terminalMappings = {
-    ["<C-Up>"] = { "<C-\\><C-N><C-w>h", "go window up" },
-    ["<C-Down>"] = { "<C-\\><C-N><C-w>j", "go window down" },
-    ["<C-Left>"] = { "<C-\\><C-N><C-w>k", "go window left" },
-    ["<C-Right>"] = { "<C-\\><C-N><C-w>l", "go window right" },
-    ["<Space><Esc>"] = { "<C-\\><C-n>", "exit insert mode" }
+    -- I don't use terminal inside vim, so until I do, just disable them all
+    -- ["<C-Up>"] = { "<C-\\><C-N><C-w>h", "go window up" },
+    -- ["<C-Down>"] = { "<C-\\><C-N><C-w>j", "go window down" },
+    -- ["<C-Left>"] = { "<C-\\><C-N><C-w>k", "go window left" },
+    -- ["<C-Right>"] = { "<C-\\><C-N><C-w>l", "go window right" },
+    -- below mapping caused lagginess in fzf when typing space..
+    -- ["<Space><Esc>"] = { "<C-\\><C-n>", "exit insert mode" }
 }
 
 M.n_mappings = {
