@@ -24,7 +24,8 @@ require("lazy").setup("afreak.plugins", {
                 "matchit",
                 "matchparen",
                 "netrw",
-                "netrwPlugin",
+                -- is needed to download spelllang
+                -- "netrwPlugin",
                 "netrwSettings",
                 "netrwFileHandlers",
                 "matchit",

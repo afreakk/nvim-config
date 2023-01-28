@@ -2,3 +2,4 @@ plugged
 .netrwhist
 plugin/packer_compiled.lua
 .vim/
+spell/
