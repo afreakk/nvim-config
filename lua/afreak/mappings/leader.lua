@@ -155,7 +155,7 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
     },
     o = {
         name = '+tab/window',
-        e = { c("tabe"), "tab new" },
+        t = { c("tabe"), "tab new" },
         v = { c("vsplit"), "vertical split" },
         s = { c("split"), "horizontal split" },
         c = { c("tabclose"), "tab close" },
