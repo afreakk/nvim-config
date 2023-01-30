@@ -62,8 +62,14 @@ return {
                     theme = 'gruvbox',
                 },
                 sections = {
-                    lualine_a = { { 'mode' }, },
+                    lualine_a = { { 'mode' } },
                     lualine_b = { { 'diagnostics', sources = { 'coc' } } },
+                    lualine_c = { { function()
+                        if string.match(vim.env.SSH_AUTH_SOCK, "trezor") then
+                            return ""
+                        end
+                        return ""
+                    end } },
                     lualine_x = {
                         -- {
                         --   noice.api.status.message.get_hl,
@@ -80,6 +86,10 @@ return {
                         {
                             noice.api.status.search.get,
                             cond = noice.api.status.search.has,
+                        },
+                        {
+                            noice.api.status.ruler.get,
+                            cond = noice.api.status.ruler.has,
                         },
                     },
                     lualine_z = { { 'location' }, { 'filetype' }, },

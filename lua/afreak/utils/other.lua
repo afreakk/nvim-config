@@ -1,4 +1,15 @@
 local M = {}
+M.toggle_SSH_AUTH_SOCK = function()
+    -- Would be nice if we could handle stderr differently than stdout,
+    -- but the stderr output is atleast not a readable file, so we can use that to differentiate.
+    local newSocket = vim.fn.system("toggleSSHSocketPath"):sub(1, -2)
+    if vim.fn.filereadable(newSocket) == 1 then
+        vim.env.SSH_AUTH_SOCK = newSocket
+        print("Changed $SSH_AUTH_SOCK to:", vim.env.SSH_AUTH_SOCK)
+    else
+        vim.api.nvim_err_writeln("Can't change $SSH_AUTH_SOCK: " .. newSocket)
+    end
+end
 M.change_cwd_to_closest_git = function(relativeTo)
     local closestGitRootFile = vim.fn.fnamemodify(vim.fn.findfile(".git", relativeTo .. ';'), ':h')
     local closestGitRoot = vim.fn.fnamemodify(vim.fn.finddir(".git", relativeTo .. ';'), ':h')

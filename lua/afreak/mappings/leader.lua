@@ -60,13 +60,15 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
     [";"] = { h('fzf-lua', 'command_history'), "command history" },
     a = {},
     r = {
-        name = "change cwd",
+        name = "change cwd/ssh-agent",
         i = { h('afreak.utils.other', 'change_cwd_to_closest_git', function() return vim.fn.expand('%:p:h') end),
             "buffer" },
         o = { h('afreak.utils.other', 'change_cwd_to_closest_git', function() return vim.fn.getcwd() end),
-            "parent of cwd" }
+            "parent of cwd" },
+        s = { h('afreak.utils.other', 'toggle_SSH_AUTH_SOCK'), "toggle SSH_AUTH_SOCK" },
     },
     s = {
+        name = "Session",
         w = { c("lua MiniSessions.write(vim.fn.input('Session name: '))"), "save session" },
         s = { c("lua MiniSessions.select()"), "open session" },
         d = { c("lua MiniSessions.select('delete')"), "delete session" },
@@ -104,7 +106,7 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
         r = { c('Gread'), 'read' },
         a = { h('fzf-lua', 'git_branches'), 'checkout branch' },
         s = { h('fzf-lua', 'git_stash'), 'stash' },
-        e = { h('gitsigns', 'toggle_deleted'), "toggle deleted" }
+        e = { h('gitsigns', 'toggle_deleted'), "toggle deleted" },
     },
     d = {
         name = '+debug(dap)',
