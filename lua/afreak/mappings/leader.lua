@@ -44,11 +44,12 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
     u = { '<cmd>UndotreeToggle<CR>', 'Undotree toggle' },
     y = {
         name = "+yank/put",
-        R = { function() require('neoclip.fzf')("+") end, "FZF-Selected > system-clipboard" },
-        r = { function() require('neoclip.fzf')() end, "FZF-Selected > default-register" },
+        R = { function() require('neoclip.fzf')("+") end, "Neoclip.fzf > system-clipboard" },
+        r = { function() require('neoclip.fzf')() end, "Neoclip.fzf > default-register" },
         s = { function() vim.fn.setreg('"', vim.fn.getreg('+')) end, "System-clipboard > default-register" },
-        f = { c("%y"), "Buffer contents > default-register" },
-        n = { c("let @+=expand('%')"), "Filename > system-clipboard" },
+        S = { function() vim.fn.setreg('+', vim.fn.getreg('"')) end, "Default-register > system-clipboard" },
+        b = { c("%y"), "Buffer contents > default-register" },
+        f = { c("let @+=expand('%')"), "Filename > system-clipboard" },
         t = {
             name = "+tpaste",
             f = { c('w !curl --silent -F "tpaste=<-" https://tpaste.us | xclip -out -in -selection clipboard'),
