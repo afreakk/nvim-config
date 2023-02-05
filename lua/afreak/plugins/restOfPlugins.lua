@@ -1,6 +1,7 @@
 return {
     'chrisbra/Recover.vim',
     'dstein64/vim-startuptime',
+    'tpope/vim-dispatch',
     'tpope/vim-unimpaired',
     'tpope/vim-repeat',
     'tpope/vim-fugitive',

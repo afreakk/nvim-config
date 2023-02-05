@@ -41,9 +41,9 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
-local jsStuff = vim.api.nvim_create_augroup("jsStuff", {})
+local javascriptGroup = vim.api.nvim_create_augroup("javascriptGroup", {})
 vim.api.nvim_create_autocmd("FileType", {
-    group = jsStuff,
+    group = javascriptGroup,
     pattern = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
     callback = function(event)
         vim.cmd([[
@@ -55,6 +55,15 @@ vim.api.nvim_create_autocmd("FileType", {
          iabbrev <buffer> rr return 
          iabbrev <buffer> prts propTypes = {}<left> 
         ]])
+    end,
+})
+
+local haskellGroup = vim.api.nvim_create_augroup("haskellGroup", {})
+vim.api.nvim_create_autocmd("FileType", {
+    group = haskellGroup,
+    pattern = "haskell",
+    callback = function(event)
+        vim.cmd([[compiler haskell]])
     end,
 })
 

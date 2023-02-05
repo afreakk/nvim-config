@@ -175,7 +175,7 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
         l = { c('set background=light'), "light" },
         t = { c('hi Normal guibg=NONE ctermbg=NONE'), "transparent" },
     },
-    x = { h('afreak.utils.other', 'qfToggle'), "quickfixtoggle" },
+    -- x = {},
     c = {
         name = "+coc",
         a = {
@@ -234,6 +234,12 @@ M.localLeaderMaps = {
     ["<space>"] = { function() print("hello") end, "hello" },
 }
 M.leaderMaps = {
+    l = {
+        name = "+location list",
+        l = { vim.cmd.lopen, "open" },
+        c = { vim.cmd.lclose, "close" },
+    },
+    q = { h('afreak.utils.other', 'qfToggle'), "quickfixtoggle" },
     s = { h("substitute.range", "operator"), "replace text defined by motion1 over range defined by motion2" },
     ["ss"] = { h("substitute.range", "word"), "replace word under cursor, in the range given by motion" }
 }
