@@ -18,6 +18,9 @@ vim.opt.smartcase = true
 -- Ignore case in command-line completion
 vim.opt.wildignorecase = true
 
+-- had enough of swapfiles for a while, dont think they have ever saved me
+vim.opt.swapfile = false
+
 -- Not sure, lets try without for a while
 -- vim.opt.showmatch = true
 

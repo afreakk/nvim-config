@@ -1,5 +1,4 @@
 return {
-    'chrisbra/Recover.vim',
     'dstein64/vim-startuptime',
     'tpope/vim-dispatch',
     'tpope/vim-unimpaired',
@@ -102,9 +101,10 @@ return {
         end
     },
     { 'ethanholz/nvim-lastplace',
-        event = "BufReadPre",
         config = function()
-            require 'nvim-lastplace'.setup()
+            require 'nvim-lastplace'.setup {
+                lastplace_ignore_buftype = { "terminal" },
+            }
         end
     },
 }
