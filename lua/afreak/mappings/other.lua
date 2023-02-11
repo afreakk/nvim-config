@@ -20,15 +20,26 @@ M.n_mappings = {
         X = { c("WinShift swap"), "WinShift swap" },
     },
     ["<S-Left>"] = { c("WinShift left"), "WinShift left" },
-    ["<S-Down>"] = { c("WinShift down"), "WinShift down" },
-    ["<S-Up>"] = { c("WinShift up"), "WinShift up" },
+    ["<S-Down>"] = { function()
+        if vim.fn["coc#float#has_scroll"]() == 1 then
+            vim.fn["coc#float#scroll"](1, 1)
+        else
+            vim.cmd("WinShift down")
+        end
+    end, "WinShift/coc-float-scroll down" },
+    ["<S-Up>"] = { function()
+        if vim.fn["coc#float#has_scroll"]() == 1 then
+            vim.fn["coc#float#scroll"](0, 1)
+        else
+            vim.cmd("WinShift up")
+        end
+    end, "WinShift/coc-float-scroll up" },
     ["<S-Right>"] = { c("WinShift right"), "WinShift right" },
     -- move cursor between windows
     ["<C-Up>"] = { "<C-W>k", "go window up" },
     ["<C-Down>"] = { "<C-W>j", "go window down" },
     ["<C-Left>"] = { "<C-W>h", "go window left" },
     ["<C-Right>"] = { "<C-W>l", "go window right" },
-
     ['<C-h>'] = { h('mini.move', 'move_line', 'left'), "move line left" },
     ['<C-l>'] = { h('mini.move', 'move_line', 'right'), "move line right" },
     ['<C-j>'] = { h('mini.move', 'move_line', 'down'), "move line down" },
@@ -36,7 +47,6 @@ M.n_mappings = {
     -- center cursor after scroll is sweet
     ["<C-d>"] = { "<C-d>zz", "scroll down" },
     ["<C-u>"] = { "<C-u>zz", "scroll up" },
-
     g = {
         -- because netrw is disabled, need to open urls another way
         -- netrw is not disabled anymore
@@ -51,6 +61,7 @@ M.n_mappings = {
     },
     ["<Esc>"] = { function()
         vim.schedule(function()
+            vim.fn["coc#float#close_all"](1)
             vim.cmd([[nohlsearch]])
             require('notify').dismiss()
         end)
@@ -60,18 +71,33 @@ M.n_mappings = {
     ["ss"] = { h("substitute", "line"), "substitute line by register0" },
     S = { h("substitute", "eol"), "substitute to end of line by register0" },
     ["]"] = {
-        h = { function() vim.schedule(require('gitsigns').next_hunk) return "<Ignore>" end, "next hunk",
+        h = { function()
+            vim.schedule(require('gitsigns').next_hunk)
+            return "<Ignore>"
+        end, "next hunk",
             { expr = true } },
         g = { p("coc-diagnostic-next"), "coc diagnostic next" },
     },
     ["["] = {
-        h = { function() vim.schedule(require('gitsigns').prev_hunk) return "<Ignore>" end, "prev hunk",
+        h = { function()
+            vim.schedule(require('gitsigns').prev_hunk)
+            return "<Ignore>"
+        end, "prev hunk",
             { expr = true } },
         g = { p("coc-diagnostic-prev"), "coc diagnostic prev" },
     },
     m = { h('leap', 'leap', {}), "leap-forward-to" },
     M = { h('leap', 'leap', { backward = true }), "leap-backward-to" },
-    K = { c("lua _G.show_docs()"), "Show documentation" },
+    K = { function()
+        local cw = vim.fn.expand('<cword>')
+        if vim.fn.index({ 'vim', 'help' }, vim.bo.filetype) >= 0 then
+            vim.api.nvim_command('h ' .. cw)
+        elseif vim.api.nvim_eval('coc#rpc#ready()') then
+            vim.fn.CocActionAsync('doHover')
+        else
+            vim.api.nvim_command('!' .. vim.o.keywordprg .. ' ' .. cw)
+        end
+    end, "Show documentation" },
 }
 M.x_mappings = {
     s = { h("substitute", "visual"), "substitute visual selection by register0" },
@@ -91,15 +117,51 @@ M.x_mappings = {
     ['<C-j>'] = { h('mini.move', 'move_selection', 'down'), "move selection down" },
     ['<C-k>'] = { h('mini.move', 'move_selection', 'up'), "move selection up" },
 }
+
+local noTextBehindCursor = function()
+    local col = vim.fn.col('.') - 1
+    return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
+end
+
 M.i_mappings = {
-    ["<TAB>"] = { 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()',
-        "pum-next (or)", silent = true, noremap = true, expr = true, replace_keycodes = false },
-    ["<S-TAB>"] = { 'coc#pum#visible() ? coc#pum#prev(1) : "<C-h>"', "pum-prev", silent = true, noremap = true,
-        expr = true, replace_keycodes = false },
-    -- Make <CR> to accept selected completion item or notify coc.nvim to format
-    -- <C-g>u breaks current undo, please make your own choice
-    ["<cr>"] = { 'coc#pum#visible() ? coc#pum#confirm() : "<C-g>u<CR><c-r>=coc#on_enter()<CR>"', "confirm", silent = true,
-        noremap = true, expr = true, replace_keycodes = false },
+    ["<S-Down>"] = { function()
+        if vim.fn["coc#float#has_scroll"]() == 1 then
+            vim.fn["coc#float#scroll"](1, 1)
+        else
+            return "<S-Down>"
+        end
+    end, "Scroll down", expr = true, replace_keycodes = true },
+    ["<S-Up>"] = { function()
+        if vim.fn["coc#float#has_scroll"]() == 1 then
+            vim.fn["coc#float#scroll"](0, 1)
+        else
+            return "<S-Up>"
+        end
+    end, "Scroll up", expr = true, replace_keycodes = true },
+    ["<TAB>"] = { function()
+        if vim.fn["coc#pum#visible"]() == 1 then
+            return vim.fn["coc#pum#next"](1)
+        end
+        if noTextBehindCursor() then
+            return "<TAB>"
+        end
+        vim.fn["coc#refresh"]()
+    end, "pum-next/refresh/tab", expr = true, replace_keycodes = true },
+    ["<S-TAB>"] = { function()
+        if vim.fn["coc#pum#visible"]() == 1 then
+            return vim.fn["coc#pum#prev"](1)
+        end
+        if noTextBehindCursor() then
+            return "<C-h>"
+        end
+        vim.fn["coc#refresh"]()
+    end, "pum-prev/refresh/s-tab", expr = true, replace_keycodes = true },
+    ["<CR>"] = { function()
+        if vim.fn["coc#pum#visible"]() == 1 then
+            return vim.fn["coc#pum#confirm"]()
+        end
+        return "<CR>"
+    end, "confirm", expr = true, replace_keycodes = true },
 }
 M.c_mappings = {
     ["<S-Enter>"] = { function() require("noice").redirect(vim.fn.getcmdline()) end, "Redirect Cmdline" }
