@@ -52,8 +52,8 @@ vim.api.nvim_create_autocmd("FileType", {
          iabbrev <buffer> clw console.warning()<left>
          iabbrev <buffer> iff if ()<left>
          iabbrev <buffer> cc const
-         iabbrev <buffer> rr return 
-         iabbrev <buffer> prts propTypes = {}<left> 
+         iabbrev <buffer> rr return
+         iabbrev <buffer> prts propTypes = {}<left>
         ]])
     end,
 })

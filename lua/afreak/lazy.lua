@@ -16,7 +16,6 @@ require("lazy").setup("afreak.plugins", {
         colorscheme = { "gruvbox" },
         -- colorscheme = { "oxocarbon" },
     },
-    checker = { enabled = false },
     performance = {
         rtp = {
             disabled_plugins = {

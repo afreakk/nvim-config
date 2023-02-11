@@ -3,16 +3,22 @@ local utils = require('afreak.utils.other')
 local h = utils.functionHelper
 local c = utils.cmd
 local p = utils.plug
-M.terminalMappings = {
-    -- I don't use terminal inside vim, so until I do, just disable them all
-    -- ["<C-Up>"] = { "<C-\\><C-N><C-w>h", "go window up" },
-    -- ["<C-Down>"] = { "<C-\\><C-N><C-w>j", "go window down" },
-    -- ["<C-Left>"] = { "<C-\\><C-N><C-w>k", "go window left" },
-    -- ["<C-Right>"] = { "<C-\\><C-N><C-w>l", "go window right" },
-    -- below mapping caused lagginess in fzf when typing space..
-    -- ["<Space><Esc>"] = { "<C-\\><C-n>", "exit insert mode" }
+local unimpairedToggles = {
+    b = { "background" },
+    c = { "cursorline" },
+    d = { "diff" },
+    h = { "hlsearch" },
+    i = { "ignorecase" },
+    l = { "list" },
+    n = { "number" },
+    r = { "relativenumber" },
+    s = { "spell" },
+    t = { "colorcolumn" },
+    u = { "cursorcolumn" },
+    v = { "virtualedit" },
+    w = { "wrap" },
+    x = { "cursorline + cursorcolumn" },
 }
-
 M.n_mappings = {
     ["<C-W>"] = {
         ["<C-M>"] = { c("WinShift"), "WinShift (modal)" },
@@ -59,6 +65,13 @@ M.n_mappings = {
         d = { p("coc-definition"), "show definition" },
         D = { p("coc-implementation"), "show implementation" },
     },
+    y = {
+        o = vim.tbl_extend("error", unimpairedToggles, {
+            name = "+toggle",
+            q = { h('afreak.utils.other', 'qfToggle'), "quickfix-list" },
+            o = { c("UndotreeToggle"), "undotree" },
+        }),
+    },
     ["<Esc>"] = { function()
         vim.schedule(function()
             vim.fn["coc#float#close_all"](1)
@@ -70,7 +83,63 @@ M.n_mappings = {
     s = { h("substitute", "operator"), "subtitute txt given by operator by register0" },
     ["ss"] = { h("substitute", "line"), "substitute line by register0" },
     S = { h("substitute", "eol"), "substitute to end of line by register0" },
+    ["["] = {
+        p = { "Put above" },
+        P = { "Put above" },
+        a = { "previous" },
+        A = { "first" },
+        q = { "cprevious" },
+        Q = { "cfirst" },
+        t = { "tprevious" },
+        T = { "tfirst" },
+        l = { "lprevious" },
+        L = { "lfirst" },
+        b = { "bprevious" },
+        B = { "bfirst" },
+        f = { "Go to prev file in directory" },
+        n = { "Go to prev conflict/diff/hunk" },
+        e = { "Exchange line with lines above" },
+        ["<Space>"] = { "Add empty lines above" },
+        ["<C-L>"] = { "lpfile" },
+        ["<C-Q>"] = { "cpfile" },
+        ["<C-T>"] = { "ptprevious" },
+        o = vim.tbl_extend("error", unimpairedToggles, {
+            name = "+Enable/Show",
+            o = { vim.cmd.lopen, "location-list" },
+            q = { vim.cmd.copen, "quickfix-list" },
+        }),
+        h = { function()
+            vim.schedule(require('gitsigns').prev_hunk)
+            return "<Ignore>"
+        end, "prev hunk",
+            { expr = true } },
+        g = { p("coc-diagnostic-prev"), "coc diagnostic prev" },
+    },
     ["]"] = {
+        p = { "Put below" },
+        P = { "Put below" },
+        a = { "next" },
+        A = { "last" },
+        q = { "cnext" },
+        Q = { "clast" },
+        t = { "tnext" },
+        T = { "tlast" },
+        l = { "lnext" },
+        L = { "llast" },
+        b = { "bnext" },
+        B = { "blast" },
+        f = { "Go to next file in directory" },
+        n = { "Go to next conflict/diff/hunk" },
+        e = { "Exchange line with lines below" },
+        ["<Space>"] = { "Add empty lines below" },
+        ["<C-L>"] = { "lnfile" },
+        ["<C-Q>"] = { "cnfile" },
+        ["<C-T>"] = { "ptnext" },
+        o = vim.tbl_extend("error", unimpairedToggles, {
+            name = "+Disable/Hide",
+            o = { vim.cmd.lclose, "location-list" },
+            q = { vim.cmd.cclose, "quickfix-list" },
+        }),
         h = { function()
             vim.schedule(require('gitsigns').next_hunk)
             return "<Ignore>"
@@ -78,13 +147,17 @@ M.n_mappings = {
             { expr = true } },
         g = { p("coc-diagnostic-next"), "coc diagnostic next" },
     },
-    ["["] = {
-        h = { function()
-            vim.schedule(require('gitsigns').prev_hunk)
-            return "<Ignore>"
-        end, "prev hunk",
-            { expr = true } },
-        g = { p("coc-diagnostic-prev"), "coc diagnostic prev" },
+    ["="] = {
+        P = { "Paste before linewise, reindenting" },
+        p = { "Paste after linewise, reindenting" },
+    },
+    ["<"] = {
+        P = { "Paste before linewise, decreasing indent" },
+        p = { "Paste after linewise, decreasing indent" },
+    },
+    [">"] = {
+        P = { "Paste before linewise, increasing indent" },
+        p = { "Paste after linewise, increasing indent" },
     },
     m = { h('leap', 'leap', {}), "leap-forward-to" },
     M = { h('leap', 'leap', { backward = true }), "leap-backward-to" },

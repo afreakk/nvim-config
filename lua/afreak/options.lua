@@ -74,3 +74,5 @@ vim.opt.signcolumn = 'number'
 
 -- Don't give |ins-completion-menu| messages.
 vim.opt.shortmess:append('c')
+
+vim.o.spelllang = "nb,en"

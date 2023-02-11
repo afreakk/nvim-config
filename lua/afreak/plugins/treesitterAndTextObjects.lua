@@ -1,6 +1,6 @@
 return {
     { 'michaeljsmith/vim-indent-object', event = "BufReadPost" },
-    { 'echasnovski/mini.ai', version = false, event = "BufReadPost", config = function()
+    { 'echasnovski/mini.ai', event = "BufReadPost", config = function()
         require('mini.ai').setup({
             custom_textobjects = {
                 -- use treesitter-textobjects instead of Function call
@@ -62,7 +62,6 @@ return {
                         node_decremental = "<BS>",
                     },
                 },
-
                 textobjects = {
                     select = {
                         enable = true,
@@ -106,5 +105,5 @@ return {
             })
         end,
     },
-    { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
+    { "nvim-treesitter/playground",      cmd = "TSPlaygroundToggle" },
 }

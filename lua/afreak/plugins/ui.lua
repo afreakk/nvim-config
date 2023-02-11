@@ -63,7 +63,7 @@ return {
                 },
                 sections = {
                     lualine_a = { { 'mode' } },
-                    lualine_b = { { 'diagnostics', sources = { 'coc' } } },
+                    lualine_b = { { 'diagnostics', sources = { 'coc' } }, 'diff' },
                     lualine_c = { { function()
                         if string.match(vim.env.SSH_AUTH_SOCK, "trezor") then
                             return ""
@@ -107,25 +107,25 @@ return {
     },
     {
         'folke/noice.nvim', config = function()
-            require("noice").setup({
-                lsp = {
-                    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-                    -- dont thinktthis is necessary as i use coc.nvim, but
-                    override = {
-                        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                        ["vim.lsp.util.stylize_markdown"] = true,
-                        ["cmp.entry.get_documentation"] = true,
-                    },
+        require("noice").setup({
+            lsp = {
+                -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+                -- dont thinktthis is necessary as i use coc.nvim, but
+                override = {
+                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                    ["vim.lsp.util.stylize_markdown"] = true,
+                    ["cmp.entry.get_documentation"] = true,
                 },
-                presets = {
-                    bottom_search = true, -- use a classic bottom cmdline for search
-                    command_palette = true, -- position the cmdline and popupmenu together
-                    long_message_to_split = true, -- long messages will be sent to a split
-                    inc_rename = false, -- enables an input dialog for inc-rename.nvim
-                    lsp_doc_border = false, -- add a border to hover docs and signature help
-                },
-            })
-        end,
+            },
+            presets = {
+                bottom_search = true, -- use a classic bottom cmdline for search
+                command_palette = true, -- position the cmdline and popupmenu together
+                long_message_to_split = true, -- long messages will be sent to a split
+                inc_rename = false, -- enables an input dialog for inc-rename.nvim
+                lsp_doc_border = false, -- add a border to hover docs and signature help
+            },
+        })
+    end,
         dependencies =
         { -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
             "MunifTanjim/nui.nvim",

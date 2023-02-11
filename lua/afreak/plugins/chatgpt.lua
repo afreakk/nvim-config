@@ -6,7 +6,7 @@ return {
             "nvim-telescope/telescope.nvim"
         },
         keys = {
-            { "<space>hh", "<cmd>ChatGPT<CR>", desc = "ChatGPT" },
+            { "<space>hh", "<cmd>ChatGPT<CR>",      desc = "ChatGPT" },
             { "<space>ha", "<cmd>ChatGPTActAs<CR>", desc = "ChatGPTActAs" },
             { "<space>hi", "<cmd>ChatGPTEditWithInstructions<CR>", desc = "ChatGPTEditWithInstructions",
                 mode = { "n", "x" } },
