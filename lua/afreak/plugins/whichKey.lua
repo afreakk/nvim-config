@@ -1,7 +1,7 @@
 return {
     'folke/which-key.nvim',
     config = function()
-        vim.o.timeoutlen = 250
+        vim.o.timeoutlen = 500
         local wk = require('which-key')
         wk.setup({
             show_keys = false,

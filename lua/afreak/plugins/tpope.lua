@@ -1,5 +1,5 @@
 return {
-    { "afreakk/unimpaired-which-key.nvim" -- ,dir = "/home/afreak/coding/unimpaired-which-key.lua"
+    { "afreakk/unimpaired-which-key.nvim", key = { "[", "]", "y", "=", "<", ">" }, dir = "/home/afreak/coding/unimpaired-which-key.nvim"
     , dependencies = { "tpope/vim-unimpaired" }
     , config = function()
         local wk = require("which-key")

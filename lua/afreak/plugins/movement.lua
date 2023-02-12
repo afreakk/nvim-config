@@ -24,22 +24,22 @@ return {
     },
     {
         keys = {
-            { "ir", desc = "remote",                     mode = "o" },
-            { "ar", desc = "remote",                     mode = "o" },
-            { "r",  desc = "remote line",                mode = "o" }, -- weird hotkey (nothing else in here..)
-            { "rr", desc = "remote line",                mode = "o" },
-            { "iR", desc = "remote cross_window",        mode = "o" },
-            { "aR", desc = "remote cross_window",        mode = "o" },
-            { "R",  desc = "remote cross_window line",   mode = "o" }, --weird hotkey
-            { "RR", desc = "remote cross_window line",   mode = "o" },
-            { "im", desc = "magnetic",                   mode = "o" },
-            { "am", desc = "magnetic",                   mode = "o" },
-            { "m",  desc = "magnetic line",              mode = "o" }, -- weird hotkey
-            { "mm", desc = "magnetic line",              mode = "o" },
-            { "iM", desc = "magnetic cross_window",      mode = "o" },
-            { "aM", desc = "magnetic cross_window",      mode = "o" },
-            { "M",  desc = "magnetic cross_window line", mode = "o" }, -- weird hotkey
-            { "MM", desc = "magnetic cross_window line", mode = "o" },
+            { "ir", desc = "Remote",                                   mode = "o" },
+            { "ar", desc = "Remote",                                   mode = "o" },
+            { "r",  desc = "Remote line",                              mode = "o" }, -- nothing else in group..
+            { "rr", desc = "Remote line",                              mode = "o" },
+            { "iR", desc = "Remote cross_window",                      mode = "o" },
+            { "aR", desc = "Remote cross_window",                      mode = "o" },
+            { "R",  desc = "Remote cross_window line",                 mode = "o" }, -- nothing else in group..
+            { "RR", desc = "Remote cross_window line",                 mode = "o" },
+            { "im", desc = "Magnetic",                                 mode = "o" },
+            { "am", desc = "Magnetic",                                 mode = "o" },
+            { "m",  desc = "Magnetic / Leap forward to",               mode = "o" }, -- also used by leap.nvim
+            { "mm", desc = "Magnetic line",                            mode = "o" },
+            { "iM", desc = "Magnetic cross_window",                    mode = "o" },
+            { "aM", desc = "Magnetic cross_window",                    mode = "o" },
+            { "M",  desc = "Magnetic cross_window / Leap backward to", mode = "o" }, -- also used by leap.nvim
+            { "MM", desc = "Magnetic cross_window line",               mode = "o" },
         },
         'ggandor/leap-spooky.nvim', config = function()
         require('leap-spooky').setup {
