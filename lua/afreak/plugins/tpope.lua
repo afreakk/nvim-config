@@ -1,21 +1,13 @@
 return {
-    { 'tpope/vim-unimpaired', key = { "[", "]", "y", "=", "<", ">" }, config = function()
-        local decoders = {
-            u = "URL",
-            x = "XML",
-            C = "C String",
-            y = "C String",
-        }
+    { "afreakk/unimpaired-which-key.nvim" -- ,dir = "/home/afreak/coding/unimpaired-which-key.lua"
+    , dependencies = { "tpope/vim-unimpaired" }
+    , config = function()
         local wk = require("which-key")
-        for k, decoderName in pairs(decoders) do
-            wk.register({
-                ["[" .. k] = { decoderName .. " encode" },
-                ["[" .. k .. k] = { decoderName .. " encode line" },
-                ["]" .. k] = { decoderName .. " decode" },
-                ["]" .. k .. k] = { decoderName .. " decode line" },
-            }, { mode = { "n", "v" } })
-        end
-    end },
+        local uwk = require("unimpaired-which-key")
+        wk.register(uwk.normal_mode)
+        wk.register(uwk.normal_and_visual_mode, { mode = { "n", "v" } })
+    end
+    },
     {
         "tpope/vim-dispatch",
         cmd = { "Dispatch", "Focus", "Make", "Start" },
