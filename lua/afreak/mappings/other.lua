@@ -38,9 +38,6 @@ M.n_mappings = {
     ["<C-d>"] = { "<C-d>zz", "Scroll down" },
     ["<C-u>"] = { "<C-u>zz", "Scroll up" },
     g = {
-        -- because netrw is disabled, need to open urls another way
-        -- netrw is not disabled anymore
-        -- x = { [[:silent execute '!$BROWSER ' . shellescape(expand('<cfile>'), 1)<CR>]], "navigate to url" },
         m = { h('leap', 'leap', function()
             return { target_windows = require('leap.util').get_enterable_windows() }
         end), "leap-cross-window" },

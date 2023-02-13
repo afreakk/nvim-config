@@ -29,7 +29,6 @@ return {
         vim.cmd([[colorscheme gruvbox]])
     end },
     {
-        event = "VeryLazy",
         'nanozuki/tabby.nvim',
         config = function()
             require('tabby.tabline').set(function(line)
@@ -53,7 +52,6 @@ return {
     },
     {
         'nvim-lualine/lualine.nvim',
-        event = "VeryLazy",
         dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
         config = function()
             local noice = require("noice")
