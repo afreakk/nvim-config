@@ -13,6 +13,7 @@
   "fzf.vim": { "branch": "master", "commit": "dc71692255b62d1f67dc55c8e51ab1aa467b1d46" },
   "gitsigns": { "branch": "main", "commit": "f29f0b22fd66c910b892aae3bc18a4872c002738" },
   "gruvbox.nvim": { "branch": "main", "commit": "73f009df5ed929a853244c413bb52c1d02c117ce" },
+  "iswap.nvim": { "branch": "master", "commit": "aed5aa196651926871a9d881a80aef868199c2a5" },
   "lazy.nvim": { "branch": "main", "commit": "06f835d0b4b62d9d26fe0ec4190b981f2f5632d2" },
   "leap-spooky.nvim": { "branch": "main", "commit": "748b2614e859704d8004e86be97401c9f3e28e80" },
   "leap.nvim": { "branch": "main", "commit": "7140feed70a5911b8c8a7eb9c218d198772f69cf" },

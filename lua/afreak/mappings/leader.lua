@@ -230,7 +230,14 @@ M.localLeaderMaps = {
 }
 M.leaderMaps = {
     s = { h("substitute.range", "operator"), "replace text defined by motion1 over range defined by motion2" },
-    ["ss"] = { h("substitute.range", "word"), "replace word under cursor, in the range given by motion" }
+    ["ss"] = { h("substitute.range", "word"), "replace word under cursor, in the range given by motion" },
+    w = {
+        name = "+swap",
+        w = { c("ISwapWith"), "ISwapWith" },
+        a = { c("ISwap"), "ISwap" },
+        n = { c("ISwapNode"), "ISwapNode" },
+        i = { c("ISwapNodeWith"), "ISwapNodeWith" },
+    },
 }
 M.x_leaderMaps = {
     s = { h("substitute.range", "visual"),

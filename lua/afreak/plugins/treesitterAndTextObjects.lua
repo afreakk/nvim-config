@@ -19,10 +19,13 @@ return {
     end,
     },
     {
-        "mfussenegger/nvim-treehopper", lazy = true,
-        config = function()
-            require("tsht").config.hint_keys = { "a", "r", "s", "t", "d", "h", "n", "e", "i", "o" }
-        end
+        "mfussenegger/nvim-treehopper", lazy = true, config = function()
+        require("tsht").config.hint_keys = { "a", "r", "s", "t", "d", "h", "n", "e", "i", "o" }
+    end
+    },
+    { 'mizlan/iswap.nvim', cmd = { "ISwap", "ISwapWith", "ISwapNode", "ISwapNodeWith" }, config = function()
+        require('iswap').setup { keys = 'arstneiodhwfuyplqxcvmbzqj' }
+    end
     },
     {
         "nvim-treesitter/nvim-treesitter",

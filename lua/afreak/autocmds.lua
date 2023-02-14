@@ -1,21 +1,3 @@
-local yankGroup = vim.api.nvim_create_augroup("yankGroup", {})
-vim.api.nvim_create_autocmd("TextYankPost", {
-    group = yankGroup,
-    pattern = "*",
-    callback = function()
-        vim.highlight.on_yank { higroup = "IncSearch", timeout = 150 }
-    end,
-})
-
-local makeSplitsNiceAfterResize = vim.api.nvim_create_augroup("makeSplitsNiceAfterResize", {})
-vim.api.nvim_create_autocmd("VimResized", {
-    group = makeSplitsNiceAfterResize,
-    pattern = "*",
-    callback = function()
-        vim.api.nvim_command("wincmd =")
-    end,
-})
-
 local numberz = vim.api.nvim_create_augroup("numberz", {})
 vim.api.nvim_create_autocmd("WinEnter", {
     group = numberz,
@@ -32,21 +14,32 @@ vim.api.nvim_create_autocmd("WinLeave", {
     end,
 })
 
-local spelling = vim.api.nvim_create_augroup("spelling", {})
-vim.api.nvim_create_autocmd("FileType", {
-    group = spelling,
-    pattern = { "markdown", "gitcommit" },
-    callback = function()
-        vim.opt_local.spell = true
-    end,
-})
+local function auCmdGrp(event, grpName, pattern, callback)
+    vim.api.nvim_create_autocmd(event, {
+        group = vim.api.nvim_create_augroup(grpName, {}),
+        pattern = pattern,
+        callback = callback,
+    })
+end
 
-local javascriptGroup = vim.api.nvim_create_augroup("javascriptGroup", {})
-vim.api.nvim_create_autocmd("FileType", {
-    group = javascriptGroup,
-    pattern = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-    callback = function(event)
-        vim.cmd([[
+auCmdGrp("TextYankPost", "yankGroup", "*", function()
+    vim.highlight.on_yank { higroup = "IncSearch", timeout = 150 }
+end)
+
+auCmdGrp("VimResized", "makeSplitsNiceAfterResizeGroup", "*", function()
+    vim.api.nvim_command("wincmd =")
+end)
+
+local function ftAuCmdGrp(grpName, pattern, callback)
+    auCmdGrp("FileType", grpName, pattern, callback)
+end
+
+ftAuCmdGrp("spellingGroup", { "markdown", "gitcommit" }, function()
+    vim.opt_local.spell = true
+end)
+
+ftAuCmdGrp("javascriptGroup", { "javascript", "javascriptreact", "typescript", "typescriptreact" }, function()
+    vim.cmd([[
          iabbrev <buffer> clg console.log()<left>
          iabbrev <buffer> cle console.error()<left>
          iabbrev <buffer> clw console.warning()<left>
@@ -55,36 +48,25 @@ vim.api.nvim_create_autocmd("FileType", {
          iabbrev <buffer> rr return
          iabbrev <buffer> prts propTypes = {}<left>
         ]])
-    end,
-})
+end)
 
-local haskellGroup = vim.api.nvim_create_augroup("haskellGroup", {})
-vim.api.nvim_create_autocmd("FileType", {
-    group = haskellGroup,
-    pattern = "haskell",
-    callback = function(event)
-        vim.cmd([[compiler haskell]])
-    end,
-})
+ftAuCmdGrp("haskellGroup", "haskell", function()
+    vim.cmd([[compiler haskell]])
+end)
+
+ftAuCmdGrp("golangGroup", "go", function()
+    vim.b.coc_root_patterns = { "go.mod" }
+end)
 
 -- set titlestring to cwd initially also
 vim.opt.titlestring = vim.fn.getcwd()
-local dirChanged = vim.api.nvim_create_augroup("dirChanged", {})
-vim.api.nvim_create_autocmd("DirChanged", {
-    group = dirChanged,
-    pattern = "*",
-    callback = function()
-        vim.opt.titlestring = vim.fn.getcwd()
-        -- source direnv/nix-shell
-        vim.api.nvim_command(":DirenvExport")
-    end,
-})
-local direnvLoaded = vim.api.nvim_create_augroup("direnvLoaded", {})
-vim.api.nvim_create_autocmd("User", {
-    group = direnvLoaded,
-    pattern = "DirenvLoaded",
-    callback = function(event)
-        -- restart coc as we now probably have  new lsps
-        vim.api.nvim_command(":CocRestart")
-    end,
-})
+auCmdGrp("DirChanged", "dirChangedGroup", "*", function()
+    vim.opt.titlestring = vim.fn.getcwd()
+    -- source direnv/nix-shell
+    vim.api.nvim_command(":DirenvExport")
+end)
+
+auCmdGrp("User", "direnvLoadedGroup", "DirenvLoaded", function()
+    -- restart coc as we now probably have  new lsps
+    vim.api.nvim_command(":CocRestart")
+end)
