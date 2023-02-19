@@ -118,6 +118,5 @@
                 }
             }
         }
-    },
-    "Lua.telemetry.enable": true
+    }
 }

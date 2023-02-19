@@ -54,10 +54,6 @@ ftAuCmdGrp("haskellGroup", "haskell", function()
     vim.cmd([[compiler haskell]])
 end)
 
-ftAuCmdGrp("golangGroup", "go", function()
-    vim.b.coc_root_patterns = { "go.mod" }
-end)
-
 -- set titlestring to cwd initially also
 vim.opt.titlestring = vim.fn.getcwd()
 auCmdGrp("DirChanged", "dirChangedGroup", "*", function()
