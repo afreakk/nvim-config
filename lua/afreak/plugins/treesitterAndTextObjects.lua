@@ -36,6 +36,17 @@ return {
             'mrjones2014/nvim-ts-rainbow'
         },
         config = function()
+            -- syntax highlight doesnt work ..
+            local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+            parser_config.fsharp = {
+                install_info = {
+                    url = vim.fn.stdpath("data") .. "/treesitters/tree-sitter-fsharp",
+                    files = { "src/scanner.cc", "src/parser.c" },
+                    branch = "develop",
+                    generate_requires_npm = false, -- if stand-alone parser without npm dependencies
+                    requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
+                },
+            }
             require("nvim-treesitter.configs").setup({
                 matchup = {
                     enable = true, -- mandatory, false will disable the whole extension
