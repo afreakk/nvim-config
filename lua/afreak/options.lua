@@ -40,8 +40,8 @@ vim.opt.formatoptions:append('o')
 -- Dont think i need this, I know what mode im in
 vim.opt.showmode = false
 
--- Https://www.reddit.com/r/vim/wiki/tabstop
-vim.opt.tabstop = 8
+-- When all these are equal length, guess-indent works nicely
+vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
