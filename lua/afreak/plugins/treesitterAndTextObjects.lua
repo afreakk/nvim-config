@@ -28,6 +28,16 @@ return {
     end
     },
     {
+        'Wansmer/treesj',
+        event = "BufReadPost",
+        cmd = { "TSJJoin", "TSJSplit", "TSJToggle" },
+        config = function()
+            require('treesj').setup({
+                use_default_keymaps = true,
+            })
+        end,
+    },
+    {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         event = "BufReadPost",
