@@ -1,6 +1,6 @@
 return {
     "AckslD/nvim-neoclip.lua",
-    event = "BufReadPost",
+    event = "VeryLazy",
     config = function()
         require('neoclip').setup({
             -- doesnt support fzf, and probably not superusefull for me

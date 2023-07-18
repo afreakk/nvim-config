@@ -1,10 +1,13 @@
 return {
-    { 'antoinemadec/coc-fzf',
+    {
+        'antoinemadec/coc-fzf',
         dependencies = {
             { 'junegunn/fzf.vim', dependencies = { 'junegunn/fzf' } }
         },
-        event = "BufReadPost" },
-    { 'ibhagwan/fzf-lua',
+        event = "VeryLazy"
+    },
+    {
+        'ibhagwan/fzf-lua',
         dependencies = { 'nvim-tree/nvim-web-devicons' },
         lazy = true,
         config = function()

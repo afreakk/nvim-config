@@ -6,5 +6,6 @@ return {
     { 'chr4/nginx.vim',               ft = "nginx" },
     { 'LnL7/vim-nix',                 ft = "nix" },
     { 'freitass/todo.txt-vim',        ft = "todo" },
+    { 'pedrohdz/vim-yaml-folds',      ft = "yaml" },
     { "iamcco/markdown-preview.nvim", ft = "markdown", build = "cd app && yarn install" },
 }

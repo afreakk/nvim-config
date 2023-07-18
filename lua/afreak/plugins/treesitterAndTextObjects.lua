@@ -1,35 +1,46 @@
 return {
-    { 'michaeljsmith/vim-indent-object', event = "BufReadPost" },
-    { 'echasnovski/mini.ai', event = "BufReadPost", config = function()
-        require('mini.ai').setup({
-            custom_textobjects = {
-                -- use treesitter-textobjects instead of Function call
-                f = false,
-                -- rebind  function_call to F instead of f
-                F = require('mini.ai').gen_spec.function_call(),
-                -- use treesitter-textobjects instead of Argument
-                a = false,
-                -- rebind  argument to A instead of a
-                A = require('mini.ai').gen_spec.argument(),
-            }
-        })
-    end },
-    { 'andymass/vim-matchup', event = "BufReadPost", init = function()
-        vim.g.matchup_matchparen_offscreen = { method = "popup" }
-    end,
+    { 'michaeljsmith/vim-indent-object', event = "VeryLazy" },
+    {
+        'echasnovski/mini.ai',
+        event = "VeryLazy",
+        config = function()
+            require('mini.ai').setup({
+                custom_textobjects = {
+                    -- use treesitter-textobjects instead of Function call
+                    f = false,
+                    -- rebind  function_call to F instead of f
+                    F = require('mini.ai').gen_spec.function_call(),
+                    -- use treesitter-textobjects instead of Argument
+                    a = false,
+                    -- rebind  argument to A instead of a
+                    A = require('mini.ai').gen_spec.argument(),
+                }
+            })
+        end
     },
     {
-        "mfussenegger/nvim-treehopper", lazy = true, config = function()
-        require("tsht").config.hint_keys = { "a", "r", "s", "t", "d", "h", "n", "e", "i", "o" }
-    end
+        'andymass/vim-matchup',
+        init = function()
+            vim.g.matchup_matchparen_offscreen = { method = "popup" }
+        end,
     },
-    { 'mizlan/iswap.nvim', cmd = { "ISwap", "ISwapWith", "ISwapNode", "ISwapNodeWith" }, config = function()
-        require('iswap').setup { keys = 'arstneiodhwfuyplqxcvmbzqj' }
-    end
+    {
+        "mfussenegger/nvim-treehopper",
+        lazy = true,
+        config = function()
+            require("tsht").config.hint_keys = { "a", "r", "s", "t", "d", "h", "n", "e", "i", "o" }
+        end
+    },
+    {
+        'mizlan/iswap.nvim',
+        cmd = { "ISwap", "ISwapWith", "ISwapNode", "ISwapNodeWith" },
+        config = function()
+            require('iswap').setup { keys = 'arstneiodhwfuyplqxcvmbzqj' }
+        end
     },
     {
         'Wansmer/treesj',
-        event = "BufReadPost",
+        event = "VeryLazy",
         cmd = { "TSJJoin", "TSJSplit", "TSJToggle" },
         config = function()
             require('treesj').setup({
@@ -48,15 +59,15 @@ return {
         config = function()
             -- syntax highlight doesnt work ..
             local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-            parser_config.fsharp = {
-                install_info = {
-                    url = vim.fn.stdpath("data") .. "/treesitters/tree-sitter-fsharp",
-                    files = { "src/scanner.cc", "src/parser.c" },
-                    branch = "develop",
-                    generate_requires_npm = false, -- if stand-alone parser without npm dependencies
-                    requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
-                },
-            }
+            -- parser_config.fsharp = {
+            --     install_info = {
+            --         url = vim.fn.stdpath("data") .. "/treesitters/tree-sitter-fsharp",
+            --         files = { "src/scanner.cc", "src/parser.c" },
+            --         branch = "develop",
+            --         generate_requires_npm = false, -- if stand-alone parser without npm dependencies
+            --         requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
+            --     },
+            -- }
             require("nvim-treesitter.configs").setup({
                 matchup = {
                     enable = true, -- mandatory, false will disable the whole extension
@@ -64,7 +75,8 @@ return {
                 ensure_installed = {
                     "c", "graphql", "javascript", "haskell", "nix", "bash", "fish", "elm", "lua", "go", "gomod",
                     "c_sharp", "html",
-                    "jq", "json", "jsonnet", "markdown", "markdown_inline", "php", "python", "regex", "toml",
+                    "jq", "json", "jsonnet", --[[ "markdown", Causes crash for some reason]] "markdown_inline", "php",
+                    "python", "regex", "toml",
                     "typescript", "vim",
                     "yaml", "cmake", "comment", "css", "cpp", "diff", "dockerfile", "sql", "help"
                 },

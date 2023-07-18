@@ -20,7 +20,6 @@ require("lazy").setup("afreak.plugins", {
         rtp = {
             disabled_plugins = {
                 "gzip",
-                "matchit",
                 "matchparen",
                 "netrw",
                 -- is needed to download spelllang

@@ -1,33 +1,31 @@
 return {
-    { 'echasnovski/mini.sessions', version = false, config = function()
-        require('mini.sessions').setup({ file = "", autowrite = true, autoread = false })
-    end },
-    { 'echasnovski/mini.starter', version = false, config = function()
-        require('mini.starter').setup()
-    end },
+    {
+        'echasnovski/mini.sessions',
+        version = false,
+        config = function()
+            require('mini.sessions').setup({ file = "", autowrite = true, autoread = false })
+        end
+    },
+    {
+        'echasnovski/mini.starter',
+        version = false,
+        config = function()
+            require('mini.starter').setup()
+        end
+    },
     { 'nyoom-engineering/oxocarbon.nvim', priority = 1000, lazy = true },
-    { "ellisonleao/gruvbox.nvim", priority = 1000, lazy = false, config = function()
-        -- setup must be called before loading the colorscheme
-        -- Default options:
-        require("gruvbox").setup({
-            undercurl = true,
-            underline = true,
-            bold = true,
-            italic = true,
-            strikethrough = true,
-            invert_selection = false,
-            invert_signs = false,
-            invert_tabline = true,
-            invert_intend_guides = false,
-            inverse = true, -- invert background for search, diffs, statuslines and errors
-            contrast = "hard", -- can be "hard", "soft" or empty string
-            palette_overrides = {},
-            overrides = {},
-            dim_inactive = false,
-            transparent_mode = false,
-        })
-        vim.cmd([[colorscheme gruvbox]])
-    end },
+    {
+        "ellisonleao/gruvbox.nvim",
+        priority = 1000,
+        lazy = false,
+        config = function()
+            require("gruvbox").setup({
+                invert_tabline = true,
+                contrast = "hard", -- can be "hard", "soft" or empty string
+            })
+            vim.cmd([[colorscheme gruvbox]])
+        end
+    },
     {
         'nanozuki/tabby.nvim',
         config = function()
@@ -62,7 +60,7 @@ return {
                 sections = {
                     lualine_a = { { 'mode' } },
                     lualine_b = { { 'diagnostics', sources = { 'coc' } }, 'diff' },
-                    lualine_c = { { function()
+                    lualine_c = { { "filename", function()
                         if string.match(vim.env.SSH_AUTH_SOCK, "trezor") then
                             return ""
                         end
@@ -104,26 +102,27 @@ return {
         end
     },
     {
-        'folke/noice.nvim', config = function()
-        require("noice").setup({
-            lsp = {
-                -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-                -- dont thinktthis is necessary as i use coc.nvim, but
-                override = {
-                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                    ["vim.lsp.util.stylize_markdown"] = true,
-                    ["cmp.entry.get_documentation"] = true,
+        'folke/noice.nvim',
+        config = function()
+            require("noice").setup({
+                lsp = {
+                    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+                    -- dont thinktthis is necessary as i use coc.nvim, but
+                    override = {
+                        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                        ["vim.lsp.util.stylize_markdown"] = true,
+                        ["cmp.entry.get_documentation"] = true,
+                    },
                 },
-            },
-            presets = {
-                bottom_search = true, -- use a classic bottom cmdline for search
-                command_palette = true, -- position the cmdline and popupmenu together
-                long_message_to_split = true, -- long messages will be sent to a split
-                inc_rename = false, -- enables an input dialog for inc-rename.nvim
-                lsp_doc_border = false, -- add a border to hover docs and signature help
-            },
-        })
-    end,
+                presets = {
+                    bottom_search = true,         -- use a classic bottom cmdline for search
+                    command_palette = true,       -- position the cmdline and popupmenu together
+                    long_message_to_split = true, -- long messages will be sent to a split
+                    inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+                    lsp_doc_border = false,       -- add a border to hover docs and signature help
+                },
+            })
+        end,
         dependencies =
         { -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
             "MunifTanjim/nui.nvim",

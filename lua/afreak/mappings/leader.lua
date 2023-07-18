@@ -40,7 +40,7 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
         l = { c("Lazy log"), "Show recent updates" },
         p = { c("Lazy profile"), "Show detailed profiling" },
         s = { c("Lazy sync"), "Run install, clean and update" },
-        t = { c("Lazy update"), "Update plugins. This will also update the lockfile" },
+        u = { c("Lazy update"), "Update plugins. This will also update the lockfile" },
     },
     -- u = {  },
     y = {
@@ -147,7 +147,6 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
         e = { h("noice", 'cmd', "errors"), "error messages in a split. Last errors on top" },
         s = { h("noice", 'cmd', "stats"), "debugging stats" },
         t = { h("noice", 'cmd', "telescope"), "opens message history in Telescope" },
-
     },
     e = { h('fzf-lua', 'resume'), 'fzf resume last' },
     -- i = {},
@@ -162,7 +161,7 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
         d = { c("-tabmove"), "tab down" },
         p = { function()
             vim.api.nvim_set_current_win(require('window-picker').pick_window() or
-            vim.api.nvim_get_current_win())
+                vim.api.nvim_get_current_win())
         end, "Pick a window" }
     },
     z = {

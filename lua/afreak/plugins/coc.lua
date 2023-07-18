@@ -1,13 +1,14 @@
 return {
     { "afreakk/coc-cspell-dicts", build = 'yarn install && yarn build' },
-    { 'neoclide/coc.nvim', branch = 'release',
+    {
+        'neoclide/coc.nvim',
+        branch = 'release',
         config = function()
             vim.g.coc_global_extensions = {
                 "coc-explorer",
                 "coc-clangd",
                 "coc-css",
                 "coc-eslint",
-                "coc-fsharp",
                 "coc-json",
                 "coc-docker",
                 "coc-yaml",
@@ -34,5 +35,6 @@ return {
                 command = "silent call CocActionAsync('highlight')",
                 desc = "Highlight symbol under cursor on CursorHold"
             })
-        end }
+        end
+    }
 }
