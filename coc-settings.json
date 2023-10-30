@@ -10,6 +10,9 @@
     "snippets.textmateSnippetsRoots": [
         "/home/afreak/.config/nvim/vscodesnippets"
     ],
+    "markdownlint.config": {
+        "line_length": false
+    },
     "coc.source.around.priority": 80,
     "coc.source.buffer.priority": 70,
     "coc.source.file.priority": 60,

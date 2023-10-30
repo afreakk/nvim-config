@@ -54,7 +54,7 @@ return {
         event = "BufReadPost",
         dependencies = {
             "nvim-treesitter/nvim-treesitter-textobjects",
-            'mrjones2014/nvim-ts-rainbow'
+            'https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git'
         },
         config = function()
             -- syntax highlight doesnt work ..
@@ -84,10 +84,6 @@ return {
                 -- auto_install = true,
                 highlight = { enable = true },
                 indent = { enable = true },
-                rainbow = {
-                    enable = true,
-                    extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-                },
                 incremental_selection = {
                     enable = true,
                     keymaps = {

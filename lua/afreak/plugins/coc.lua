@@ -26,6 +26,7 @@ return {
                 "coc-snippets",
                 "coc-pairs",
                 "coc-sumneko-lua",
+                "coc-markdownlint",
             }
             vim.api.nvim_create_user_command("Format", "call CocAction('format')", {})
             -- Highlight the symbol and its references on a CursorHold event(cursor is idle)
