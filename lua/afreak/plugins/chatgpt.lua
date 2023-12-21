@@ -1,19 +1,21 @@
 return {
-    { 'jackMort/ChatGPT.nvim',
+    {
+        'jackMort/ChatGPT.nvim',
         dependencies = {
             "MunifTanjim/nui.nvim",
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope.nvim"
         },
-        keys = {
-            { "<space>hh", "<cmd>ChatGPT<CR>",      desc = "ChatGPT" },
-            { "<space>ha", "<cmd>ChatGPTActAs<CR>", desc = "ChatGPTActAs" },
-            { "<space>hi", "<cmd>ChatGPTEditWithInstructions<CR>", desc = "ChatGPTEditWithInstructions",
-                mode = { "n", "x" } },
-        },
+        event = "VeryLazy",
         config = function()
             require("chatgpt").setup({
-                -- optional configuration
+                api_key_cmd = "cat /home/afreak/random/openai_api_key",
+                openai_params = {
+                    model = "gpt-4",
+                },
+                openai_edit_params = {
+                    model = "gpt-4",
+                },
             })
         end
     }

@@ -149,5 +149,7 @@
             }
         }
     },
-    "cSpell.userWords": ["Dotenv"]
+    "cSpell.userWords": [
+      "xlarge"
+    ]
 }
