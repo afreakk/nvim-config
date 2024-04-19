@@ -102,7 +102,7 @@
         "csharp-ls": {
             "command": "csharp-ls",
             "filetypes": ["cs"],
-            "rootPatterns": ["*.csproj", ".vim/", ".git/", ".hg/"]
+            "rootPatterns": ["*.sln"]
         },
         "graphql": {
             "command": "graphql-lsp",
@@ -110,8 +110,9 @@
             "filetypes": ["graphql"]
         },
         "nix": {
-            "command": "rnix-lsp",
-            "filetypes": ["nix"]
+            "command": "nil",
+            "filetypes": ["nix"],
+            "rootPatterns": ["flake.nix"]
         },
         "terraform": {
             "command": "terraform-ls",
@@ -149,7 +150,5 @@
             }
         }
     },
-    "cSpell.userWords": [
-      "xlarge"
-    ]
+    "cSpell.userWords": ["Serverlessv", "rege", "xlarge"]
 }

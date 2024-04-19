@@ -46,4 +46,21 @@ return {
             vim.g.direnv_auto = 0
         end
     },
+    {
+        'stevearc/oil.nvim',
+        opts = {},
+        -- Optional dependencies
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+    },
+    {
+        -- probably remove when this becomes live https://github.com/neovim/neovim/pull/23401 https://github.com/stevearc/oil.nvim/issues/182
+        "chrishrb/gx.nvim",
+        keys = { { "gx", "<cmd>Browse<cr>", mode = { "n", "x" } } },
+        cmd = { "Browse" },
+        init = function()
+            vim.g.netrw_nogx = 1 -- disable netrw gx
+        end,
+        dependencies = { "nvim-lua/plenary.nvim" },
+        config = true,
+    }
 }
