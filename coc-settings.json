@@ -7,9 +7,6 @@
             "kustomization.yml"
         ]
     },
-    "snippets.textmateSnippetsRoots": [
-        "/home/afreak/.config/nvim/vscodesnippets"
-    ],
     "markdownlint.config": {
         "line_length": false
     },
@@ -30,6 +27,7 @@
 
     "prettier.tabWidth": 4,
     "prettier.singleQuote": true,
+    "prettier.enableDebugLogs": true,
     "cSpell.language": "en-US,nb",
     "cSpell.allowCompoundWords": true,
     "cSpellExt.enableDictionaries": ["norwegian"],
@@ -77,9 +75,6 @@
             "args": [],
             "filetypes": ["fsharp"],
             "trace.server": "verbose",
-            "initalizationOptions": {
-                "AutomaticWorkspaceInit": true
-            },
             "settings": {
                 "FSharp.keywordsAutocomplete": true,
                 "FSharp.ExternalAutocomplete": false,
@@ -150,5 +145,10 @@
             }
         }
     },
-    "cSpell.userWords": ["Serverlessv", "rege", "xlarge"]
+    "cSpell.userWords": [
+      "Serverlessv",
+      "rege",
+      "webauthn",
+      "xlarge"
+    ]
 }

@@ -76,3 +76,6 @@ vim.opt.signcolumn = 'number'
 vim.opt.shortmess:append('c')
 
 vim.o.spelllang = "nb,en"
+
+-- use default but add - to it, not this was not a good idea for langs  that use o->f() etc
+-- vim.opt.iskeyword:append("-")
