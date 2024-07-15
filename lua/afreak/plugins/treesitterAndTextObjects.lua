@@ -75,10 +75,10 @@ return {
                 ensure_installed = {
                     "c", "graphql", "javascript", "haskell", "nix", "bash", "fish", "elm", "lua", "go", "gomod",
                     "c_sharp", "html",
-                    "jq", "json", "jsonnet", --[[ "markdown", Causes crash for some reason]] "markdown_inline", "php",
+                    "jq", "json", "jsonnet", "markdown", "markdown_inline", "php",
                     "python", "regex", "toml",
-                    "typescript", "vim",
-                    "yaml", "cmake", "comment", "css", "cpp", "diff", "dockerfile", "sql", "help"
+                    "typescript", "vim", "vimdoc", "luadoc",
+                    "yaml", "cmake", "comment", "css", "cpp", "diff", "dockerfile", "sql"
                 },
                 sync_install = false,
                 -- auto_install = true,
