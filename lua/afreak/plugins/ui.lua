@@ -47,60 +47,81 @@ return {
                 }
             end)
         end
+    }, {
+    'stevearc/quicker.nvim',
+    ---@module "quicker"
+    ---@type quicker.SetupOptions
+    opts = {
+        keys = {
+            {
+                ">",
+                function()
+                    require("quicker").expand({ before = 2, after = 2, add_to_existing = true })
+                end,
+                desc = "Expand quickfix context",
+            },
+            {
+                "<",
+                function()
+                    require("quicker").collapse()
+                end,
+                desc = "Collapse quickfix context",
+            },
+        },
     },
-    {
-        'nvim-lualine/lualine.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
-        config = function()
-            local noice = require("noice")
-            require('lualine').setup({
-                options = {
-                    theme = 'gruvbox',
-                },
-                sections = {
-                    lualine_a = { { 'mode' } },
-                    lualine_b = { { 'diagnostics', sources = { 'coc' } }, 'diff' },
-                    lualine_c = { { "filename", function()
-                        if string.match(vim.env.SSH_AUTH_SOCK, "trezor") then
-                            return ""
-                        end
-                        return ""
-                    end } },
-                    lualine_x = {
-                        -- {
-                        --   noice.api.status.message.get_hl,
-                        --   cond = noice.api.status.message.has,
-                        -- },
-                        {
-                            noice.api.status.command.get,
-                            cond = noice.api.status.command.has,
-                        },
-                        {
-                            noice.api.status.mode.get,
-                            cond = noice.api.status.mode.has,
-                        },
-                        {
-                            noice.api.status.search.get,
-                            cond = noice.api.status.search.has,
-                        },
-                        {
-                            noice.api.status.ruler.get,
-                            cond = noice.api.status.ruler.has,
-                        },
+}, {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
+    config = function()
+        local noice = require("noice")
+        require('lualine').setup({
+            options = {
+                theme = 'gruvbox',
+            },
+            sections = {
+                lualine_a = { { 'mode' } },
+                lualine_b = { { 'diagnostics', sources = { 'coc' } }, 'diff' },
+                lualine_c = { { "filename", function()
+                    if string.match(vim.env.SSH_AUTH_SOCK, "trezor") then
+                        return ""
+                    end
+                    return ""
+                end } },
+                lualine_x = {
+                    -- {
+                    --   noice.api.status.message.get_hl,
+                    --   cond = noice.api.status.message.has,
+                    -- },
+                    {
+                        noice.api.status.command.get,
+                        cond = noice.api.status.command.has,
                     },
-                    lualine_z = { { 'location' }, { 'filetype' }, },
+                    {
+                        noice.api.status.mode.get,
+                        cond = noice.api.status.mode.has,
+                    },
+                    {
+                        noice.api.status.search.get,
+                        cond = noice.api.status.search.has,
+                    },
+                    {
+                        noice.api.status.ruler.get,
+                        cond = noice.api.status.ruler.has,
+                    },
                 },
-                inactive_sections = {
-                    lualine_a = {},
-                    lualine_b = {},
-                    lualine_c = { 'filename' },
-                    lualine_x = { 'progress' },
-                    lualine_y = { 'location' },
-                    lualine_z = {}
-                },
-            })
-        end
-    },
+                lualine_z = { { 'location' }, { 'filetype' }, },
+            },
+            inactive_sections = {
+                lualine_a = {},
+                lualine_b = {},
+                lualine_c = { 'filename' },
+                lualine_x = { 'progress' },
+                lualine_y = { 'location' },
+                lualine_z = {}
+            },
+        })
+    end
+},
     {
         'folke/noice.nvim',
         config = function()

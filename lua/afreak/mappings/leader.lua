@@ -205,7 +205,8 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
             r = { c("CocFzfListResume"), "coclistresume" },
         },
         u = { c("CocCommand workspace.showOutput"), "workspace.showOutput" },
-        r = { c("CocRestart"), "CocRestart" },
+        r = { c("CocRestart"), "Restart" },
+        o = { c("CocOutline"), "Outline" },
         g = {
             name = "+goto (also available as g* keys)",
             i = { p("coc-implementation"), "goto-implementation" },
