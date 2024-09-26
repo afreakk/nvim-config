@@ -1,6 +1,6 @@
 return {
     'folke/which-key.nvim',
-    dependencies = { "afreakk/unimpaired-which-key.nvim" },
+    dependencies = { dir = "/home/afreak/coding/unimpaired-which-key.nvim" },
     config = function()
         vim.o.timeoutlen = 500
         local wk = require('which-key')
@@ -14,6 +14,7 @@ return {
                 suggestions = 20,
             },
         })
+        wk.add(require("unimpaired-which-key"))
         local mappings = require("afreak.mappings.other")
         wk.register(mappings.n_mappings, { mode = "n" })
         wk.register(mappings.x_mappings, { mode = "x" })
@@ -24,8 +25,5 @@ return {
         wk.register(leadermaps.leaderMaps, { prefix = '<leader>' })
         wk.register(leadermaps.localLeaderMaps, { prefix = '<localleader>' })
         wk.register(leadermaps.x_leaderMaps, { prefix = '<localleader>', mode = "x" })
-        local uwk = require("unimpaired-which-key")
-        wk.register(uwk.normal_mode)
-        wk.register(uwk.normal_and_visual_mode, { mode = { "n", "v" } })
     end
 }

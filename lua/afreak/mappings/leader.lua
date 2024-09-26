@@ -8,6 +8,7 @@ local M = {}
 M.spaceMaps = fzfUtils.fzfFileFind({}, {
     q = fzfUtils.fzfGreps({}, {
         name = "+fzf",
+        e = { c('AdvancedGitSearch'), 'AdvancedGitSearch' },
         h = { h('fzf-lua', 'search_history'), "search history" },
         j = { h('fzf-lua', 'jumps'), ":jumps" },
         c = { h('fzf-lua', 'changes'), ":changes" },

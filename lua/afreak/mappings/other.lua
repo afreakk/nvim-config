@@ -53,14 +53,19 @@ M.n_mappings = {
             o = { c("UndotreeToggle"), "Toggle undotree" },
         },
     },
-    ["<Esc>"] = { function()
-        vim.schedule(function()
-            vim.fn["coc#float#close_all"](1)
-            vim.cmd([[nohlsearch]])
-            require('notify').dismiss()
-        end)
-        return "<Esc>"
-    end, "dismiss", expr = true, replace_keycodes = true },
+    ["<Esc>"] = {
+        function()
+            vim.schedule(function()
+                vim.fn["coc#float#close_all"](1)
+                vim.cmd([[nohlsearch]])
+                require('notify').dismiss()
+            end)
+            return "<Esc>"
+        end,
+        "dismiss",
+        expr = true,
+        replace_keycodes = true
+    },
     s = { h("substitute", "operator"), "Subtitute txt given by operator by register0" },
     ["ss"] = { h("substitute", "line"), "Substitute line by register0" },
     S = { h("substitute", "eol"), "Substitute to end of line by register0" },
@@ -126,44 +131,69 @@ local noTextBehindCursor = function()
 end
 
 M.i_mappings = {
-    ["<S-Down>"] = { function()
-        if vim.fn["coc#float#has_scroll"]() == 1 then
-            vim.fn["coc#float#scroll"](1, 1)
-        else
-            return "<S-Down>"
-        end
-    end, "Scroll down", expr = true, replace_keycodes = true },
-    ["<S-Up>"] = { function()
-        if vim.fn["coc#float#has_scroll"]() == 1 then
-            vim.fn["coc#float#scroll"](0, 1)
-        else
-            return "<S-Up>"
-        end
-    end, "Scroll up", expr = true, replace_keycodes = true },
-    ["<TAB>"] = { function()
-        if vim.fn["coc#pum#visible"]() == 1 then
-            return vim.fn["coc#pum#next"](1)
-        end
-        if noTextBehindCursor() then
-            return "<TAB>"
-        end
-        vim.fn["coc#refresh"]()
-    end, "pum-next/refresh/tab", expr = true, replace_keycodes = true },
-    ["<S-TAB>"] = { function()
-        if vim.fn["coc#pum#visible"]() == 1 then
-            return vim.fn["coc#pum#prev"](1)
-        end
-        if noTextBehindCursor() then
-            return "<C-h>"
-        end
-        vim.fn["coc#refresh"]()
-    end, "pum-prev/refresh/s-tab", expr = true, replace_keycodes = true },
-    ["<CR>"] = { function()
-        if vim.fn["coc#pum#visible"]() == 1 then
-            return vim.fn["coc#pum#confirm"]()
-        end
-        return "<CR>"
-    end, "Confirm", expr = true, replace_keycodes = true },
+    ["<S-Down>"] = {
+        function()
+            if vim.fn["coc#float#has_scroll"]() == 1 then
+                vim.fn["coc#float#scroll"](1, 1)
+            else
+                return "<S-Down>"
+            end
+        end,
+        "Scroll down",
+        expr = true,
+        replace_keycodes = true
+    },
+    ["<S-Up>"] = {
+        function()
+            if vim.fn["coc#float#has_scroll"]() == 1 then
+                vim.fn["coc#float#scroll"](0, 1)
+            else
+                return "<S-Up>"
+            end
+        end,
+        "Scroll up",
+        expr = true,
+        replace_keycodes = true
+    },
+    ["<TAB>"] = {
+        function()
+            if vim.fn["coc#pum#visible"]() == 1 then
+                return vim.fn["coc#pum#next"](1)
+            end
+            if noTextBehindCursor() then
+                return "<TAB>"
+            end
+            vim.fn["coc#refresh"]()
+        end,
+        "pum-next/refresh/tab",
+        expr = true,
+        replace_keycodes = true
+    },
+    ["<S-TAB>"] = {
+        function()
+            if vim.fn["coc#pum#visible"]() == 1 then
+                return vim.fn["coc#pum#prev"](1)
+            end
+            if noTextBehindCursor() then
+                return "<C-h>"
+            end
+            vim.fn["coc#refresh"]()
+        end,
+        "pum-prev/refresh/s-tab",
+        expr = true,
+        replace_keycodes = true
+    },
+    ["<CR>"] = {
+        function()
+            if vim.fn["coc#pum#visible"]() == 1 then
+                return vim.fn["coc#pum#confirm"]()
+            end
+            return "<CR>"
+        end,
+        "Confirm",
+        expr = true,
+        replace_keycodes = true
+    },
 }
 M.c_mappings = {
     ["<S-Enter>"] = { function() require("noice").redirect(vim.fn.getcmdline()) end, "Redirect Cmdline" }
