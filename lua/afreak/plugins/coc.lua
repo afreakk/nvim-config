@@ -23,7 +23,7 @@ return {
                 "coc-highlight",
                 "coc-spell-checker",
                 "coc-sh",
-                "coc-snippets",
+                -- "coc-snippets",
                 "coc-pairs",
                 "coc-sumneko-lua",
                 "coc-markdownlint",

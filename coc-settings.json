@@ -150,6 +150,7 @@
       "grpc",
       "kubectl",
       "rege",
+      "rofi",
       "tailef",
       "webauthn",
       "xlarge"
