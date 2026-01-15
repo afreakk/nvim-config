@@ -10,6 +10,7 @@
     "markdownlint.config": {
         "line_length": false
     },
+    "FSharp.Linter": false,
     "coc.source.around.priority": 80,
     "coc.source.buffer.priority": 70,
     "coc.source.file.priority": 60,
@@ -21,6 +22,7 @@
     "diagnostic.hintSign": "",
     "diagnostic.virtualText": true,
     "explorer.icon.enableNerdfont": true,
+    "deno.documentPreloadLimit": 20000000000,
     "explorer.previewAction.onHover": false,
     "explorer.file.reveal.auto": true,
     "explorer.trash.command": "trash-put %s",
@@ -111,7 +113,14 @@
         },
         "terraform": {
             "command": "terraform-ls",
-            "filetypes": ["terraform", "tf"]
+            "args": ["serve"],
+            "filetypes": ["terraform", "tf"],
+            "initializationOptions": {},
+            "settings": {
+                "terraform-ls": {
+                    "ignoreDiagnostics": []
+                }
+            }
         },
         "haskell": {
             "command": "haskell-language-server-wrapper",
@@ -146,13 +155,34 @@
         }
     },
     "cSpell.userWords": [
+      "Aiven",
+      "Authenticatable",
+      "Authorizable",
+      "Cloudamqp",
+      "Debugf",
+      "Debugln",
+      "Hono",
+      "Infof",
+      "Infoln",
       "Serverlessv",
+      "Traceln",
+      "Warnf",
+      "Warnln",
+      "appsv",
+      "brotli",
+      "cfargotunnel",
+      "corev",
       "grpc",
+      "iasa",
       "kubectl",
+      "metav",
+      "rabbitmq",
       "rege",
       "rofi",
+      "serversideup",
       "tailef",
       "webauthn",
-      "xlarge"
+      "xlarge",
+      "zstd"
     ]
 }

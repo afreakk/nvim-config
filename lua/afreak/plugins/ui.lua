@@ -6,26 +6,26 @@ return {
             require('mini.sessions').setup({ file = "", autowrite = true, autoread = false })
         end
     },
-    {
-        'echasnovski/mini.starter',
-        version = false,
-        config = function()
-            require('mini.starter').setup()
-        end
-    },
+    -- {
+    --     'echasnovski/mini.starter',
+    --     version = false,
+    --     config = function()
+    --         require('mini.starter').setup()
+    --     end
+    -- },
     { 'nyoom-engineering/oxocarbon.nvim', priority = 1000, lazy = true },
-    {
-        "ellisonleao/gruvbox.nvim",
-        priority = 1000,
-        lazy = false,
-        config = function()
-            require("gruvbox").setup({
-                invert_tabline = true,
-                contrast = "hard", -- can be "hard", "soft" or empty string
-            })
-            vim.cmd([[colorscheme gruvbox]])
-        end
-    },
+    -- {
+    --     "ellisonleao/gruvbox.nvim",
+    --     priority = 1000,
+    --     lazy = false,
+    --     config = function()
+    --         require("gruvbox").setup({
+    --             invert_tabline = true,
+    --             contrast = "hard", -- can be "hard", "soft" or empty string
+    --         })
+    --         vim.cmd([[colorscheme gruvbox]])
+    --     end
+    -- },
     {
         'nanozuki/tabby.nvim',
         config = function()
@@ -150,7 +150,25 @@ return {
             -- OPTIONAL:
             --   `nvim-notify` is only needed, if you want to use the notification view.
             --   If not available, we use `mini` as the fallback
-            "rcarriga/nvim-notify",
+            -- "rcarriga/nvim-notify",
         }
-    },
+    }, {
+    "folke/snacks.nvim",
+    opts = {
+        notifier = {
+        },
+        quickfile = { enable = true },
+        dashboard = {
+            -- your dashboard configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+            sections = {
+                { section = "header" },
+                { section = "keys", gap = 1, padding = 1 },
+                { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+                { section = "startup" },
+            }
+        }
+    }
+}
 }

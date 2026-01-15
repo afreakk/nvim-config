@@ -54,7 +54,7 @@ return {
         event = "BufReadPost",
         dependencies = {
             "nvim-treesitter/nvim-treesitter-textobjects",
-            'https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git'
+            -- 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git'
         },
         config = function()
             -- syntax highlight doesnt work ..
@@ -74,7 +74,7 @@ return {
                 },
                 ensure_installed = {
                     "c", "graphql", "javascript", "haskell", "nix", "bash", "fish", "elm", "lua", "go", "gomod",
-                    "c_sharp", "html",
+                    "c_sharp", "html", "fsharp",
                     "jq", "json", "jsonnet", "markdown", "markdown_inline", "php",
                     "python", "regex", "toml",
                     "typescript", "vim", "vimdoc", "luadoc",

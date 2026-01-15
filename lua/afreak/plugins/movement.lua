@@ -11,12 +11,15 @@ return {
         'ggandor/leap.nvim',
         lazy = true,
         config = function()
-            require('leap').opts.safe_labels = vim.tbl_map(function(v)
-                if vim.tbl_contains({ "s", "S" }, v) then
-                    return nil
-                end
-                return v
-            end, require('leap').opts.safe_labels)
+            local leap = require('leap')
+            if leap.opts and leap.opts.safe_labels and type(leap.opts.safe_labels) == 'table' then
+                leap.opts.safe_labels = vim.tbl_map(function(v)
+                    if vim.tbl_contains({ "s", "S" }, v) then
+                        return nil
+                    end
+                    return v
+                end, leap.opts.safe_labels)
+            end
         end
     },
     {

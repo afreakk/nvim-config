@@ -23,10 +23,12 @@ return {
                 "coc-highlight",
                 "coc-spell-checker",
                 "coc-sh",
+                "coc-deno",
                 -- "coc-snippets",
-                "coc-pairs",
+                -- "coc-pairs",
                 "coc-sumneko-lua",
                 "coc-markdownlint",
+                "coc-fsharp",
             }
             vim.api.nvim_create_user_command("Format", "call CocAction('format')", {})
             -- Highlight the symbol and its references on a CursorHold event(cursor is idle)

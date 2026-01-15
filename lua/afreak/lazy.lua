@@ -37,3 +37,5 @@ require("lazy").setup("afreak.plugins", {
     },
     -- debug = true,
 })
+
+vim.cmd.packadd('cfilter')

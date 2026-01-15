@@ -8,6 +8,8 @@ vim.opt.cursorline = true
 -- Mouse support in all modes
 vim.opt.mouse = 'a'
 
+vim.opt.background = "dark";
+
 -- Persistent undo across yeye
 vim.opt.undofile = true
 
