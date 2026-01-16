@@ -1,5 +1,14 @@
 return {
     {
+        "RRethy/base16-nvim",
+        priority = 1000,
+        lazy = false,
+        config = function()
+            local colors = require("stylix-colors")
+            require("base16-colorscheme").setup(colors)
+        end
+    },
+    {
         'echasnovski/mini.sessions',
         version = false,
         config = function()
