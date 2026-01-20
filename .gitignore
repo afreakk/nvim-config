@@ -3,3 +3,4 @@ plugged
 plugin/packer_compiled.lua
 .vim/
 spell/
+lua/stylix-colors.lua

@@ -1,1 +1,0 @@
-/nix/store/96xks2maa5s9b461wwlv88jwr9hb0mi9-home-manager-files/.config/nvim/lua/stylix-colors.lua
