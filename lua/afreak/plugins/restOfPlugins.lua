@@ -21,7 +21,6 @@ return {
             select = { backend = "fzf_lua", } }
     },
     { 'bronson/vim-visual-star-search', event = "VeryLazy" },
-    { 'numToStr/Comment.nvim',          event = "VeryLazy", config = true, name = "Comment" },
     {
         'ethanholz/nvim-lastplace',
         event = "BufReadPost",
