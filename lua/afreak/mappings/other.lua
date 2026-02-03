@@ -107,16 +107,6 @@ M.n_mappings = {
     },
     { "gr",  "<Plug>(coc-references)",            desc = "Show references" },
     { "gy",  "<Plug>(coc-type-definition)",       desc = "Show type definition" },
-    {
-        "gx",
-        function()
-            local word = vim.fn.expand("<cfile>")
-            if word ~= "" then
-                vim.ui.open(word)
-            end
-        end,
-        desc = "Open file/URL under cursor"
-    },
     { "m",   h('leap', 'leap', {}),               desc = "Leap forward to" },
     { "s",   h("substitute", "operator"),         desc = "Subtitute txt given by operator by register0" },
     { "ss",  h("substitute", "line"),             desc = "Substitute line by register0" },
