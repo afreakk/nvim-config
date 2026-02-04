@@ -38,11 +38,15 @@ return {
     {
         'nanozuki/tabby.nvim',
         config = function()
+            local colors = require("stylix-colors")
+            vim.api.nvim_set_hl(0, "TabbyActive", { fg = colors.base0B, bg = colors.base02, bold = true })
+            vim.api.nvim_set_hl(0, "TabbyInactive", { fg = colors.base04, bg = colors.base01 })
+            vim.api.nvim_set_hl(0, "TabbyFill", { bg = colors.base00 })
             require('tabby.tabline').set(function(line)
                 return {
                     line.tabs().foreach(function(tab)
-                        local tabClr = tab.is_current() and 'GruvboxOrangeSign' or 'WinBarNC'
-                        local bgClr = "Normal"
+                        local tabClr = tab.is_current() and 'TabbyActive' or 'TabbyInactive'
+                        local bgClr = "TabbyFill"
                         return {
                             line.sep('', tabClr, bgClr),
                             tab.number(),
@@ -52,7 +56,7 @@ return {
                             margin = ' ',
                         }
                     end),
-                    hl = 'WinBarNC',
+                    hl = 'TabbyFill',
                 }
             end)
         end
