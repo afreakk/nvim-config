@@ -222,9 +222,6 @@ M.n_mappings = {
 -- }
 M.x_mappings = {
     s = { h("substitute", "visual"), "Substitute visual selection by register0" },
-    g = {
-        M = { ":lua require('tsht').nodes()<CR>", "Treehopper expand selection" },
-    },
     i = {
         h = { c("Gitsigns select_hunk"), "Gitsigns hunk", mode = { "o", "x" } },
     },
