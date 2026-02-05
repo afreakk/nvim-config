@@ -1,19 +1,4 @@
 return {
-    -- Mason: manages LSP servers, linters, formatters
-    {
-        "mason-org/mason.nvim",
-        opts = {},
-    },
-    {
-        "mason-org/mason-lspconfig.nvim",
-        dependencies = {
-            "mason-org/mason.nvim",
-            "neovim/nvim-lspconfig",
-        },
-        opts = {
-            automatic_enable = true,
-        },
-    },
     -- LSP configuration
     {
         "neovim/nvim-lspconfig",
@@ -97,7 +82,6 @@ return {
                 root_markers = { "package.json", "tsconfig.json", "jsconfig.json" },
             })
 
-            -- Custom language servers (provided by nix/system, not mason)
             vim.lsp.config('fsautocomplete', {
                 cmd = { "fsautocomplete" },
                 filetypes = { "fsharp" },
@@ -165,8 +149,24 @@ return {
                 filetypes = { "graphql" },
             })
 
-            -- Enable servers that are provided by nix/system (not installed via mason)
+            -- Enable all servers — ones not in PATH simply won't attach
             vim.lsp.enable({
+                'lua_ls',
+                'ts_ls',
+                'gopls',
+                'pyright',
+                'rust_analyzer',
+                'clangd',
+                'jsonls',
+                'yamlls',
+                'cssls',
+                'dockerls',
+                'bashls',
+                'vimls',
+                'eslint',
+                'denols',
+                'phpactor',
+                'terraformls',
                 'fsautocomplete',
                 'csharp_ls',
                 'nil_ls',

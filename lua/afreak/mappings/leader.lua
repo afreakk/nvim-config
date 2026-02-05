@@ -220,7 +220,7 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
                 end
             end
         end, "close all floating windows" },
-        i = { c("LspInfo"), "LSP info" },
+        i = { c("checkhealth lsp"), "LSP info" },
     },
     v = fzfUtils.fzfFileFind({ cwd = '~/.config/nvim' }, {
         name = '+vimrc',
