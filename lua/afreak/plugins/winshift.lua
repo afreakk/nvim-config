@@ -29,7 +29,7 @@ return {
                             floats = true, -- Filter out floating windows
                             filetype = {
                                 "NvimTree",
-                                "coc-explorer",
+                                "oil",
                             }, -- List of ignored file types
                             buftype = {
                                 "terminal",

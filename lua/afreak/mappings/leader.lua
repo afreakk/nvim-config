@@ -2,7 +2,7 @@ local utils = require("afreak.utils.other")
 local fzfUtils = require("afreak.utils.fzf")
 local h = utils.functionHelper
 local c = utils.cmd
-local p = utils.plug
+
 local grepCmd = 'grep -r -i --line-number --color=auto --perl-regex'
 local M = {}
 M.spaceMaps = fzfUtils.fzfFileFind({}, {
@@ -23,7 +23,7 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
         })
     }),
     w = { c('w'), 'save file' },
-    f = { c("CocCommand explorer"), "Explorer" },
+    f = { c("Oil"), "Explorer (Oil)" },
     -- p = Merged in by fzfFileFind
     -- g = ----||------
     j = { c("TSJJoin"), "Join code block" },
@@ -187,43 +187,40 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
     },
     -- x = {},
     c = {
-        name = "+coc",
-        a = {
-            name = "+actions",
-            a = { p("coc-codeaction"), "codeaction" },
-            l = { p("coc-codeaction-line"), "codeaction-line" },
-            c = { p("coc-codeaction-cursor"), "codeaction-cursor" },
-            v = { p("coc-codeaction-selected"), "codeaction-selected" },
-            s = { p("coc-codelens-action"), "codelens-action" },
-        },
+        name = "+lsp",
+        a = { function() vim.lsp.buf.code_action() end, "code action" },
         l = {
-            name = "+coclists",
-            l = { c("CocFzfList"), "List all list sources" },
-            d = { c("CocFzfList diagnostics"), "diagnostics" },
-            e = { c("CocFzfList extensions"), "extensions" },
-            c = { c("CocFzfList commands"), "commands" },
-            o = { c("CocFzfList outline"), "outline" },
-            s = { c("CocFzfList symbols"), "symbols" },
-            r = { c("CocFzfListResume"), "coclistresume" },
+            name = "+lists",
+            d = { h('fzf-lua', 'diagnostics_workspace'), "diagnostics" },
+            o = { h('fzf-lua', 'lsp_document_symbols'), "outline" },
+            s = { h('fzf-lua', 'lsp_workspace_symbols'), "symbols" },
+            r = { h('fzf-lua', 'resume'), "resume last" },
         },
-        u = { c("CocCommand workspace.showOutput"), "workspace.showOutput" },
-        r = { c("CocRestart"), "Restart" },
-        o = { c("CocOutline"), "Outline" },
+        u = { c("LspLog"), "LSP log" },
+        r = { c("LspRestart"), "Restart" },
+        o = { h('fzf-lua', 'lsp_document_symbols'), "Outline" },
         g = {
             name = "+goto (also available as g* keys)",
-            i = { p("coc-implementation"), "goto-implementation" },
-            t = { p("coc-type-definition"), "goto-type-definition" },
-            r = { p("coc-references"), "goto-references" },
-            d = { p("coc-definition"), "goto-definition" },
+            i = { h('fzf-lua', 'lsp_implementations'), "goto-implementation" },
+            t = { h('fzf-lua', 'lsp_typedefs'), "goto-type-definition" },
+            r = { h('fzf-lua', 'lsp_references'), "goto-references" },
+            d = { h('fzf-lua', 'lsp_definitions'), "goto-definition" },
         },
-        e = { p("coc-rename"), "rename" },
-        f = { p("coc-refactor"), "refactor" },
+        e = { function() vim.lsp.buf.rename() end, "rename" },
+        f = { c("ConformInfo"), "Formatter info" },
         d = {
             name = "+diagnostics enable/disable",
-            e = { c('call coc#config("diagnostic.enable", 1)'), "diagnostic enable" },
-            d = { c('call coc#config("diagnostic.enable", 0)'), "diagnostic disable" },
+            e = { function() vim.diagnostic.enable() end, "diagnostic enable" },
+            d = { function() vim.diagnostic.enable(false) end, "diagnostic disable" },
         },
-        w = { c('call coc#float#close_all() '), "close all floating windows" },
+        w = { function()
+            for _, win in ipairs(vim.api.nvim_list_wins()) do
+                if vim.api.nvim_win_get_config(win).relative ~= "" then
+                    pcall(vim.api.nvim_win_close, win, true)
+                end
+            end
+        end, "close all floating windows" },
+        i = { c("LspInfo"), "LSP info" },
     },
     v = fzfUtils.fzfFileFind({ cwd = '~/.config/nvim' }, {
         name = '+vimrc',
