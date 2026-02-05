@@ -28,7 +28,7 @@ return {
                             cur_win = true, -- Filter out the current window
                             floats = true, -- Filter out floating windows
                             filetype = {
-                                "NvimTree",
+                                "neo-tree",
                                 "oil",
                             }, -- List of ignored file types
                             buftype = {
