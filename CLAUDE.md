@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is a personal Neovim configuration repository (dotfiles for `~/.config/nvim`). It's a highly customized, modular Lua-based Neovim setup designed for professional development with support for 30+ programming languages via LSP integration, advanced text navigation, fuzzy finding, git integration, and debugging capabilities.
+This is a personal Neovim configuration repository (dotfiles for `~/.config/nvim`). It's a highly customized, modular Lua-based Neovim setup designed for professional development with support for 30+ programming languages via native LSP, advanced text navigation, fuzzy finding, git integration, and debugging capabilities. Runs on NixOS — language servers are provided via nix-shell/direnv rather than mason.nvim.
 
 ## Architecture
 
@@ -23,8 +23,7 @@ init.lua (entry point)
 lua/afreak/
 ├── plugins/            - Feature-organized plugin configs (14 files)
 ├── mappings/           - Keybindings organized by mode (leader.lua, other.lua)
-├── utils/              - Helper functions (other.lua, fzf.lua)
-└── coc-settings.json   - LSP and language server configuration
+└── utils/              - Helper functions (other.lua, fzf.lua)
 ```
 
 ### Plugin Organization
@@ -32,7 +31,7 @@ lua/afreak/
 Plugins are organized into logical categories in `lua/afreak/plugins/`:
 
 - **ui.lua** - Visual/UI elements (tabby, lualine, noice, snacks)
-- **coc.lua** - Language servers and code intelligence (primary LSP via Coc.nvim)
+- **lsp.lua** - Native LSP (nvim-lspconfig, blink.cmp, conform.nvim, nvim-lint, fidget.nvim)
 - **fzf.lua** - Fuzzy finding and searching
 - **treesitterAndTextObjects.lua** - Syntax highlighting and text navigation
 - **movement.lua** - Advanced navigation (leap, flit, mini.move)
@@ -43,43 +42,44 @@ Plugins are organized into logical categories in `lua/afreak/plugins/`:
 - **tpope.lua** - tpope plugins (fugitive, rhubarb, repeat, unimpaired)
 - **neoclip.lua** - Clipboard manager
 - **winshift.lua** - Window management
-- **restOfPlugins.lua** - Miscellaneous utilities
+- **restOfPlugins.lua** - Miscellaneous utilities (neo-tree, oil, gitsigns, etc.)
 - **filetypePlugins.lua** - File type-specific configurations
 
 ### Key Binding Architecture
 
 Keybindings are organized by mode and prefix in `lua/afreak/mappings/`:
 
-**leader.lua** (~260+ lines):
-- `spaceMaps` - Nested menus under `<leader><space>`
-- `leaderMaps` - Direct `<leader>` bindings
+**leader.lua** (~250+ lines):
+- `spaceMaps` - Nested menus under `<space>` (files, grep, git, LSP, etc.)
+- `leaderMaps` - Direct `<leader>` (`;`) bindings
 - `localLeaderMaps` - Local leader (`\\`) bindings
 - `x_leaderMaps` - Visual mode leader bindings
 
-**other.lua** (~310+ lines):
-- `n_mappings` - Normal mode (window navigation, diagnostics)
+**other.lua** (~110+ lines):
+- `n_mappings` - Normal mode (window navigation, diagnostics, LSP goto)
 - `x_mappings` - Visual mode
-- `i_mappings` - Insert mode (completion, scrolling)
+- `i_mappings` - Insert mode
 - `c_mappings` - Command mode
 
 ### LSP and Language Support
 
-**Primary LSP Provider**: Coc.nvim with 25+ language extensions configured in `coc-settings.json`
+**LSP Stack** (configured in `lua/afreak/plugins/lsp.lua`):
+- **nvim-lspconfig** + Neovim 0.11 native `vim.lsp.config()` / `vim.lsp.enable()` APIs
+- **blink.cmp** - Autocompletion (Tab/S-Tab/CR keybindings, lazydev source for Lua)
+- **conform.nvim** - Formatting (Prettier, buildifier, nixpkgs-fmt)
+- **nvim-lint** - Linting (shellcheck, markdownlint)
+- **fidget.nvim** - LSP progress notifications
+- **lazydev.nvim** - Lua development support
 
-Supported languages include: C#, F#, Go, Haskell, Elm, Nix, Terraform, GraphQL, Python, JavaScript/TypeScript, Rust, and more.
+**Server Management**: Language servers are provided by nix-shell/direnv. `vim.lsp.enable()` silently skips servers not found in PATH.
 
-**Language Server Configuration** (`coc-settings.json`):
-- Configures all language servers and their options
-- Defines diagnostic signs and virtual text appearance
-- Sets up formatters (Prettier, buildifier, nixpkgs-fmt)
-- Configures spell checking (en-US, Norwegian)
-- Controls code completion priority and behavior
+Configured servers: lua_ls, ts_ls, gopls, pyright, rust_analyzer, clangd, jsonls, yamlls, cssls, dockerls, bashls, vimls, eslint, denols, phpactor, terraformls, fsautocomplete, csharp_ls, nil_ls, hls, elmls, graphql.
 
 ## Common Development Tasks
 
 ### Managing Plugins
 
-All plugin management is done through Lazy.nvim (accessed via `<leader><space>l`):
+All plugin management is done through Lazy.nvim (accessed via `<space>l`):
 
 ```vim
 :Lazy home          " Open plugin manager UI
@@ -94,8 +94,10 @@ All plugin management is done through Lazy.nvim (accessed via `<leader><space>l`
 ### Language Server Management
 
 ```vim
-:CocRestart         " Restart Coc and all language servers
-:CocDiagnostics     " Show all diagnostics
+:LspRestart         " Restart LSP servers
+:LspLog             " View LSP logs
+:checkhealth lsp    " LSP health check
+:ConformInfo        " Show formatter info
 ```
 
 ### Making Configuration Changes
@@ -103,7 +105,7 @@ All plugin management is done through Lazy.nvim (accessed via `<leader><space>l`
 1. **Adding a new plugin**: Create a new `{plugin-name}.lua` file in `lua/afreak/plugins/` or add to `restOfPlugins.lua`
 2. **Adding keybindings**: Add to appropriate file in `lua/afreak/mappings/`
 3. **Adjusting editor options**: Modify `lua/afreak/options.lua`
-4. **Configuring LSP for a language**: Update `coc-settings.json`
+4. **Configuring LSP for a language**: Add `vim.lsp.config()` and `vim.lsp.enable()` calls in `lua/afreak/plugins/lsp.lua`
 
 ### Plugin Specification Format
 
@@ -150,7 +152,7 @@ The codebase has Lua diagnostics warnings about undefined globals (`vim`). This 
 
 ## File Lock and Reproducibility
 
-`lazy-lock.json` locks all 67+ plugins to specific versions. This ensures reproducible builds across systems. To update plugin versions, use `:Lazy update` and commit the updated `lazy-lock.json`.
+`lazy-lock.json` locks all plugin versions. This ensures reproducible builds across systems. To update plugin versions, use `:Lazy update` and commit the updated `lazy-lock.json`.
 
 ## Common File Locations
 
@@ -159,7 +161,7 @@ The codebase has Lua diagnostics warnings about undefined globals (`vim`). This 
 | Plugin configs | `lua/afreak/plugins/*.lua` |
 | Keybindings | `lua/afreak/mappings/*.lua` |
 | Editor options | `lua/afreak/options.lua` |
-| Language servers | `coc-settings.json` |
+| LSP/completion/format config | `lua/afreak/plugins/lsp.lua` |
 | Spellcheck files | `spell/` |
 | Snippets | `vscodesnippets/` |
 | Compiler configs | `compiler/` |

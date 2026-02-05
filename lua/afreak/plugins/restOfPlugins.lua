@@ -12,14 +12,6 @@ return {
         'v1.*',
     },
     { "gbprod/substitute.nvim",         lazy = true,        config = true, name = "substitute", },
-    {
-        "stevearc/dressing.nvim",
-        event = "VeryLazy",
-        config = true,
-        name = "dressing",
-        opts = {
-            select = { backend = "fzf_lua", } }
-    },
     { 'bronson/vim-visual-star-search', event = "VeryLazy" },
     {
         'ethanholz/nvim-lastplace',
