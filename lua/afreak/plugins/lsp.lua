@@ -6,7 +6,7 @@ return {
             { "folke/lazydev.nvim", ft = "lua", opts = {} },
         },
         config = function()
-            -- Diagnostic configuration (matching your old coc diagnostic signs)
+            -- Diagnostic configuration
             vim.diagnostic.config({
                 signs = {
                     text = {
@@ -19,7 +19,7 @@ return {
                 virtual_text = true,
             })
 
-            -- Document highlight on CursorHold (replaces coc-highlight)
+            -- Document highlight on CursorHold
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(args)
                     local client = vim.lsp.get_client_by_id(args.data.client_id)
@@ -176,7 +176,7 @@ return {
             })
         end,
     },
-    -- Autocompletion (replaces coc's built-in completion)
+    -- Autocompletion
     {
         'saghen/blink.cmp',
         version = '1.*',
@@ -211,7 +211,7 @@ return {
             fuzzy = { implementation = "prefer_rust_with_warning" },
         },
     },
-    -- Formatting (replaces coc-prettier, buildifier, nixpkgs-fmt)
+    -- Formatting
     {
         "stevearc/conform.nvim",
         event = "BufWritePre",
@@ -242,7 +242,7 @@ return {
             },
         },
     },
-    -- Linting (replaces coc-diagnostic with shellcheck, markdownlint)
+    -- Linting
     {
         "mfussenegger/nvim-lint",
         event = { "BufReadPre", "BufNewFile" },
@@ -252,7 +252,7 @@ return {
                 sh = { "shellcheck" },
                 markdown = { "markdownlint" },
             }
-            -- Disable line_length rule for markdownlint (matching old coc config)
+            -- Disable MD013 (line_length) for markdownlint
             lint.linters.markdownlint.args = {
                 "--disable", "MD013", "--",
             }

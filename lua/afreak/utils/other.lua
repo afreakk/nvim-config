@@ -50,7 +50,5 @@ M.qfToggle = function()
     end
     vim.cmd.copen()
 end
-M.plug = function(plugCmd)
-    return "<Plug>(" .. plugCmd .. ")"
-end
+
 return M
