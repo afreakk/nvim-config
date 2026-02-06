@@ -1,12 +1,5 @@
 return {
     {
-        'antoinemadec/coc-fzf',
-        dependencies = {
-            { 'junegunn/fzf.vim', dependencies = { 'junegunn/fzf' } }
-        },
-        event = "VeryLazy"
-    },
-    {
         'ibhagwan/fzf-lua',
         dependencies = { 'nvim-tree/nvim-web-devicons' },
         lazy = true,

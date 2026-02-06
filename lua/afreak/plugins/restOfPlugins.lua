@@ -12,14 +12,6 @@ return {
         'v1.*',
     },
     { "gbprod/substitute.nvim",         lazy = true,        config = true, name = "substitute", },
-    {
-        "stevearc/dressing.nvim",
-        event = "VeryLazy",
-        config = true,
-        name = "dressing",
-        opts = {
-            select = { backend = "fzf_lua", } }
-    },
     { 'bronson/vim-visual-star-search', event = "VeryLazy" },
     {
         'ethanholz/nvim-lastplace',
@@ -50,5 +42,23 @@ return {
         opts = {},
         -- Optional dependencies
         dependencies = { "nvim-tree/nvim-web-devicons" },
+    },
+    {
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v3.x",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons",
+            "MunifTanjim/nui.nvim",
+        },
+        opts = {
+            filesystem = {
+                follow_current_file = { enabled = true },
+                hijack_netrw_behavior = "disabled",
+            },
+            window = {
+                width = 30,
+            },
+        },
     },
 }

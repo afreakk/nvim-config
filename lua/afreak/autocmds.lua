@@ -3,11 +3,6 @@ vim.api.nvim_create_autocmd("WinEnter", {
     group = numberz,
     pattern = "*",
     callback = function()
-        local bufnr = vim.api.nvim_get_current_buf()
-        local ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
-        if ft == "coc-explorer" then
-            return
-        end
         vim.opt_local.relativenumber = true
     end,
 })
@@ -68,6 +63,6 @@ auCmdGrp("DirChanged", "dirChangedGroup", "*", function()
 end)
 
 auCmdGrp("User", "direnvLoadedGroup", "DirenvLoaded", function()
-    -- restart coc as we now probably have  new lsps
-    vim.api.nvim_command(":CocRestart")
+    -- restart LSP servers as we now probably have new ones from nix-shell
+    vim.api.nvim_command(":LspRestart")
 end)
