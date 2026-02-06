@@ -252,10 +252,9 @@ return {
                 sh = { "shellcheck" },
                 markdown = { "markdownlint" },
             }
-            -- Disable MD013 (line_length) for markdownlint
-            lint.linters.markdownlint.args = {
-                "--disable", "MD013", "--",
-            }
+            -- Disable MD013 (line_length) while preserving default --stdin flag
+            local ml = lint.linters.markdownlint
+            vim.list_extend(ml.args, { "--disable", "MD013", "--" })
             vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
                 callback = function()
                     lint.try_lint()
