@@ -4,6 +4,7 @@ return {
     config = function()
         vim.o.timeoutlen = 500
         local wk = require('which-key')
+        local uwk = require("unimpaired-which-key")
         wk.setup({
             notify = false,
             show_keys = false,
@@ -14,6 +15,10 @@ return {
                 -- how many suggestions should be shown in the list?
                 suggestions = 20,
             },
+            -- triggers = vim.list_extend(
+            --     { { "<auto>", mode = "nixsotc" } },
+            --     uwk.triggers
+            -- ),
         })
 
         -- Convert old wk.register() dict format to new wk.add() array format
@@ -32,8 +37,8 @@ return {
             end
             return specs
         end
+        wk.add(uwk)
 
-        wk.add(require("unimpaired-which-key"))
         local mappings = require("afreak.mappings.other")
         wk.add(mappings.n_mappings)
         wk.add(convert(mappings.x_mappings, "", "x"))
