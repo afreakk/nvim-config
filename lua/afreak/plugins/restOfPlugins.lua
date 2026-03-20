@@ -21,7 +21,14 @@ return {
         opts = {
             lastplace_ignore_buftype = { "terminal" } }
     },
-    { 'NvChad/nvim-colorizer.lua', event = "BufReadPre", config = true, name = "colorizer" },
+    {
+        'NvChad/nvim-colorizer.lua',
+        event = "BufReadPre",
+        name = "colorizer",
+        opts = {
+            options = { parsers = { css = true } },
+        },
+    },
     {
         'lewis6991/gitsigns.nvim',
         event = "BufReadPre",

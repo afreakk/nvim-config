@@ -165,7 +165,7 @@ return {
                 'vimls',
                 'eslint',
                 'denols',
-                'phpactor',
+                'intelephense',
                 'terraformls',
                 'fsautocomplete',
                 'csharp_ls',

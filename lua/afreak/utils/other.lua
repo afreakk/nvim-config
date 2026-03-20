@@ -11,14 +11,19 @@ M.toggle_SSH_AUTH_SOCK = function()
     end
 end
 M.change_cwd_to_closest_git = function(relativeTo)
-    local closestGitRootFile = vim.fn.fnamemodify(vim.fn.findfile(".git", relativeTo .. ';'), ':h')
-    local closestGitRoot = vim.fn.fnamemodify(vim.fn.finddir(".git", relativeTo .. ';'), ':h')
-    local cwd
-    if string.len(closestGitRoot) > string.len(closestGitRootFile) then
-        cwd = closestGitRoot
-    else
-        cwd = closestGitRootFile
+    local search = relativeTo .. ";"
+    local git_file = vim.fn.findfile(".git", search)
+    local git_dir = vim.fn.finddir(".git", search)
+    -- Normalize to absolute paths so length comparison reflects actual depth
+    if git_file ~= "" then git_file = vim.fn.fnamemodify(git_file, ":p") end
+    if git_dir ~= "" then git_dir = vim.fn.fnamemodify(git_dir, ":p") end
+    -- Pick the deeper (closer) result
+    local result = #git_file > #git_dir and git_file or git_dir
+    if result == "" then
+        vim.api.nvim_err_writeln("No .git found above " .. relativeTo)
+        return
     end
+    local cwd = vim.fn.fnamemodify(result, ":h")
     print("changed cwd to: " .. cwd)
     vim.api.nvim_set_current_dir(cwd)
 end

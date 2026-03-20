@@ -232,7 +232,14 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
         l = { h('fzf-lua', 'buffers'), "list" },
         o = { ":%bd <bar> e# <bar> bd#<CR> <bar>'\"", "only" },
     },
-    k = {},
+    k = {
+        name = "+claude",
+        i = { c("ClaudePreviewInstallHooks"), "Install hooks" },
+        u = { c("ClaudePreviewUninstallHooks"), "Uninstall hooks" },
+        c = { c("ClaudePreviewCloseDiff"), "Close diff" },
+        s = { c("ClaudePreviewStatus"), "Status" },
+        -- y/Y mapped via lazy keys in claudePreview.lua (yank @ref)
+    },
     m = {},
     [","] = {},
     ["."] = {},
