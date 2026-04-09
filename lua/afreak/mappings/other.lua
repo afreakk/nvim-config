@@ -88,7 +88,7 @@ M.n_mappings = {
     { "s",   h("substitute", "operator"),         desc = "Subtitute txt given by operator by register0" },
     { "ss",  h("substitute", "line"),             desc = "Substitute line by register0" },
     { "yo",  group = "Toggle" },
-    { "yoo", "<cmd>UndotreeToggle<CR>",           desc = "Toggle undotree" },
+    { "yoo", function() vim.cmd.undotree() end,    desc = "Toggle undotree" },
     { "yoq", h('afreak.utils.other', 'qfToggle'), desc = "Toggle quickfixlist" },
 }
 M.x_mappings = {
@@ -106,8 +106,13 @@ M.x_mappings = {
     ['<C-k>'] = { h('mini.move', 'move_selection', 'up'), "Mini.move selection up" },
 }
 
--- Insert mode completion keybindings are handled by blink.cmp (see lsp.lua)
-M.i_mappings = {}
+-- Insert mode completion keybindings for native LSP completion
+M.i_mappings = {
+    { "<Tab>", function() return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>" end, expr = true, mode = "i", desc = "Next completion / Tab" },
+    { "<S-Tab>", function() return vim.fn.pumvisible() == 1 and "<C-p>" or "<S-Tab>" end, expr = true, mode = "i", desc = "Prev completion / S-Tab" },
+    { "<CR>", function() return vim.fn.pumvisible() == 1 and "<C-y>" or "<CR>" end, expr = true, mode = "i", desc = "Accept completion / Enter" },
+    { "<C-n>", function() if vim.fn.pumvisible() == 1 then return "<C-n>" else vim.lsp.completion.get() end end, expr = true, mode = "i", desc = "Trigger/next completion" },
+}
 M.c_mappings = {
     ["<S-Enter>"] = { function() require("noice").redirect(vim.fn.getcmdline()) end, "Redirect Cmdline" }
 }

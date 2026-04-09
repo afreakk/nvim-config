@@ -23,7 +23,23 @@ local function auCmdGrp(event, grpName, pattern, callback)
 end
 
 auCmdGrp("TextYankPost", "yankGroup", "*", function()
-    vim.highlight.on_yank { higroup = "IncSearch", timeout = 150 }
+    vim.hl.on_yank { higroup = "IncSearch", timeout = 150 }
+end)
+
+local lastplace_ignore_buftype = { "quickfix", "nofile", "help" }
+local lastplace_ignore_filetype = { "gitcommit", "gitrebase", "svn", "hgcommit" }
+auCmdGrp("BufRead", "lastPlaceGroup", "*", function()
+    if vim.tbl_contains(lastplace_ignore_buftype, vim.bo.buftype) then return end
+    if vim.tbl_contains(lastplace_ignore_filetype, vim.bo.filetype) then
+        vim.cmd([[normal! gg]])
+        return
+    end
+    if vim.fn.line(".") > 1 then return end
+    local last = vim.fn.line([['"]])
+    if last > 0 and last <= vim.fn.line("$") then
+        vim.cmd([[keepjumps normal! g`"zz]])
+        if vim.fn.foldclosed(".") ~= -1 then vim.cmd([[normal! zvzz]]) end
+    end
 end)
 
 auCmdGrp("VimResized", "makeSplitsNiceAfterResizeGroup", "*", function()

@@ -1,5 +1,4 @@
 return {
-    { 'mbbill/undotree',           cmd = "UndotreeToggle" },
     { 'nmac427/guess-indent.nvim', config = true,         name = "guess-indent" },
     {
         's1n7ax/nvim-window-picker',
@@ -12,15 +11,6 @@ return {
         'v1.*',
     },
     { "gbprod/substitute.nvim",         lazy = true,        config = true, name = "substitute", },
-    { 'bronson/vim-visual-star-search', event = "VeryLazy" },
-    {
-        'ethanholz/nvim-lastplace',
-        event = "BufReadPost",
-        config = true,
-        name = "nvim-lastplace",
-        opts = {
-            lastplace_ignore_buftype = { "terminal" } }
-    },
     {
         'NvChad/nvim-colorizer.lua',
         event = "BufReadPre",
@@ -43,29 +33,5 @@ return {
         init = function()
             vim.g.direnv_auto = 0
         end
-    },
-    {
-        'stevearc/oil.nvim',
-        opts = {},
-        -- Optional dependencies
-        dependencies = { "nvim-tree/nvim-web-devicons" },
-    },
-    {
-        "nvim-neo-tree/neo-tree.nvim",
-        branch = "v3.x",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-tree/nvim-web-devicons",
-            "MunifTanjim/nui.nvim",
-        },
-        opts = {
-            filesystem = {
-                follow_current_file = { enabled = true },
-                hijack_netrw_behavior = "disabled",
-            },
-            window = {
-                width = 30,
-            },
-        },
     },
 }

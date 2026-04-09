@@ -1,10 +1,9 @@
 return {
-    { "tpope/vim-unimpaired" },
     { "tpope/vim-dispatch",  cmd = { "Dispatch", "Focus", "Make", "Start" } },
     { "tpope/vim-repeat",    event = "BufReadPre" },
     { "tpope/vim-fugitive", event = "VeryLazy",
         config = function()
-            -- Workaround: blink.cmp ghost_text triggers fugitive#Complete on :G,
+            -- Workaround: completion autotrigger can invoke fugitive#Complete on :G,
             -- which scans every PATH dir for git-* via glob() — 3+ seconds on NixOS.
             -- We replace subcommand completion with `git --list-cmds` (fast, C impl)
             -- and delegate argument/flag completion to the original.

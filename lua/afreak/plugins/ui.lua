@@ -165,6 +165,9 @@ return {
     }, {
     "folke/snacks.nvim",
     opts = {
+        explorer = {
+            replace_netrw = true,
+        },
         notifier = {
         },
         quickfile = { enable = true },

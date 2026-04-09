@@ -23,7 +23,7 @@ M.spaceMaps = fzfUtils.fzfFileFind({}, {
         })
     }),
     w = { c('w'), 'save file' },
-    f = { c("Neotree reveal toggle"), "Explorer" },
+    f = { function() Snacks.explorer.open() end, "Explorer" },
     -- p = Merged in by fzfFileFind
     -- g = ----||------
     j = { c("TSJJoin"), "Join code block" },

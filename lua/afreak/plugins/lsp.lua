@@ -6,6 +6,9 @@ return {
             { "folke/lazydev.nvim", ft = "lua", opts = {} },
         },
         config = function()
+            -- Native completion settings
+            vim.opt.completeopt = "menu,menuone,noselect,popup,fuzzy"
+
             -- Diagnostic configuration
             vim.diagnostic.config({
                 signs = {
@@ -19,11 +22,17 @@ return {
                 virtual_text = true,
             })
 
-            -- Document highlight on CursorHold
+            -- Native LSP completion and document highlight on LspAttach
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(args)
                     local client = vim.lsp.get_client_by_id(args.data.client_id)
-                    if client and client.supports_method("textDocument/documentHighlight") then
+
+                    -- Enable native LSP completion
+                    if client and client:supports_method("textDocument/completion") then
+                        vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+                    end
+
+                    if client and client:supports_method("textDocument/documentHighlight") then
                         local group = vim.api.nvim_create_augroup("LspDocHighlight_" .. args.buf, { clear = true })
                         vim.api.nvim_create_autocmd("CursorHold", {
                             group = group,
@@ -175,41 +184,6 @@ return {
                 'graphql',
             })
         end,
-    },
-    -- Autocompletion
-    {
-        'saghen/blink.cmp',
-        version = '1.*',
-        dependencies = { 'rafamadriz/friendly-snippets' },
-        ---@module 'blink.cmp'
-        ---@type blink.cmp.Config
-        opts = {
-            keymap = {
-                preset = 'none',
-                ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
-                ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
-                ['<CR>'] = { 'accept', 'fallback' },
-                ['<S-Down>'] = { 'scroll_documentation_down', 'fallback' },
-                ['<S-Up>'] = { 'scroll_documentation_up', 'fallback' },
-            },
-            appearance = {
-                nerd_font_variant = 'mono',
-            },
-            completion = {
-                documentation = { auto_show = true },
-            },
-            sources = {
-                default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
-                providers = {
-                    lazydev = {
-                        name = "LazyDev",
-                        module = "lazydev.integrations.blink",
-                        score_offset = 100,
-                    },
-                },
-            },
-            fuzzy = { implementation = "prefer_rust_with_warning" },
-        },
     },
     -- Formatting
     {

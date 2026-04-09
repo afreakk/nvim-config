@@ -1,10 +1,9 @@
 return {
     'folke/which-key.nvim',
-    dependencies = { { dir = "/home/afreak/coding/unimpaired-which-key.nvim" }, "echasnovski/mini.icons" },
+    dependencies = { "echasnovski/mini.icons" },
     config = function()
         vim.o.timeoutlen = 500
         local wk = require('which-key')
-        local uwk = require("unimpaired-which-key")
         wk.setup({
             notify = false,
             show_keys = false,
@@ -37,10 +36,9 @@ return {
             end
             return specs
         end
-        wk.add(uwk)
-
         local mappings = require("afreak.mappings.other")
         wk.add(mappings.n_mappings)
+        wk.add(mappings.i_mappings)
         wk.add(convert(mappings.x_mappings, "", "x"))
         wk.add(convert(mappings.c_mappings, "", "c"))
         local leadermaps = require("afreak.mappings.leader")

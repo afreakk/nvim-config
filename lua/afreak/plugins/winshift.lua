@@ -28,8 +28,7 @@ return {
                             cur_win = true, -- Filter out the current window
                             floats = true, -- Filter out floating windows
                             filetype = {
-                                "neo-tree",
-                                "oil",
+                                "snacks_picker_list",
                             }, -- List of ignored file types
                             buftype = {
                                 "terminal",
